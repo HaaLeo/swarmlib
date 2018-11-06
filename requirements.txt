@@ -1,1 +1,3 @@
 tsplib95
+networkx
+matplotlib

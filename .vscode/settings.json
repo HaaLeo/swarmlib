@@ -1,4 +1,8 @@
 {
     "files.trimFinalNewlines": true,
     "files.insertFinalNewline": true,
+    "cSpell.words": [
+        "networkx",
+        "pyplot"
+    ]
 }
