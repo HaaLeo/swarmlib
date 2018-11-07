@@ -6,14 +6,14 @@ import matplotlib.pyplot as plt
 import networkx as nx
 
 from ant import Ant
-from graph import Graph
+from tsp_graph import Graph
 
 LOGGER = logging.getLogger(__name__)
 
 class ACOProblem(object):
     def __init__(self, tsp_file, ant_number, rho=0.1, alpha=0.5, beta=0.5, num_iterations=1000):
         """Initializes a new instance of the ACOProblem class."""
-        self.graph = Graph(tsplib95.load_problem(tsp_file).get_graph())
+        self.graph = Graph(tsplib95.load_problem(tsp_file))
         LOGGER.info('Loaded tsp problem="%s"', tsp_file)
 
         self.rho = rho # evaporation rate
@@ -27,7 +27,8 @@ class ACOProblem(object):
         # Create ants
         self.ants = []
         for _ in range(self.ant_number):
-            ant = Ant(1, self.graph)
+            ant = Ant(1, self.graph, self.alpha, self.beta)
+            ant.initialize_thread()
             self.ants.append(ant)
 
         for _ in range(self.num_iterations):
@@ -41,9 +42,9 @@ class ACOProblem(object):
 
             # TODO: Evaluate partial ant solutions
 
-            # Reset ants
+            # Reset ants' thread
             for ant in self.ants:
-                ant.__init__(ant.next_node, self.graph)
+                ant.initialize_thread()
 
         nx.draw(self.graph.networkx_graph)
         plt.show()
