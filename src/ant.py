@@ -1,33 +1,86 @@
 import logging
 from threading import Thread
+import random
 
 LOGGER = logging.getLogger(__name__)
 
 
 class Ant(Thread):
-    def __init__(self, start_node, graph, alpha, beta):
-        self.current_node = start_node
+    def __init__(self, start_node, graph, alpha, beta, Q):
+        """Initializes a new instance of the Ant class."""
+        self.initialize_thread()
+        self.__current_node = start_node
         self.graph = graph
-        self.traveled_node = [start_node]
-        self.alpha = alpha
-        self.beta = beta
+        self.traveled_nodes = [start_node]
+        self.traveled_distance = 0
+        self.spawned_pheromone = 0
+        self.selected_edge = None
+        self.__alpha = alpha
+        self.__beta = beta
+        self.__Q = Q
+
     def initialize_thread(self):
         Thread.__init__(self)
 
     def run(self):
-        pass
-
-    def _select_edge(self):
+        """Run the ant."""
         # Possible locations where the ant can got to from the current node without the location it has already been.
-        possible_locations = self.graph.get_connected_nodes(self.current_node).difference(self.traveled_node)
+        possible_locations = self.graph.get_connected_nodes(
+            self.__current_node).difference(self.traveled_nodes)
+
+        while possible_locations:
+            self.__select_edge(possible_locations)
+            self.__move_to_next_node(self.selected_edge)
+
+            possible_locations = self.graph.get_connected_nodes(
+                self.__current_node).difference(self.traveled_nodes)
+
+    def __select_edge(self, possible_locations):
+        """Select the edge where to go next."""
         LOGGER.debug('Possible locations="%s"', possible_locations)
         attractiveness = {}
         overall_attractiveness = .0
         for node in possible_locations:
-            edge = (self.current_node, node)
+            edge = (self.__current_node, node)
 
             edge_pheromone = self.graph.get_edge_pheromone(edge)
-            distance = self.graph.get_edge_length(edge) # Gets the rounded distance.
+            # Gets the rounded distance.
+            distance = self.graph.get_edge_length(edge)
 
-            attractiveness[node] = pow(edge_pheromone, self.alpha)*pow(1/distance, self.beta)
-            overall_attractiveness += attractiveness
+            attractiveness[node] = pow(
+                edge_pheromone, self.__alpha)*pow(1/distance, self.__beta)
+            overall_attractiveness += attractiveness[node]
+
+        toss = random.random()
+
+        cumulative = 0
+        self.selected_edge = ()
+        if overall_attractiveness == 0:
+            self.selected_edge = (self.__current_node,
+                                  random.choice(list(attractiveness.keys())))
+        else:
+            for node in attractiveness:
+                weight = (attractiveness[node] / overall_attractiveness)
+                cumulative += weight
+
+                if toss <= cumulative:
+                    self.selected_edge = (self.__current_node, node)
+
+        LOGGER.debug('Selected edge: %s' % (self.selected_edge,))
+
+    def __move_to_next_node(self, edge_to_travel):
+        """Move to the next node and update member."""
+        self.traveled_distance += self.graph.get_edge_length(edge_to_travel)
+        self.traveled_nodes.append(edge_to_travel[1])
+        LOGGER.info('Traveled from node="%s" to node="%s". Overall traveled distance="%s"',
+                    self.__current_node, edge_to_travel[1], self.traveled_distance)
+        self.__current_node = edge_to_travel[1]
+
+    def spawn_pheromone(self):
+        # loop all except the last item
+        for idx in range(len(self.traveled_nodes) - 1):
+            traveled_edge = (
+                self.traveled_nodes[idx], self.traveled_nodes[idx+1])
+            pheromone = self.graph.get_edge_pheromone(traveled_edge)
+            pheromone += self.__Q*self.graph.get_edge_length(traveled_edge)
+            self.graph.set_pheromone(traveled_edge, pheromone)

@@ -11,7 +11,7 @@ from tsp_graph import Graph
 LOGGER = logging.getLogger(__name__)
 
 class ACOProblem(object):
-    def __init__(self, tsp_file, ant_number, rho=0.1, alpha=0.5, beta=0.5, num_iterations=1000):
+    def __init__(self, tsp_file, ant_number, rho=0.1, alpha=0.5, beta=0.5, Q=1, num_iterations=1000):
         """Initializes a new instance of the ACOProblem class."""
         self.graph = Graph(tsplib95.load_problem(tsp_file))
         LOGGER.info('Loaded tsp problem="%s"', tsp_file)
@@ -21,14 +21,14 @@ class ACOProblem(object):
         self.beta = beta # used for edge detection
         self.ant_number = ant_number # Number of ants
         self.num_iterations = num_iterations # Number of iterations
+        self.Q = Q
 
     def solve(self):
         """Solve the problem."""
         # Create ants
         self.ants = []
         for _ in range(self.ant_number):
-            ant = Ant(1, self.graph, self.alpha, self.beta)
-            ant.initialize_thread()
+            ant = Ant(1, self.graph, self.alpha, self.beta, self.Q)
             self.ants.append(ant)
 
         for _ in range(self.num_iterations):
@@ -40,7 +40,12 @@ class ACOProblem(object):
             for ant in self.ants:
                 ant.join()
 
-            # TODO: Evaluate partial ant solutions
+            # decay pheromone
+            for edge in self.graph.get_edges():
+                pheromone = self.graph.get_edge_pheromone(edge)
+                pheromone *= 1-self.rho
+                self.graph.set_pheromone(edge, pheromone)
+
 
             # Reset ants' thread
             for ant in self.ants:

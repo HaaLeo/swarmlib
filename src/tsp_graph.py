@@ -10,7 +10,7 @@ class Graph:
         self.networkx_graph = self.__problem.get_graph()
         self.__lock = RLock()
 
-    def get_edges(self, node):
+    def get_edges(self, node=None):
         """Get all edges connected to the given node. (u,v)"""
         with self.__lock:
             return self.networkx_graph.edges(node)
@@ -37,5 +37,6 @@ class Graph:
 
     def __get_edge_data(self, edge, label):
         with self.__lock:
+            LOGGER.debug('Get data="%s" for edge="%s"', label, edge)
             data = self.networkx_graph.get_edge_data(*edge)
-            return deepcopy(data[label])
+            return deepcopy(data.get(label,0))
