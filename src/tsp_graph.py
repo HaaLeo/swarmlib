@@ -1,12 +1,16 @@
 import logging
 from copy import deepcopy
 from threading import RLock
+from tsplib95 import distances
 import networkx as nx
+
 LOGGER = logging.getLogger(__name__)
 
 class Graph:
     def __init__(self, problem):
         self.__problem = problem
+        # LOGGER.debug(self.__problem.node_coords)
+        self.__problem.wfunc = self.__geographical_distance #TODO: Implement dynamically
         self.networkx_graph = self.__problem.get_graph()
         self.__lock = RLock()
 
@@ -37,6 +41,15 @@ class Graph:
 
     def __get_edge_data(self, edge, label):
         with self.__lock:
-            LOGGER.debug('Get data="%s" for edge="%s"', label, edge)
             data = self.networkx_graph.get_edge_data(*edge)
-            return deepcopy(data.get(label,0))
+            result=  deepcopy(data.get(label,0))
+
+        LOGGER.debug('Get data="%s", value="%s" for edge="%s"', label, result, edge)
+        return result
+
+    def __geographical_distance(self, start, end):
+        """
+        This method is used to overwrite the tsplib95's geographical distance function
+        to avoid rounding for th burma14 file.
+        """
+        return distances.geographical(self.__problem.node_coords[start], self.__problem.node_coords[end], lambda x: x)
