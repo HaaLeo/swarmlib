@@ -13,4 +13,5 @@ if __name__ == '__main__':
     logger.debug('Hello World')
     problem = ACOProblem('resources/burma14.tsp', 1)
     problem.solve()
+    problem.show_result()
     i = 6

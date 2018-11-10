@@ -2,6 +2,7 @@ import logging
 from copy import deepcopy
 from threading import RLock
 from tsplib95 import distances
+import matplotlib.pyplot as plt
 import networkx as nx
 
 LOGGER = logging.getLogger(__name__)
@@ -38,6 +39,34 @@ class Graph:
         # tsplib95 stores the distance as "weight"
         return self.__get_edge_data(edge, 'weight')
 
+    def show_result(self, path_edges, path_nodes):
+
+        G = self.networkx_graph
+        edge_widths = []
+        edge_colors = []
+        for edge in self.networkx_graph.edges():
+
+            pheromone = self.get_edge_pheromone(edge)
+
+            edge_widths.append(pheromone)
+            if edge in path_edges:
+                edge_colors.append('b')
+            else:
+                edge_colors.append('black')
+
+        nx.draw(
+            G,
+            pos=self.__problem.node_coords,
+            edge_color=edge_colors,
+            width=self.__scale_range(edge_widths),
+            with_labels=True,
+            label=', '.join(str(path_nodes)))
+
+
+        # labels = nx.get_edge_attributes(G, 'weight')
+        # nx.draw_networkx_edge_labels(G, self.__problem.node_coords, edge_labels=labels)
+        plt.show()
+
     def __get_edge_data(self, edge, label):
         with self.__lock:
             data = self.networkx_graph.get_edge_data(*edge)
@@ -52,4 +81,10 @@ class Graph:
         without rounding.
         """
         distance_function=distances.TYPES[self.__problem.edge_weight_type]
-        return distance_function(start=self.__problem.node_coords[start], end=self.__problem.node_coords[end], round=lambda x: x)
+        return distance_function(start=self.__problem.node_coords[start], end=self.__problem.node_coords[end], round=lambda x: round(x,2))
+
+    def __scale_range(self, seq, new_max=5, new_min=0):
+        old_max = max(seq)
+        old_min = min(seq)
+
+        return [(((old_value - old_min) * (new_max - new_min)) / (old_max - old_min)) + new_min for old_value in seq]

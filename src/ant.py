@@ -8,19 +8,20 @@ LOGGER = logging.getLogger(__name__)
 class Ant(Thread):
     def __init__(self, start_node, graph, alpha, beta, Q):
         """Initializes a new instance of the Ant class."""
-        self.initialize_thread()
-        self.__current_node = start_node
+        self.initialize(start_node)
         self.graph = graph
-        self.traveled_nodes = [start_node]
-        self.traveled_distance = 0
-        self.spawned_pheromone = 0
-        self.selected_edge = None
+
         self.__alpha = alpha
         self.__beta = beta
         self.__Q = Q
 
-    def initialize_thread(self):
+    def initialize(self, start_node):
         Thread.__init__(self)
+        self.__current_node = start_node
+        self.traveled_nodes = [self.__current_node]
+        self.traveled_edges = []
+        self.traveled_distance = 0
+        self.selected_edge = None
 
     def run(self):
         """Run the ant."""
@@ -72,7 +73,8 @@ class Ant(Thread):
         """Move to the next node and update member."""
         self.traveled_distance += self.graph.get_edge_length(edge_to_travel)
         self.traveled_nodes.append(edge_to_travel[1])
-        LOGGER.info('Traveled from node="%s" to node="%s". Overall traveled distance="%s"',
+        self.traveled_edges.append(edge_to_travel)
+        LOGGER.debug('Traveled from node="%s" to node="%s". Overall traveled distance="%s"',
                     self.__current_node, edge_to_travel[1], self.traveled_distance)
         self.__current_node = edge_to_travel[1]
 
@@ -82,5 +84,5 @@ class Ant(Thread):
             traveled_edge = (
                 self.traveled_nodes[idx], self.traveled_nodes[idx+1])
             pheromone = self.graph.get_edge_pheromone(traveled_edge)
-            pheromone += self.__Q*self.graph.get_edge_length(traveled_edge)
+            pheromone += self.__Q/self.graph.get_edge_length(traveled_edge)
             self.graph.set_pheromone(traveled_edge, pheromone)
