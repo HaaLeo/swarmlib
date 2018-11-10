@@ -9,8 +9,7 @@ LOGGER = logging.getLogger(__name__)
 class Graph:
     def __init__(self, problem):
         self.__problem = problem
-        # LOGGER.debug(self.__problem.node_coords)
-        self.__problem.wfunc = self.__geographical_distance #TODO: Implement dynamically
+        self.__problem.wfunc = self.__distance # do not round distances
         self.networkx_graph = self.__problem.get_graph()
         self.__lock = RLock()
 
@@ -47,9 +46,10 @@ class Graph:
         LOGGER.debug('Get data="%s", value="%s" for edge="%s"', label, result, edge)
         return result
 
-    def __geographical_distance(self, start, end):
+    def __distance(self, start, end):
         """
-        This method is used to overwrite the tsplib95's geographical distance function
-        to avoid rounding for th burma14 file.
+        This method is used to call the tsplib95's distance functions
+        without rounding.
         """
-        return distances.geographical(self.__problem.node_coords[start], self.__problem.node_coords[end], lambda x: x)
+        distance_function=distances.TYPES[self.__problem.edge_weight_type]
+        return distance_function(start=self.__problem.node_coords[start], end=self.__problem.node_coords[end], round=lambda x: x)
