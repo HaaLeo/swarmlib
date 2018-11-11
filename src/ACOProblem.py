@@ -1,5 +1,6 @@
 
 import logging
+import random
 
 import tsplib95
 
@@ -10,7 +11,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 class ACOProblem(object):
-    def __init__(self, tsp_file, ant_number, rho=0.8, alpha=0.5, beta=0.5, Q=5, num_iterations=1):
+    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, Q=0.01, num_iterations=100, plot_interval=5):
         """Initializes a new instance of the ACOProblem class."""
         self.graph = Graph(tsplib95.load_problem(tsp_file))
         LOGGER.info('Loaded tsp problem="%s"', tsp_file)
@@ -23,16 +24,17 @@ class ACOProblem(object):
         self.best_path = None
         self.shortest_distance = None
         self.Q = Q
+        self.plot_iter = plot_interval # plot intervall
 
     def solve(self):
         """Solve the problem."""
         # Create ants
         self.ants = []
         for _ in range(self.ant_number):
-            ant = Ant(1, self.graph, self.alpha, self.beta, self.Q)
+            ant = Ant(random.choice(self.graph.get_nodes()), self.graph, self.alpha, self.beta, self.Q)
             self.ants.append(ant)
 
-        for _ in range(self.num_iterations):
+        for idx in range(self.num_iterations):
             # Start all multithreaded ants
             for ant in self.ants:
                 ant.start()
@@ -60,11 +62,15 @@ class ACOProblem(object):
                                 self.shortest_distance, self.best_path)
 
                 # Reset ants' thread
-                ant.initialize(1)
+                ant.initialize(random.choice(self.graph.get_nodes()))
+
+            if (idx+1) % self.plot_iter == 0:
+                self.show_result(False, idx+1, self.num_iterations)
+
 
         LOGGER.info('Finish! Shortest_distance="%s" and best_path="%s"',
                     self.shortest_distance, self.best_path)
 
-    def show_result(self):
+    def show_result(self, wait, current=None, overall=None):
         sorted_edges = [tuple(sorted(item)) for item in self.best_edge_seq]
-        self.graph.show_result(sorted_edges, self.best_path)
+        self.graph.show_result(sorted_edges, self.best_path, wait, current, overall)
