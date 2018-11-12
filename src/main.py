@@ -14,4 +14,3 @@ if __name__ == '__main__':
     problem = ACOProblem('resources/burma14.tsp', 9)
     problem.solve()
     problem.show_result(True)
-    i = 6
