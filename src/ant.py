@@ -60,12 +60,17 @@ class Ant(Thread):
             self.selected_edge = (self.__current_node,
                                   random.choice(list(attractiveness.keys())))
         else:
-            for node in attractiveness:
-                weight = (attractiveness[node] / overall_attractiveness)
-                cumulative += weight
+            # for node in attractiveness:
+            #     weight = (attractiveness[node] / overall_attractiveness)
+            #     cumulative += weight
 
-                if toss <= cumulative:
-                    self.selected_edge = (self.__current_node, node)
+            #     if toss <= cumulative:
+            #         self.selected_edge = (self.__current_node, node)
+
+
+            self.selected_edge = (self.__current_node, max(attractiveness, key=attractiveness.get))
+
+
 
         LOGGER.debug('Selected edge: %s' % (self.selected_edge,))
 

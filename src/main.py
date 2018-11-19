@@ -11,6 +11,6 @@ if __name__ == '__main__':
     """The main entry point. Currently used for debug purpose."""
     logger = logging.getLogger(__name__)
     logger.debug('Hello World')
-    problem = ACOProblem('resources/burma14.tsp', 9)
+    problem = ACOProblem('resources/burma14.tsp', 28)
     problem.solve()
     problem.show_result(True)
