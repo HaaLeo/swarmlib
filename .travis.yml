@@ -4,7 +4,7 @@ python:
   - "3.7"
 
 # Needed because of https://github.com/travis-ci/travis-ci/issues/9069#issuecomment-425720905
-sudo: yes
+sudo: required
 dist: xenial
 
 stages:
@@ -21,13 +21,13 @@ jobs:
   include:
     - stage: test
       script:
-        - python3 -m pylint ./*/*.py
+        - python -m pylint ./*/*.py
     - stage: bundle
       script:
-        - python3 setup.py sdist bdist_wheel
+        - python setup.py sdist bdist_wheel
     - stage: deploy
       before_deploy:
-        - python3 setup.py sdist bdist_wheel
+        - python setup.py sdist bdist_wheel
         - export RELEASE_PKG_FILES=$(ls dist/*)
         - twine upload "${RELEASE_PKG_FILES}" -u HaaLeo -p "${PYPI_PASSWORD}"
       script: skip
