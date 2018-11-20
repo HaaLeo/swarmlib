@@ -1,3 +1,3 @@
-tsplib95
-networkx
-matplotlib
+tsplib95==0.3.2
+matplotlib==3.0.2
+networkx==2.1
