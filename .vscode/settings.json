@@ -6,7 +6,9 @@
         "pylint",
         "ioff",
         "qsize",
-        "fignum"
+        "fignum",
+        "Hanisch",
+        "pypi"
     ],
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,

@@ -1,4 +1,9 @@
-# Ant Colony Optimization
+# Ant Colony Optimization &#8212; aco4tsp
+
+[![Pypi](https://img.shields.io/pypi/v/aco4tsp.svg?style=flat-square)](https://pypi.python.org/pypi/aco4tsp) [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/aco4tsp.svg?style=flat-square)](https://pypi.python.org/pypi/aco4tsp) [![Stars](https://img.shields.io/github/stars/HaaLeo/ant-colony-optimization.svg?label=Stars&logo=github&style=flat-square)](https://github.com/HaaLeo/ant-colony-optimization/stargazers)  
+[![PyPI - License](https://img.shields.io/pypi/l/aco4tsp.svg?style=flat-square)](https://pypi.python.org/pypi/aco4tsp) 
+[![Build Status](https://img.shields.io/travis/HaaLeo/ant-colony-optimization/master.svg?style=flat-square)](https://travis-ci.org/HaaLeo/ant-colony-optimization) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)  
+[![Donate](https://img.shields.io/badge/-Donate-blue.svg?logo=paypal&style=flat-square)](https://www.paypal.me/LeoHanisch)
 
 ## Description
 
@@ -50,8 +55,14 @@ Example:
 python aco4tsp/main.py resources/burma14.tsp 14
 ```
 
-## Requirements
-Python 3.6
-
 ## License
 See [LICENSE.txt](LICENSE.txt).
+
+## Contribution
+
+If you found a bug or are missing a feature do not hesitate to [file an issue](https://github.com/HaaLeo/ant-colony-optimization/issues/new/choose).  
+Pull Requests are welcome!
+
+## Support
+When you like this extension make sure to [star the repo](https://github.com/HaaLeo/ant-colony-optimization/stargazers). I am always looking for new ideas and feedback.  
+In addition, it is possible to [donate via paypal](https://www.paypal.me/LeoHanisch).
