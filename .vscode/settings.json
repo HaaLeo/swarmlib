@@ -4,6 +4,10 @@
     "cSpell.words": [
         "networkx",
         "pyplot",
-        "wfunc"
-    ]
+        "wfunc",
+        "pylint",
+        "ioff",
+        "qsize"
+    ],
+    "python.linting.enabled": true
 }

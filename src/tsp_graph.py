@@ -2,7 +2,6 @@ import logging
 from copy import deepcopy
 from threading import RLock
 from tsplib95 import distances
-import matplotlib.pyplot as plt
 import networkx as nx
 
 LOGGER = logging.getLogger(__name__)
@@ -14,6 +13,14 @@ class Graph:
         self.__problem.wfunc = self.__distance  # do not round distances
         self.networkx_graph = self.__problem.get_graph()
         self.__lock = RLock()
+
+    @property
+    def node_coordinates(self):
+        return self.__problem.node_coords
+
+    @property
+    def name(self):
+        return deepcopy(self.__problem.comment)
 
     def get_nodes(self):
         """Get all nodes."""
@@ -45,53 +52,13 @@ class Graph:
         # tsplib95 stores the distance as "weight"
         return self.__get_edge_data(edge, 'weight')
 
-    def show_result(self, path_edges, path_nodes, wait, current_iteration=None, overall_iterations=None):
-
-        name = self.__problem.comment
-        if current_iteration and overall_iterations:
-            name += ' - Iteration (%s/%s)' % (current_iteration, overall_iterations)
-        else:
-            name+= ' - Final'
-
-        fig = plt.figure('dummy', clear=True,)
-
-        G = self.networkx_graph
-        edge_widths = []
-        edge_colors = []
-        for edge in self.networkx_graph.edges():
-
-            pheromone = self.get_edge_pheromone(edge)
-
-            edge_widths.append(pheromone)
-            if edge in path_edges:
-                edge_colors.append('b')
-            else:
-                edge_colors.append('black')
-
-        nx.draw(
-            G,
-            pos=self.__problem.node_coords,
-            edge_color=edge_colors,
-            width=self.__scale_range(edge_widths),
-            with_labels=True,
-            label=', '.join(str(path_nodes)))
-
-        fig.canvas.set_window_title(name)
-
-        plt.show(wait)
-        plt.pause(0.5)
-
-        # throws an exception otherwise
-        if not wait:
-            fig.canvas.flush_events()
-
     def __get_edge_data(self, edge, label):
         with self.__lock:
             data = self.networkx_graph.get_edge_data(*edge)
             result = deepcopy(data.get(label, 0))
 
-        LOGGER.debug('Get data="%s", value="%s" for edge="%s"',
-                     label, result, edge)
+        # LOGGER.debug('Get data="%s", value="%s" for edge="%s"',
+        #              label, result, edge)
         return result
 
     def __distance(self, start, end):
@@ -101,9 +68,3 @@ class Graph:
         """
         distance_function = distances.TYPES[self.__problem.edge_weight_type]
         return distance_function(start=self.__problem.node_coords[start], end=self.__problem.node_coords[end], round=lambda x: round(x, 2))
-
-    def __scale_range(self, seq, new_max=5, new_min=0):
-        old_max = max(seq)
-        old_min = min(seq)
-
-        return [(((old_value - old_min) * (new_max - new_min)) / (old_max - old_min)) + new_min for old_value in seq]

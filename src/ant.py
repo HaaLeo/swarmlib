@@ -3,7 +3,7 @@ from threading import Thread
 import random
 
 LOGGER = logging.getLogger(__name__)
-
+# pylint: disable=attribute-defined-outside-init,too-many-instance-attributes,too-many-arguments,super-init-not-called
 
 class Ant(Thread):
     def __init__(self, start_node, graph, alpha, beta, Q):
@@ -13,7 +13,7 @@ class Ant(Thread):
 
         self.__alpha = alpha
         self.__beta = beta
-        self.__Q = Q
+        self.__q = Q
 
     def initialize(self, start_node):
         Thread.__init__(self)
@@ -60,19 +60,14 @@ class Ant(Thread):
             self.selected_edge = (self.__current_node,
                                   random.choice(list(attractiveness.keys())))
         else:
-            # for node in attractiveness:
-            #     weight = (attractiveness[node] / overall_attractiveness)
-            #     cumulative += weight
+            for node in attractiveness:
+                weight = (attractiveness[node] / overall_attractiveness)
+                cumulative += weight
 
-            #     if toss <= cumulative:
-            #         self.selected_edge = (self.__current_node, node)
+                if toss <= cumulative:
+                    self.selected_edge = (self.__current_node, node)
 
-
-            self.selected_edge = (self.__current_node, max(attractiveness, key=attractiveness.get))
-
-
-
-        LOGGER.debug('Selected edge: %s' % (self.selected_edge,))
+        LOGGER.debug('Selected edge: %s', (self.selected_edge,))
 
     def __move_to_next_node(self, edge_to_travel):
         """Move to the next node and update member."""
@@ -80,7 +75,7 @@ class Ant(Thread):
         self.traveled_nodes.append(edge_to_travel[1])
         self.traveled_edges.append(edge_to_travel)
         LOGGER.debug('Traveled from node="%s" to node="%s". Overall traveled distance="%s"',
-                    self.__current_node, edge_to_travel[1], self.traveled_distance)
+                     self.__current_node, edge_to_travel[1], self.traveled_distance)
         self.__current_node = edge_to_travel[1]
 
     def spawn_pheromone(self):
@@ -89,5 +84,5 @@ class Ant(Thread):
             traveled_edge = (
                 self.traveled_nodes[idx], self.traveled_nodes[idx+1])
             pheromone = self.graph.get_edge_pheromone(traveled_edge)
-            pheromone += self.__Q/self.graph.get_edge_length(traveled_edge)
+            pheromone += self.__q/self.graph.get_edge_length(traveled_edge)
             self.graph.set_pheromone(traveled_edge, pheromone)
