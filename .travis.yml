@@ -1,4 +1,4 @@
-language: node_js
+language: python
 python:
   - "3.6"
   - "3.7"
