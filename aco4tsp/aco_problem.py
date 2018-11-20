@@ -6,9 +6,9 @@ from queue import Queue
 import tsplib95
 from matplotlib import pyplot as plt
 
-from ant import Ant
-from tsp_graph import Graph
-from sketcher import draw_graph
+from aco4tsp.ant import Ant
+from aco4tsp.tsp_graph import Graph
+from aco4tsp.sketcher import draw_graph
 
 LOGGER = logging.getLogger(__name__)
 
@@ -16,7 +16,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 class ACOProblem():
-    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, Q=1, num_iterations=10, plot_interval=1):
+    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, q=1, iterations=10, plot_interval=1):
         """Initializes a new instance of the ACOProblem class."""
 
         self.__graph = Graph(tsplib95.load_problem(tsp_file))
@@ -25,15 +25,15 @@ class ACOProblem():
         self.rho = rho  # evaporation rate
         self.alpha = alpha  # used for edge detection
         self.beta = beta  # used for edge detection
+        self.Q = q # Hyperparameter Q
         self.ant_number = ant_number  # Number of ants
-        self.num_iterations = num_iterations  # Number of iterations
-        self.best_path = None
-        self.shortest_distance = None
-        self.Q = Q
+        self.num_iterations = iterations  # Number of iterations
         self.plot_iter = plot_interval  # plot intervall
         self.__stop_event = Event()  # Event used to stop the plotting thread
         self.__result_queue = Queue()
         self.__last_result = None
+        self.best_path = None
+        self.shortest_distance = None
 
     def solve(self):
         """"Solve the given problem. Returns true if problem was solved successfully."""

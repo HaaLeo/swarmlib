@@ -6,7 +6,11 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/src/main.py",
-            "console": "none"
+            "console": "none",
+            "args": [
+                "${workspaceFolder}/resources/burma14.tsp",
+                14
+            ]
         }
     ]
 }
