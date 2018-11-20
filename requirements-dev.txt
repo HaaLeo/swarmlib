@@ -2,3 +2,6 @@
 
 pylint
 pylint-quotes
+setuptools
+twine
+wheel
