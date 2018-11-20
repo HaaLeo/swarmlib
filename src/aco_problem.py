@@ -43,14 +43,28 @@ class ACOProblem():
         solving_thread = Thread(target=self.__solve, args=args)
         solving_thread.start()
 
+        fig = plt.figure(self.__graph.name)
+
         try:
             while solving_thread.is_alive():
                 self.__show_result()
 
+                # Check whether plot was closed by user
+                if not plt.fignum_exists(fig.number):
+                    self.__stop_event.set()
+                    break
+
+            # Plot results that could be still queued
             while self.__result_queue.qsize() != 0:
                 self.__show_result()
 
-            success = True
+                # Check whether plot was closed by user
+                if not plt.fignum_exists(fig.number):
+                    self.__stop_event.set()
+                    break
+
+            if plt.fignum_exists(fig.number):
+                success = True
         except KeyboardInterrupt:
             LOGGER.debug('The user closed the app. Stop calculation thread.')
             self.__stop_event.set()
@@ -104,7 +118,7 @@ class ACOProblem():
                 LOGGER.debug('Stop event detected. Shut down thread.')
                 break
 
-            if (idx+1) % plot_batch == 0 or idx == 0 or (idx+1) == num_iterations:
+            if (idx+1) % plot_batch == 0 or (idx+1) == num_iterations:
                 self.__result_queue.put({
                     'path_edges': best_edge_seq,
                     'best_path': best_path,

@@ -1,13 +1,14 @@
 {
-    "files.trimFinalNewlines": true,
-    "files.insertFinalNewline": true,
     "cSpell.words": [
         "networkx",
         "pyplot",
         "wfunc",
         "pylint",
         "ioff",
-        "qsize"
+        "qsize",
+        "fignum"
     ],
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
     "python.linting.enabled": true
 }
