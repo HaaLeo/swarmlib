@@ -57,8 +57,8 @@ class Graph:
             data = self.networkx_graph.get_edge_data(*edge)
             result = deepcopy(data.get(label, 0))
 
-        LOGGER.debug('Get data="%s", value="%s" for edge="%s"',
-                     label, result, edge)
+        # LOGGER.debug('Get data="%s", value="%s" for edge="%s"',
+        #              label, result, edge)
         return result
 
     def __distance(self, start, end):

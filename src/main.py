@@ -1,16 +1,15 @@
 import logging
 import sys
-from ACOProblem import ACOProblem
+from aco_problem import ACOProblem
 
 logging.basicConfig(
-    format="%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s",
+    format='%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s',
     stream=sys.stdout,
     level=logging.INFO)
 
 if __name__ == '__main__':
-    """The main entry point. Currently used for debug purpose."""
-    logger = logging.getLogger(__name__)
-    logger.debug('Hello World')
-    problem = ACOProblem('resources/berlin52.tsp', 60, num_iterations=1000, plot_interval=10)
-    problem.solve()
-    problem.show_result(True)
+    LOGGER = logging.getLogger(__name__)
+    LOGGER.debug('Hello World')
+    PROBLEM = ACOProblem('resources/burma14.tsp', 10, num_iterations=100, plot_interval=10)
+    if PROBLEM.solve():
+        PROBLEM.show_result()
