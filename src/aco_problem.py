@@ -16,7 +16,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 class ACOProblem():
-    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, Q=0.01, num_iterations=10, plot_interval=1):
+    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, Q=1, num_iterations=10, plot_interval=1):
         """Initializes a new instance of the ACOProblem class."""
 
         self.__graph = Graph(tsplib95.load_problem(tsp_file))

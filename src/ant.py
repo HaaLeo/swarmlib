@@ -3,7 +3,7 @@ from threading import Thread
 import random
 
 LOGGER = logging.getLogger(__name__)
-# pylint: disable=attribute-defined-outside-init,too-many-instance-attributes,too-many-arguments,super-init-not-called
+# pylint: disable=attribute-defined-outside-init,too-many-instance-attributes,too-many-arguments,super-init-not-called,invalid-name
 
 class Ant(Thread):
     def __init__(self, start_node, graph, alpha, beta, Q):
@@ -13,7 +13,7 @@ class Ant(Thread):
 
         self.__alpha = alpha
         self.__beta = beta
-        self.__q = Q
+        self.__Q = Q
 
     def initialize(self, start_node):
         Thread.__init__(self)
@@ -52,20 +52,12 @@ class Ant(Thread):
                 edge_pheromone, self.__alpha)*pow(1/distance, self.__beta)
             overall_attractiveness += attractiveness[node]
 
-        toss = random.random()
-
-        cumulative = 0
-        self.selected_edge = ()
         if overall_attractiveness == 0:
             self.selected_edge = (self.__current_node,
                                   random.choice(list(attractiveness.keys())))
         else:
-            for node in attractiveness:
-                weight = (attractiveness[node] / overall_attractiveness)
-                cumulative += weight
 
-                if toss <= cumulative:
-                    self.selected_edge = (self.__current_node, node)
+            self.selected_edge = (self.__current_node, max(attractiveness, key=attractiveness.get))
 
         LOGGER.debug('Selected edge: %s', (self.selected_edge,))
 
@@ -84,5 +76,5 @@ class Ant(Thread):
             traveled_edge = (
                 self.traveled_nodes[idx], self.traveled_nodes[idx+1])
             pheromone = self.graph.get_edge_pheromone(traveled_edge)
-            pheromone += self.__q/self.graph.get_edge_length(traveled_edge)
+            pheromone += self.__Q/self.graph.get_edge_length(traveled_edge)
             self.graph.set_pheromone(traveled_edge, pheromone)
