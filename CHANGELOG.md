@@ -1,6 +1,9 @@
-# Change Log
+# Changelog
 All notable changes to the "aco4tsp" pypi package will be documented in this file.  
 This project follows [semantic versioning](https://semver.org/).
+
+## 2018-11-21 - v0.0.1
+* **Fixed**
 
 ## 2018-11-21 - v0.0.1
 * **Initial Release**

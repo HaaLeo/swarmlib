@@ -21,10 +21,10 @@ The nodes are plot according to their coordinates read from the TSPLIB95 file. T
 
 ## Installation
 
-First you have to install the [pypi package](https://pypi.org/project/aco4tsp):
+You can install the package with `pip` from [pypi](https://pypi.org/project/aco4tsp):
 
 ```
-pip install aco4tsp
+pip3 install aco4tsp
 ```
 
 ## Usage

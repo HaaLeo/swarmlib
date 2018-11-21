@@ -5,7 +5,7 @@ with open(path.join(path.abspath(path.dirname(__file__)), 'README.md'), 'r') as 
 
 setup(
     name='aco4tsp',  # PEP8: Packages should also have short, all-lowercase names, the use of underscores is discouraged
-    version='0.0.1',
+    version='0.0.2',
     packages=find_packages(exclude=['*test']),
     description='Implementation of Ant Colony Optimization for the Traveling Salesman Problem.',
     long_description=LONG_DESCRIPTION,
