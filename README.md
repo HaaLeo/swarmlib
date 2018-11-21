@@ -40,7 +40,7 @@ aco4tsp --help
 Example:
 
 ```
-ac04tsp resources/burma14.tsp 14
+aco4tsp resources/burma14.tsp 14
 ```
 
 ### API
