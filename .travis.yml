@@ -24,7 +24,7 @@ jobs:
     - stage: deploy
       before_deploy:
         - python setup.py sdist bdist_wheel
-        - twine upload dist/* -u HaaLeo -p "${PYPI_PASSWORD}"
+        - twine upload dist/* -u HaaLeo -p ${PYPI_PASSWORD}
       script: skip
       deploy:
         provider: releases
