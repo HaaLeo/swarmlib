@@ -10,7 +10,6 @@ stages:
   - name: deploy
     if: tag =~ /^v\d+\.\d+\.\d+$/ AND repo = HaaLeo/ant-colony-optimization
 
-
 install:
   - pip install -r requirements-dev.txt
 
@@ -25,8 +24,7 @@ jobs:
     - stage: deploy
       before_deploy:
         - python setup.py sdist bdist_wheel
-        - export RELEASE_PKG_FILES=$(ls dist/*)
-        # - twine upload dist/* -u HaaLeo -p "${PYPI_PASSWORD}"
+        - twine upload dist/* -u HaaLeo -p "${PYPI_PASSWORD}"
       script: skip
       deploy:
         provider: releases
