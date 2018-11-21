@@ -26,12 +26,12 @@ jobs:
       before_deploy:
         - python setup.py sdist bdist_wheel
         - export RELEASE_PKG_FILES=$(ls dist/*)
-        # - twine upload "${RELEASE_PKG_FILES}" -u HaaLeo -p "${PYPI_PASSWORD}"
+        # - twine upload dist/* -u HaaLeo -p "${PYPI_PASSWORD}"
       script: skip
       deploy:
         provider: releases
         file_glob: true
-        file: "${RELEASE_PKG_FILES}"
+        file: "dist/*"
         api_key: ${TRAVIS_CD}
         skip_cleanup: true
         on:
