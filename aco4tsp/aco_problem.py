@@ -16,8 +16,21 @@ LOGGER = logging.getLogger(__name__)
 
 
 class ACOProblem():
-    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, q=1, iterations=10, plot_interval=1):
-        """Initializes a new instance of the ACOProblem class."""
+    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, q=1, iterations=100, plot_interval=10):
+        """Initializes a new instance of the `ACOProblem` class.
+
+        Arguments:  \r
+        `tsp_file`   -- Path of the tsp file that shall be loaded  \r
+        `ant_number` -- Number of ants used for solving
+
+        Keyword arguments:  \r
+        `rho`           -- Evaporation rate (default 0.5)  \r
+        `alpha`         -- Relative importance of the pheromone (default 0.5)  \r
+        `beta`          -- Relative importance of the heuristic information (default 0.5)  \r
+        `q`             -- Constant Q. Used to calculate the pheromone, laid down on an edge (default 1)  \r
+        `iterations`    -- Number of iterations to execute (default 100)  \r
+        `plot_interval` -- Plot intermediate result after this amount of iterations (default 10)
+        """
 
         self.__graph = Graph(tsplib95.load_problem(tsp_file))
         LOGGER.info('Loaded tsp problem="%s"', tsp_file)
@@ -25,7 +38,7 @@ class ACOProblem():
         self.rho = rho  # evaporation rate
         self.alpha = alpha  # used for edge detection
         self.beta = beta  # used for edge detection
-        self.Q = q # Hyperparameter Q
+        self.Q = q  # Hyperparameter Q
         self.ant_number = ant_number  # Number of ants
         self.num_iterations = iterations  # Number of iterations
         self.plot_iter = plot_interval  # plot intervall
@@ -36,7 +49,11 @@ class ACOProblem():
         self.shortest_distance = None
 
     def solve(self):
-        """"Solve the given problem. Returns true if problem was solved successfully."""
+        """
+        Solve the given problem.
+
+        Returns `true` if problem was solved successfully otherwise `false`.
+        """
         success = False
         args = deepcopy([self.ant_number, self.alpha, self.beta,
                          self.Q, self.rho, self.num_iterations, self.plot_iter])
@@ -130,11 +147,14 @@ class ACOProblem():
                     shortest_distance, best_path)
 
     def show_result(self):
-        """This plots the current state."""
+        """
+        Plot the result using `matplotlib`.
+        """
+
         self.__show_result(False)
 
     def __show_result(self, update=True):
-        """Show the result. When update=True wait until new result occurred."""
+        """Show the result. When update=True re-draw the figure if possible."""
         fig = plt.figure(self.__graph.name)
 
         if update:

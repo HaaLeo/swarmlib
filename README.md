@@ -19,40 +19,40 @@ Enables to apply the ant colony optimization algorithm to a TSP using a [TSPLIB9
 The algorithm solves the TSP and plots the result all _n_ iterations.  
 The nodes are plot according to their coordinates read from the TSPLIB95 file. The _widths_ of the edges indicate the _amount of pheromone_ that is associated with this edge. If an edge is _blue_, it is part of the _best found path_.
 
+## Installation
+
+First you have to install the [pypi package](https://pypi.org/project/aco4tsp):
+
+```
+pip install aco4tsp
+```
+
 ## Usage
-First you have to clone the repository:
-```
-git clone git@github.com:HaaLeo/ant-colony-optimization.git
-cd ant-colony-optimization
-```
 
 ### Client
 
-To use the command line interface you need to package and install the pip package:
-```
-python setup.py sdist
-pip install dist/aco4tsp-0.0.1.tar.gz --upgrade
-```
-
 To print all available options:
+
 ```
 aco4tsp --help
 ```
 
 Example:
+
 ```
 ac04tsp resources/burma14.tsp 14
 ```
 
-### From Source
-If you prefer to run it from source, run the following to print all available options:
-```
-python aco4tsp/main.py --help
-```
+### API
 
-Example:
-```
-python aco4tsp/main.py resources/burma14.tsp 14
+In addition to the client you can also use the API:
+
+```python
+from aco4tsp.aco_problem import ACOProblem
+
+problem = ACOProblem('/path/to/my/tsp-file.tsp', 10)
+if problem.solve():
+    problem.show_result()
 ```
 
 ## Contribution
@@ -61,5 +61,5 @@ If you found a bug or are missing a feature do not hesitate to [file an issue](h
 Pull Requests are welcome!
 
 ## Support
-When you like this package make sure to [star the repo](https://github.com/HaaLeo/ant-colony-optimization/stargazers). I am always looking for new ideas and feedback.  
+When you like this package make sure to [star the repository](https://github.com/HaaLeo/ant-colony-optimization/stargazers). I am always looking for new ideas and feedback.  
 In addition, it is possible to [donate via paypal](https://www.paypal.me/LeoHanisch).

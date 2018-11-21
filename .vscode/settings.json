@@ -8,7 +8,15 @@
         "qsize",
         "fignum",
         "Hanisch",
-        "pypi"
+        "pypi",
+        "isabs",
+        "getcwd",
+        "Dorigo",
+        "Birattari",
+        "Stuetzle",
+        "optimisation",
+        "TSPLIB",
+        "paypal"
     ],
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
