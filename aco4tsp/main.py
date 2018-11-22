@@ -16,9 +16,9 @@ LOGGER = logging.getLogger(__name__)
 
 def main():
     """
-    usage: main.py [-h] [-r RHO] [-a ALPHA] [-b BETA] [-q Q] [-i ITERATIONS]
-               [-p PLOT_INTERVAL]
-               tsp_file ant_number
+    usage: main.py [-h] [-v] [-r RHO] [-a ALPHA] [-b BETA] [-q Q] [-i ITERATIONS]
+                [-p PLOT_INTERVAL]
+                tsp_file ant_number
 
     Solve a Traveling Salesman Problem using Ant Colony Optimization.
 
@@ -28,6 +28,7 @@ def main():
 
     optional arguments:
     -h, --help            show this help message and exit
+    -v, --version         Show version and exit
     -r RHO, --rho RHO     Evaporation rate (default 0.5)
     -a ALPHA, --alpha ALPHA
                             Relative importance of the pheromone (default 0.5)
@@ -44,6 +45,14 @@ def main():
 
     parser = argparse.ArgumentParser(
         description='Solve a Traveling Salesman Problem using Ant Colony Optimization.')
+
+    parser.add_argument(
+        '-v',
+        '--version',
+        action='version',
+        version='%(prog)s v' + __version__,
+        help='Show version and exit')
+
     parser.add_argument(
         '-r',
         '--rho',
@@ -80,13 +89,6 @@ def main():
         type=int,
         default=10,
         help='Plot intermediate result after this amount of iterations (default 10)')
-
-    parser.add_argument(
-        '-v',
-        '--version',
-        action='version',
-        version='%(prog)s v' + __version__,
-        help='Show version and exit')
 
     parser.add_argument(
         'tsp_file',
