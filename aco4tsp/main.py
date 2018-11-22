@@ -4,6 +4,7 @@ import argparse
 import os
 
 from aco4tsp.aco_problem import ACOProblem
+from aco4tsp._version import __version__
 
 logging.basicConfig(
     format='%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s',
@@ -79,6 +80,13 @@ def main():
         type=int,
         default=10,
         help='Plot intermediate result after this amount of iterations (default 10)')
+
+    parser.add_argument(
+        '-v',
+        '--version',
+        action='version',
+        version='%(prog)s v' + __version__,
+        help='Show version and exit')
 
     parser.add_argument(
         'tsp_file',

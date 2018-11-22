@@ -25,6 +25,8 @@ You can install the package with `pip` from [pypi](https://pypi.org/project/aco4
 
 ```
 pip3 install aco4tsp
+
+aco4tsp --version
 ```
 
 ## Usage
