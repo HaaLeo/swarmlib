@@ -1,8 +1,8 @@
-# Ant Colony Optimization &#8212; aco4tsp
+# aco4tsp &#8212; ant colony optimization
 
-[![Pypi](https://img.shields.io/pypi/v/aco4tsp.svg?style=flat-square)](https://pypi.python.org/pypi/aco4tsp) [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/aco4tsp.svg?style=flat-square)](https://pypi.python.org/pypi/aco4tsp) [![Stars](https://img.shields.io/github/stars/HaaLeo/ant-colony-optimization.svg?label=Stars&logo=github&style=flat-square)](https://github.com/HaaLeo/ant-colony-optimization/stargazers)  
+[![Pypi](https://img.shields.io/pypi/v/aco4tsp.svg?style=flat-square)](https://pypi.python.org/pypi/aco4tsp) [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/aco4tsp.svg?style=flat-square)](https://pypi.python.org/pypi/aco4tsp) [![Stars](https://img.shields.io/github/stars/HaaLeo/aco4tsp.svg?label=Stars&logo=github&style=flat-square)](https://github.com/HaaLeo/aco4tsp/stargazers)  
 [![PyPI - License](https://img.shields.io/pypi/l/aco4tsp.svg?style=flat-square)](https://pypi.python.org/pypi/aco4tsp) 
-[![Build Status](https://img.shields.io/travis/HaaLeo/ant-colony-optimization/master.svg?style=flat-square)](https://travis-ci.org/HaaLeo/ant-colony-optimization) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)  
+[![Build Status](https://img.shields.io/travis/HaaLeo/aco4tsp/master.svg?style=flat-square)](https://travis-ci.org/HaaLeo/aco4tsp) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)  
 [![Donate](https://img.shields.io/badge/-Donate-blue.svg?logo=paypal&style=flat-square)](https://www.paypal.me/LeoHanisch)
 
 ## Description
@@ -14,7 +14,7 @@ The implementation was part of the course [Natural computing for learning and op
 
 Enables to apply the ant colony optimization algorithm to a TSP using a [TSPLIB95](https://www.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/index.html) file and plots the result.
 
-![Sample](https://raw.githubusercontent.com/HaaLeo/ant-colony-optimization/master/doc/Sample.png)
+![Sample](https://raw.githubusercontent.com/HaaLeo/aco4tsp/master/doc/Sample.png)
 
 The algorithm solves the TSP and plots the result all _n_ iterations.  
 The nodes are plot according to their coordinates read from the TSPLIB95 file. The _widths_ of the edges indicate the _amount of pheromone_ that is associated with this edge. If an edge is _blue_, it is part of the _best found path_.
@@ -57,9 +57,9 @@ if problem.solve():
 
 ## Contribution
 
-If you found a bug or are missing a feature do not hesitate to [file an issue](https://github.com/HaaLeo/ant-colony-optimization/issues/new/choose).  
+If you found a bug or are missing a feature do not hesitate to [file an issue](https://github.com/HaaLeo/aco4tsp/issues/new/choose).  
 Pull Requests are welcome!
 
 ## Support
-When you like this package make sure to [star the repository](https://github.com/HaaLeo/ant-colony-optimization/stargazers). I am always looking for new ideas and feedback.  
+When you like this package make sure to [star the repository](https://github.com/HaaLeo/aco4tsp/stargazers). I am always looking for new ideas and feedback.  
 In addition, it is possible to [donate via paypal](https://www.paypal.me/LeoHanisch).

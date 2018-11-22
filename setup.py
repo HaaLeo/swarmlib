@@ -10,7 +10,7 @@ setup(
     description='Implementation of Ant Colony Optimization for the Traveling Salesman Problem.',
     long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
-    url='https://github.com/HaaLeo/ant-colony-optimization',
+    url='https://github.com/HaaLeo/aco4tsp',
     author='Leo Hanisch',
     license='BSD 3-Clause License',
     install_requires=[
@@ -19,8 +19,8 @@ setup(
         'networkx==2.1'  # Required by tsplib95 0.3.2
     ],
     project_urls={
-        'Issue Tracker': 'https://github.com/HaaLeo/ant-colony-optimization/issues',
-        'Changelog': 'https://github.com/HaaLeo/ant-colony-optimization/blob/master/CHANGELOG.md'
+        'Issue Tracker': 'https://github.com/HaaLeo/aco4tsp/issues',
+        'Changelog': 'https://github.com/HaaLeo/aco4tsp/blob/master/CHANGELOG.md'
     },
     python_requires='>=3.6',
     keywords=[

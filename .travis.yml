@@ -8,7 +8,7 @@ stages:
   - test
   - bundle
   - name: deploy
-    if: tag =~ /^v\d+\.\d+\.\d+$/ AND repo = HaaLeo/ant-colony-optimization
+    if: tag =~ /^v\d+\.\d+\.\d+$/ AND repo = HaaLeo/aco4tsp
 
 install:
   - pip install -r requirements-dev.txt
