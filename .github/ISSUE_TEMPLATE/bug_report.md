@@ -5,7 +5,7 @@ about: Create a report to help us improve
 ---
 
 <!-- Please fulfill the table below-->
-| Python Version | aco4tsp Version |
+| Python Version | swarmlib Version |
 | -------------- | --------------- |
 |                |                 |
 

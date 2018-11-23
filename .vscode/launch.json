@@ -2,14 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Main",
+            "name": "Python: aco4tsp",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/src/main.py",
+            "program": "${workspaceFolder}/swarmlib/main.py",
+            "preLaunchTask": "Bundle and Install",
             "console": "none",
             "args": [
+                "ants",
                 "${workspaceFolder}/resources/burma14.tsp",
-                14
+                "14"
             ]
         }
     ]

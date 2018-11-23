@@ -16,7 +16,8 @@
         "Stuetzle",
         "optimisation",
         "TSPLIB",
-        "paypal"
+        "paypal",
+        "swarmlib"
     ],
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
