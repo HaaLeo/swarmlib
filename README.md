@@ -68,6 +68,12 @@ The implementation was part of the course [Natural computing for learning and op
 
 ### Features
 
+To print all available options execute:
+
+```
+swarm fireflies -h
+```
+
 ### API
 
 ## Contribution
