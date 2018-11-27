@@ -54,11 +54,11 @@ confidence=
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use"--disable=all --enable=classes
 # --disable=W"
-disable=duplicate-code, # ReadyKit: Fails in unit tests
-        missing-docstring, # ReadyKit: Add DOCSTRINGS only where helpful
-        relative-import, # ReadyKit: ignore for unit tests
-        redefined-outer-name, # ReadyKit: conflicts with pytest fixtures
-        too-few-public-methods # ReadyKit: know what you are doing
+disable=duplicate-code, # swarmlib: Fails in unit tests
+        missing-docstring, # swarmlib: Add DOCSTRINGS only where helpful
+        relative-import, # swarmlib: ignore for unit tests
+        redefined-outer-name, # swarmlib: conflicts with pytest fixtures
+        too-few-public-methods # swarmlib: know what you are doing
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -279,7 +279,7 @@ bad-names=foo,
           tata
 
 # Naming style matching correct class attribute names
-class-attribute-naming-style=snake_case # ReadyKit: Enforce PEP8 style here
+class-attribute-naming-style=snake_case # swarmlib: Enforce PEP8 style here
 
 # Regular expression matching correct class attribute names. Overrides class-
 # attribute-naming-style
@@ -321,7 +321,7 @@ good-names=i,
 include-naming-hint=yes
 
 # Naming style matching correct inline iteration names
-inlinevar-naming-style=snake_case # ReadyKit: same as variables
+inlinevar-naming-style=snake_case # swarmlib: same as variables
 
 # Regular expression matching correct inline iteration names. Overrides
 # inlinevar-naming-style

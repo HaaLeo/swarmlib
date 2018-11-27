@@ -31,6 +31,8 @@ setup(
     },
     python_requires='>=3.6',
     keywords=[
+        'swarm',
+        'swarmlib',
         'ant',
         'colony',
         'optimization',
@@ -46,7 +48,10 @@ setup(
         'tsplib95'
         'networkx',
         'visualization',
-        'matplotlib'
+        'matplotlib',
+        'firefly',
+        'fireflies',
+        'algorithm'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',

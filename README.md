@@ -30,6 +30,7 @@ swarm --help
 ```
 
 ## Ant Colony Optimization
+
 This repository includes an ant colony optimization algorithm for the traveling salesman problem (TSP) like Marco Dorigo, Mauro Birattari, and Thomas Stuetzle introduced in the [IEEE Computational Intelligence Magazine](https://ieeexplore.ieee.org/document/4129846) in November 2006 (DOI: 10.1109/MCI.2006.329691).  
 The implementation was part of the course [Natural computing for learning and optimisation](https://is.cuni.cz/studium/eng/predmety/index.php?do=predmet&kod=NPFL107) at Charles University Prague in winter 2018/2019.
 
@@ -59,6 +60,15 @@ problem = ACOProblem('/path/to/my/tsp-file.tsp', 10)
 if problem.solve():
     problem.show_result()
 ```
+
+## Firefly Algorithm
+
+This repository includes the firefly algorithm like Xin-She Yang introduced in his paper [Firefly Algorithms for Multimodal Optimization](https://link.springer.com/chapter/10.1007%2F978-3-642-04944-6_14) in 2009 (DOI: 10.1007/978-3-642-04944-6_14).  
+The implementation was part of the course [Natural computing for learning and optimisation](https://is.cuni.cz/studium/eng/predmety/index.php?do=predmet&kod=NPFL107) at Charles University Prague in winter 2018/2019.
+
+### Features
+
+### API
 
 ## Contribution
 
