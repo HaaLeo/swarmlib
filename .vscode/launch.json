@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: aco4tsp",
+            "name": "Run: ACO",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/swarmlib/main.py",
@@ -10,6 +10,19 @@
             "console": "none",
             "args": [
                 "ants",
+                "${workspaceFolder}/resources/burma14.tsp",
+                "14"
+            ]
+        },
+        {
+            "name": "Run: FA",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/swarmlib/main.py",
+            "preLaunchTask": "Bundle and Install",
+            "console": "none",
+            "args": [
+                "fireflies",
                 "${workspaceFolder}/resources/burma14.tsp",
                 "14"
             ]
