@@ -7,6 +7,10 @@
             "windows": {
                 "command": "Remove-Item -Recurse -Force dist; py -3 setup.py sdist bdist_wheel; Get-Childitem –Path ./dist/*whl | Select-Object -ExpandProperty Name -outvariable package; pip3 install ./dist/$package --user --upgrade"
             },
+            "group": {
+                "isDefault": true,
+                "kind": "build"
+            }
         }
     ]
 }

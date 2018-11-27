@@ -22,7 +22,10 @@ jobs=1
 
 # List of plugins (as comma separated values of python modules names) to load,
 # usually to register additional checkers.
-load-plugins=pylint_quotes
+load-plugins=pylint_quotes,pylintfileheader
+
+# Option for the pylintfileheader plugin
+file-header=# ------------------------------------------------------------------------------------------------------\n#  Copyright \(c\) Leo Hanisch. All rights reserved.\n#  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.\n# ------------------------------------------------------------------------------------------------------\n
 
 # Pickle collected data for later comparisons.
 persistent=yes
