@@ -19,6 +19,11 @@
         "paypal",
         "swarmlib"
     ],
+    "cSpell.ignorePaths": [
+        "**/.git/**",
+        ".vscode",
+        ".pylintrc"
+    ],
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
     "python.linting.enabled": true,
