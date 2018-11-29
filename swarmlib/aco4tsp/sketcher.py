@@ -29,8 +29,8 @@ def draw_graph(graph, result):
     edge_widths = []
     edge_colors = []
 
-    sorted_edges = [tuple(sorted(item))
-                    for item in result['path_edges']]
+    sorted_edges = [tuple(sorted((result['best_path'][idx], result['best_path'][idx+1])))
+                    for idx in range(len(result['best_path'])-1)]
 
     for edge in graph.networkx_graph.edges():
 

@@ -4,8 +4,16 @@
         {
             "label": "Bundle and Install",
             "type": "shell",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
             "windows": {
-                "command": "Remove-Item -Recurse -Force dist; py -3 setup.py sdist bdist_wheel; Get-Childitem –Path ./dist/*whl | Select-Object -ExpandProperty Name -outvariable package; pip3 install ./dist/$package --user --upgrade"
+                "command": "Remove-Item -Recurse -Force -ErrorAction Ignore dist; py -3 setup.py sdist bdist_wheel; Get-Childitem –Path ./dist/*whl | Select-Object -ExpandProperty Name -outvariable package; pip3 install ./dist/$package --user --upgrade"
             },
             "group": {
                 "isDefault": true,

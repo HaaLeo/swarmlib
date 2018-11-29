@@ -50,7 +50,8 @@ class Graph:
 
     def get_edge_pheromone(self, edge):
         """Get the pheromone value for the given edge"""
-        return self.__get_edge_data(edge, 'pheromone')
+        sorted_edge = tuple(sorted(edge))
+        return self.__get_edge_data(sorted_edge, 'pheromone')
 
     def get_edge_length(self, edge):
         """Get the `rounded` length of the given edge."""

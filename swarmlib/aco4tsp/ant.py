@@ -6,12 +6,14 @@
 import logging
 from threading import Thread
 import random
+from swarmlib.aco4tsp.local_2_opt import run_2opt
 
 LOGGER = logging.getLogger(__name__)
 # pylint: disable=attribute-defined-outside-init,too-many-instance-attributes,too-many-arguments,super-init-not-called,invalid-name
 
+
 class Ant(Thread):
-    def __init__(self, start_node, graph, alpha, beta, Q):
+    def __init__(self, start_node, graph, alpha, beta, Q, use_2_opt):
         """Initializes a new instance of the Ant class."""
         self.initialize(start_node)
         self.graph = graph
@@ -19,6 +21,7 @@ class Ant(Thread):
         self.__alpha = alpha
         self.__beta = beta
         self.__Q = Q
+        self.__use_2_opt = use_2_opt
 
     def initialize(self, start_node):
         Thread.__init__(self)
@@ -41,6 +44,15 @@ class Ant(Thread):
             possible_locations = self.graph.get_connected_nodes(
                 self.__current_node).difference(self.traveled_nodes)
 
+        # Move back to origin
+        self.__move_to_next_node((self.__current_node, self.traveled_nodes[0]))
+
+        if self.__use_2_opt:
+            self.traveled_nodes, self.traveled_distance = run_2opt(
+                self.traveled_nodes,
+                self.graph.get_edge_length)
+
+
     def __select_edge(self, possible_locations):
         """Select the edge where to go next."""
         LOGGER.debug('Possible locations="%s"', possible_locations)
@@ -62,7 +74,8 @@ class Ant(Thread):
                                   random.choice(list(attractiveness.keys())))
         else:
 
-            self.selected_edge = (self.__current_node, max(attractiveness, key=attractiveness.get))
+            self.selected_edge = (self.__current_node, max(
+                attractiveness, key=attractiveness.get))
 
         LOGGER.debug('Selected edge: %s', (self.selected_edge,))
 

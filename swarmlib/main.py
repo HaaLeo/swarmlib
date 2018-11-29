@@ -26,7 +26,7 @@ def run_swarm():
         '-v',
         '--version',
         action='version',
-        version='%(prog)s v' + __version__,
+        version='swarmlib v' + __version__,
         help='Show version and exit')
 
     sub_parsers = parser.add_subparsers(

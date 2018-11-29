@@ -11,9 +11,9 @@ from queue import Queue
 import tsplib95
 from matplotlib import pyplot as plt
 
-from aco4tsp.ant import Ant
-from aco4tsp.tsp_graph import Graph
-from aco4tsp.sketcher import draw_graph
+from swarmlib.aco4tsp.ant import Ant
+from swarmlib.aco4tsp.tsp_graph import Graph
+from swarmlib.aco4tsp.sketcher import draw_graph
 
 LOGGER = logging.getLogger(__name__)
 
@@ -21,7 +21,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 class ACOProblem():
-    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, q=1, iterations=100, plot_interval=10):
+    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, q=1, iterations=100, plot_interval=10, two_opt=True):
         """Initializes a new instance of the `ACOProblem` class.
 
         Arguments:  \r
@@ -34,12 +34,12 @@ class ACOProblem():
         `beta`          -- Relative importance of the heuristic information (default 0.5)  \r
         `q`             -- Constant Q. Used to calculate the pheromone, laid down on an edge (default 1)  \r
         `iterations`    -- Number of iterations to execute (default 100)  \r
-        `plot_interval` -- Plot intermediate result after this amount of iterations (default 10)
+        `plot_interval` -- Plot intermediate result after this amount of iterations (default 10) \r
+        `two_opt`       -- Additionally use 2-opt local search after each iteration (default true)
         """
 
         self.__graph = Graph(tsplib95.load_problem(tsp_file))
         LOGGER.info('Loaded tsp problem="%s"', tsp_file)
-
         self.rho = rho  # evaporation rate
         self.alpha = alpha  # used for edge detection
         self.beta = beta  # used for edge detection
@@ -52,6 +52,7 @@ class ACOProblem():
         self.__last_result = None
         self.best_path = None
         self.shortest_distance = None
+        self.__use_2_opt = two_opt
 
     def solve(self):
         """
@@ -61,7 +62,7 @@ class ACOProblem():
         """
         success = False
         args = deepcopy([self.ant_number, self.alpha, self.beta,
-                         self.Q, self.rho, self.num_iterations, self.plot_iter])
+                         self.Q, self.rho, self.num_iterations, self.plot_iter, self.__use_2_opt])
         solving_thread = Thread(target=self.__solve, args=args)
         solving_thread.start()
 
@@ -93,17 +94,16 @@ class ACOProblem():
 
         return success
 
-    def __solve(self, ant_number, alpha, beta, Q, rho, num_iterations, plot_batch):
+    def __solve(self, ant_number, alpha, beta, Q, rho, num_iterations, plot_batch, use_2_opt):
         """Solve the problem."""
         ants = []
         shortest_distance = None
         best_path = None
-        best_edge_seq = None
 
         # Create ants
         for _ in range(ant_number):
             ant = Ant(random.choice(self.__graph.get_nodes()),
-                      self.__graph, alpha, beta, Q)
+                      self.__graph, alpha, beta, Q, use_2_opt)
             ants.append(ant)
 
         for idx in range(num_iterations):
@@ -123,13 +123,13 @@ class ACOProblem():
 
             # Add each ant's pheromone
             for ant in ants:
+
                 ant.spawn_pheromone()
 
                 # Check for best path
                 if not shortest_distance or ant.traveled_distance < shortest_distance:
                     shortest_distance = ant.traveled_distance
                     best_path = ant.traveled_nodes
-                    best_edge_seq = ant.traveled_edges
                     LOGGER.info('Updated shortest_distance="%s" and best_path="%s"',
                                 shortest_distance, best_path)
 
@@ -142,7 +142,6 @@ class ACOProblem():
 
             if (idx+1) % plot_batch == 0 or (idx+1) == num_iterations:
                 self.__result_queue.put({
-                    'path_edges': best_edge_seq,
                     'best_path': best_path,
                     'current_iter': idx+1,
                     'total_iter': num_iterations
