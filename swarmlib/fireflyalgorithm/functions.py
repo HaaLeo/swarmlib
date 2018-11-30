@@ -3,14 +3,16 @@
 #  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.
 # ------------------------------------------------------------------------------------------------------
 
-# pylint: disable=unused-variable,unused-argument
-# to do remove
+#pylint: disable=invalid-name
 
-class Firefly():
-    def __init__(self, alpha, beta, gamma, position):
-        self.__position = position
+from functools import reduce
+import numpy as np
 
 
-    @property
-    def position(self):
-        return self.__position
+def michalewicz(x):
+    m = 10
+    def func(x):
+        return np.sin(x) * np.power(np.sin((0 + 1) * np.power(x, 2) / np.pi), 2 * m)
+
+    result = reduce((lambda acc, x: acc - func(x)), x, 0.)
+    return result

@@ -8,6 +8,7 @@ import sys
 import argparse
 
 from swarmlib.aco4tsp.main import configure_parser as aco_parser
+from swarmlib.fireflyalgorithm.main import configure_parser as firefly_parser
 from swarmlib._version import __version__
 
 logging.basicConfig(
@@ -34,6 +35,7 @@ def run_swarm():
         description='Valid commands',
         help='Choose the algorithm to execute')
     aco_parser(sub_parsers)
+    firefly_parser(sub_parsers)
 
     args = vars(parser.parse_args())
     if args:

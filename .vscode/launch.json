@@ -23,12 +23,13 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/swarmlib/main.py",
-            "preLaunchTask": "Bundle and Install",
+            //"preLaunchTask": "Bundle and Install",
             "console": "none",
             "args": [
                 "fireflies",
-                "${workspaceFolder}/resources/burma14.tsp",
-                "14"
+                "-f",
+                "Michalewicz",
+                "2"
             ]
         }
     ]

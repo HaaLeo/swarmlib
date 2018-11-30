@@ -28,7 +28,8 @@ setup(
     install_requires=[
         'tsplib95>=0.3.2, <1.0.0',
         'matplotlib>=3.0.2, <4.0.0',
-        'networkx==2.1'  # Required by tsplib95 0.3.2
+        'networkx==2.1',  # Required by tsplib95 0.3.2
+        'numpy>=1.15.4, <2.0.0'
     ],
     project_urls={
         'Issue Tracker': 'https://github.com/HaaLeo/swarmlib/issues',
