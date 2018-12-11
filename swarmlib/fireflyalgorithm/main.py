@@ -3,11 +3,10 @@
 #  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.
 # ------------------------------------------------------------------------------------------------------
 
-from swarmlib.fireflyalgorithm.firefly_problem import FireflyProblem
-from swarmlib.fireflyalgorithm.functions import michalewicz
+from fireflyalgorithm.firefly_problem import FireflyProblem
+from fireflyalgorithm.functions import michalewicz
 
 def _run_firefly_algorithm(args):
-
     if args['function'] == 'Michalewicz':
         args['function'] = michalewicz
 
