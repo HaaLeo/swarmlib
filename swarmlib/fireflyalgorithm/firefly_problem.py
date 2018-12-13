@@ -3,14 +3,14 @@
 #  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.
 # ------------------------------------------------------------------------------------------------------
 
-# pylint: disable=too-many-arguments,invalid-name,unused-import
+# pylint: disable=too-many-arguments,invalid-name,too-many-instance-attributes,import-error,too-many-locals
+#to do remove import-error
 import logging
 import operator
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import animation
 from matplotlib import cm
-from mpl_toolkits.mplot3d.axes3d import Axes3D
 
 from fireflyalgorithm.firefly import Firefly
 
@@ -18,7 +18,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 class FireflyProblem():
-    def __init__(self, function, firefly_number, function_dimension=2, upper_boundary=4, lower_boundary=0, alpha=0.25, beta=1, gamma=0.97, iteration_number=100, plot_interval=10):
+    def __init__(self, function, firefly_number, function_dimension=2, upper_boundary=4., lower_boundary=0., alpha=0.25, beta=1, gamma=0.97, iteration_number=100, interval=500):
         self.__alpha = alpha
         self.__beta = beta
         self.__gamma = gamma
@@ -27,7 +27,7 @@ class FireflyProblem():
         self.__lower_boundary = lower_boundary
         self.__iteration_number = iteration_number
         self.__function = function
-        self.__plot_interval = plot_interval
+        self.__interval = interval
 
         # Create fireflies
         self.__fireflies = [Firefly(self.__alpha,
@@ -85,7 +85,7 @@ class FireflyProblem():
             rectangle.set_edgecolor('none')
             return particles, rectangle
 
-        def __animate(i):  # plyint: disable=unused-argument
+        def __animate(_):
             ms = int(fig.dpi * 2 * 0.02 * fig.get_figwidth()
                      / np.diff(ax.get_xbound())[0])
             rectangle.set_edgecolor('k')
@@ -100,8 +100,8 @@ class FireflyProblem():
 
             return particles, rectangle
 
-        _ = animation.FuncAnimation(fig, __animate, frames=self.__iteration_number, interval=200,
-                                blit=True, init_func=__init)
+        _ = animation.FuncAnimation(fig, __animate, frames=self.__iteration_number, interval=self.__interval,
+                                    blit=True, init_func=__init)
         # ani.save('videos/mich_firefly.mp4', fps=5,
         #          extra_args=['-vcodec', 'libx264'])
 

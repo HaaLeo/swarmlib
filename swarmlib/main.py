@@ -7,6 +7,9 @@ import logging
 import sys
 import argparse
 
+# pylint: disable=import-error
+# to do remove import-error
+
 from aco4tsp.main import configure_parser as aco_parser
 from fireflyalgorithm.main import configure_parser as firefly_parser
 from _version import __version__
@@ -43,6 +46,7 @@ def run_swarm():
         algorithm(args)
     else:
         parser.print_usage()
+
 
 if __name__ == '__main__':
     run_swarm()
