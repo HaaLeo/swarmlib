@@ -82,6 +82,16 @@ swarm fireflies -h
 
 ### API
 
+In addition to the client you can also use the API:
+
+```python
+from swarmlib.fireflyalgorithm.firefly_problem import FireflyProblem
+from swarmlib.fireflyalgorithm.functions import FUNCTIONS
+
+problem = FireflyProblem(FUNCTIONS['michalewicz'], 14)
+problem.solve()
+```
+
 ## Contribution
 
 If you found a bug or are missing a feature do not hesitate to [file an issue](https://github.com/HaaLeo/swarmlib/issues/new/choose).  

@@ -40,7 +40,7 @@ def configure_parser(sub_parsers):
         '--lower-boundary',
         type=float,
         default=0.,
-        help='Lower boundary of the function (default o)')
+        help='Lower boundary of the function (default 0)')
     parser.add_argument(
         '-a',
         '--alpha',
@@ -63,8 +63,8 @@ def configure_parser(sub_parsers):
         '-n',
         '--iteration-number',
         type=int,
-        default=100,
-        help='Number of iterations to execute (default 100)')
+        default=10,
+        help='Number of iterations to execute (default 10)')
     parser.add_argument(
         '-i',
         '--interval',
