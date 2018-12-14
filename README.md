@@ -9,8 +9,6 @@
 
 This repository implements several optimization algorithms.
 
->Currently only the ant colony optimization is included.
-
 ## Installation
 
 You can install the package with `pip` from [pypi](https://pypi.org/project/swarmlib):
