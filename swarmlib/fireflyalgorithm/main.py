@@ -3,19 +3,14 @@
 #  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.
 # ------------------------------------------------------------------------------------------------------
 
-#pylint:disable=import-error
-#to do remove import-error
 
-from fireflyalgorithm.firefly_problem import FireflyProblem
-from fireflyalgorithm.functions import michalewicz
+from swarmlib.fireflyalgorithm.firefly_problem import FireflyProblem
+from swarmlib.fireflyalgorithm.functions import FUNCTIONS
 
 def _run_firefly_algorithm(args):
-    if args['function'] == 'Michalewicz':
-        args['function'] = michalewicz
-
+    args['function'] = FUNCTIONS[args['function']]
     problem = FireflyProblem(**args)
-    if problem.solve():
-        problem.show_result()
+    problem.solve()
 
 def configure_parser(sub_parsers):
     """
@@ -31,51 +26,51 @@ def configure_parser(sub_parsers):
         '-f',
         '--function',
         type=str,
-        default='Michalewicz',
+        default='michalewicz',
         help='Choose the function that is used for searching the minimum.',
-        choices=['Michalewicz'])
+        choices=['michalewicz', 'ackley'])
     parser.add_argument(
         '-u',
         '--upper-boundary',
         type=float,
         default=4.,
-        help='The upper boundary of the chosen function.')
+        help='Upper boundary of the function (default 4)')
     parser.add_argument(
         '-l',
         '--lower-boundary',
         type=float,
         default=0.,
-        help='The lower boundary of the chosen function.')
+        help='Lower boundary of the function (default o)')
     parser.add_argument(
         '-a',
         '--alpha',
         type=float,
         default=0.25,
-        help='Alpha')
+        help='Randomization parameter (default 0.25)')
     parser.add_argument(
         '-b',
         '--beta',
         type=float,
         default=1.,
-        help='Beta')
+        help='Attractiveness at distance=0 (default 1)')
     parser.add_argument(
         '-g',
         '--gamma',
         type=float,
         default=0.97,
-        help='Gamma')
+        help='Characterizes the variation of the attractiveness. (default 0.97)')
     parser.add_argument(
         '-n',
         '--iteration-number',
         type=int,
         default=100,
-        help='Number of iterations that will be executed.')
+        help='Number of iterations to execute (default 100)')
     parser.add_argument(
         '-i',
         '--interval',
         type=int,
         default=500,
-        help='Interval between two animation frames in ms (default 500).')
+        help='Interval between two animation frames in ms (default 500)')
 
     parser.add_argument(
         'firefly_number',

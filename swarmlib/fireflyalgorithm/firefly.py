@@ -25,6 +25,10 @@ class Firefly():
     def position(self):
         return self.__position
 
+    @position.setter
+    def position(self, value):
+        self.__position = value
+
     @property
     def intensity(self):
         return self.__intensity

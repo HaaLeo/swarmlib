@@ -28,8 +28,12 @@
             "args": [
                 "fireflies",
                 "-f",
-                "Michalewicz",
-                "20"
+                "michalewicz",
+                "-n",
+                "10",
+                "14",
+                "-i",
+                "1000"
             ]
         }
     ]

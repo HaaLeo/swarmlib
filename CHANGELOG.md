@@ -2,6 +2,9 @@
 All notable changes to the "swarmlib" pypi package will be documented in this file.  
 This project follows [semantic versioning](https://semver.org/).
 
+## 2018-12-14 - v0.2.0
+* **Added** a feature that enables the firefly algorithm for one of the provided 2D functions. Each 
+
 ## 2018-11-29 - v0.1.0
 * **Added** a feature that performs [2-opt](https://en.wikipedia.org/wiki/2-opt) search once on each partial solution after each iteration. It can be disabled via the argument `--two-opt false`.
 * **Fixed** an import bug that caused the application to crash instantly

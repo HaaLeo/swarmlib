@@ -38,7 +38,7 @@ The implementation was part of the course [Natural computing for learning and op
 
 Enables to apply the ant colony optimization algorithm to a TSP using a [TSPLIB95](https://www.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/index.html) file and plots the result.
 
-![Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/ACO_Sample.png)
+![ACO Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/ACO_Sample.png)
 
 The algorithm solves the TSP and plots the result all _n_ iterations.  
 The nodes are plot according to their coordinates read from the TSPLIB95 file. The _widths_ of the edges indicate the _amount of pheromone_ that is associated with this edge. If an edge is _blue_, it is part of the _best found path_.
@@ -67,6 +67,14 @@ This repository includes the firefly algorithm like Xin-She Yang introduced in h
 The implementation was part of the course [Natural computing for learning and optimisation](https://is.cuni.cz/studium/eng/predmety/index.php?do=predmet&kod=NPFL107) at Charles University Prague in winter 2018/2019.
 
 ### Features
+
+Enables to apply the firefly algorithm to one of the provided 2D functions. The algorithm tries to find the global minimum of the selected function.  
+
+Currently two functions can be selected:
+* [ackley](https://www.sfu.ca/~ssurjano/ackley.html)
+* [michalewicz](https://www.sfu.ca/~ssurjano/michal.html)
+
+![firefly algorithm](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/fireflies.gif)
 
 To print all available options execute:
 

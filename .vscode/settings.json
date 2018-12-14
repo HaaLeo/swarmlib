@@ -20,7 +20,8 @@
         "swarmlib",
         "numpy",
         "michalewicz",
-        "functools"
+        "functools",
+        "ackley"
     ],
     "cSpell.ignorePaths": [
         "**/.git/**",
