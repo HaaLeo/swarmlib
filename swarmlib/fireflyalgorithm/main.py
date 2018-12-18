@@ -9,6 +9,7 @@ from swarmlib.fireflyalgorithm.functions import FUNCTIONS
 
 def _run_firefly_algorithm(args):
     args['function'] = FUNCTIONS[args['function']]
+    args['continuous'] = False if args['continuous'] == 'false' or args['continuous'] == 'f' else True
     problem = FireflyProblem(**args)
     problem.solve()
 
@@ -71,6 +72,13 @@ def configure_parser(sub_parsers):
         type=int,
         default=500,
         help='Interval between two animation frames in ms (default 500)')
+    parser.add_argument(
+        '-c',
+        '--continuous',
+        type=str,
+        default='false',
+        help='Indicates whether the algorithm should run continuously (default false)',
+        choices=['false', 'f', 'true', 't'])
 
     parser.add_argument(
         'firefly_number',

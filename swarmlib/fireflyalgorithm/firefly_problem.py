@@ -18,7 +18,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 class FireflyProblem():
-    def __init__(self, function, firefly_number, upper_boundary=4., lower_boundary=0., alpha=0.25, beta=1, gamma=0.97, iteration_number=10, interval=500):
+    def __init__(self, function, firefly_number, upper_boundary=4., lower_boundary=0., alpha=0.25, beta=1, gamma=0.97, iteration_number=10, interval=500, continuous=False):
         """Initializes a new instance of the `FireflyProblem` class.
 
         Arguments:  \r
@@ -32,7 +32,8 @@ class FireflyProblem():
         `beta`             -- Attractiveness at distance=0 (default 1)  \r
         `gamma`            -- Characterizes the variation of the attractiveness. (default 0.97) \r
         `iteration_number` -- Number of iterations to execute (default 100)  \r
-        `interval`         -- Interval between two animation frames in ms (default 500)
+        `interval`         -- Interval between two animation frames in ms (default 500)  \r
+        `continuous`       -- Indicates whether the algorithm should run continuously (default False)
         """
 
         self.__alpha = alpha
@@ -44,7 +45,8 @@ class FireflyProblem():
         self.__iteration_number = iteration_number
         self.__function = function
         self.__interval = interval
-
+        self.__best = None
+        self.__continuous = continuous
         # Create fireflies
         self.__fireflies = [Firefly(self.__alpha,
                                     self.__beta,
@@ -67,8 +69,15 @@ class FireflyProblem():
                     i.move_towards(j.position)
                     i.update_intensity(self.__function)
 
+        if not self.__best or self.__fireflies[0].intensity > self.__best:
+            self.__best = self.__fireflies[0].intensity
+
+        LOGGER.info('Current best intensity: %s, Overall best intensity: %s',
+                    self.__fireflies[0].intensity,
+                    self.__best)
+
         # randomly walk the best firefly
-        self.__fireflies[0].random_walk(0.3)
+        self.__fireflies[0].random_walk(0.1)
         self.__fireflies[0].update_intensity(self.__function)
 
     def solve(self):
@@ -110,6 +119,10 @@ class FireflyProblem():
             fig.canvas.set_window_title(
                 'Iteration %s/%s' % (i, self.__iteration_number))
 
+            if i == 0:
+                LOGGER.info('Reset fireflies')
+                self.__best = None
+
             for idx, firefly in enumerate(self.__fireflies):
                 # Reset fireflies after all iterations
                 if i == 0:
@@ -126,6 +139,6 @@ class FireflyProblem():
 
             # iteration_number+1 for initialization frame
         _ = animation.FuncAnimation(fig, __animate, frames=self.__iteration_number+1, interval=self.__interval,
-                                    blit=True, init_func=__init)
+                                    blit=True, init_func=__init, repeat=self.__continuous)
 
         plt.show()
