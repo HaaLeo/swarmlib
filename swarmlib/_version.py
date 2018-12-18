@@ -3,4 +3,4 @@
 #  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.
 # ------------------------------------------------------------------------------------------------------
 
-__version__ = '0.2.0'
+__version__ = '0.3.0'

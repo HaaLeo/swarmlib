@@ -2,6 +2,10 @@
 All notable changes to the "swarmlib" pypi package will be documented in this file.  
 This project follows [semantic versioning](https://semver.org/).
 
+## 2018-12-18 - v0.3.0
+* **Added** command line option `--continuous` for the firefly algorithm to indicate, whether the algorithm should run continuously or not
+* **Added** logging for the current best and overall best intensity found of the firefly algorithm
+
 ## 2018-12-14 - v0.2.0
 * **Added** a feature that enables the firefly algorithm for one of the provided 2D functions. After each step the intermediate solution is plotted.
 
