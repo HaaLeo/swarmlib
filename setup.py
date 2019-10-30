@@ -33,7 +33,7 @@ setup(
     ],
     project_urls={
         'Issue Tracker': 'https://github.com/HaaLeo/swarmlib/issues',
-        'Changelog': 'https://github.com/HaaLeo/swarmlib/blob/master/CHANGELOG.md'
+        'Changelog': 'https://github.com/HaaLeo/swarmlib/blob/master/CHANGELOG.md#changelog'
     },
     python_requires='>=3.6',
     keywords=[
@@ -60,9 +60,10 @@ setup(
         'algorithm'
     ],
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Intended Audience :: Education',

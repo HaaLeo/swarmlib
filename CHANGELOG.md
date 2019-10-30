@@ -2,6 +2,10 @@
 All notable changes to the "swarmlib" pypi package will be documented in this file.  
 This project follows [semantic versioning](https://semver.org/).
 
+
+## Unreleased
+* **Fixed** a bug in the ACO algorithm that chose the next node by its maximal attractiveness. Now the next node is chosen randomly weighted by its attractiveness
+
 ## 2018-12-18 - v0.3.0
 * **Added** command line option `--continuous` for the firefly algorithm to indicate, whether the algorithm should run continuously or not
 * **Added** logging for the current best and overall best intensity found of the firefly algorithm

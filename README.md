@@ -3,7 +3,7 @@
 [![Pypi](https://img.shields.io/pypi/v/swarmlib.svg?style=flat-square)](https://pypi.python.org/pypi/swarmlib) [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/swarmlib.svg?style=flat-square)](https://pypi.python.org/pypi/swarmlib) [![PyPI - Downloads](https://img.shields.io/pypi/dm/swarmlib.svg?style=flat-square)](https://pypistats.org/packages/swarmlib) [![Stars](https://img.shields.io/github/stars/HaaLeo/swarmlib.svg?label=Stars&logo=github&style=flat-square)](https://github.com/HaaLeo/swarmlib/stargazers)  
 [![PyPI - License](https://img.shields.io/pypi/l/swarmlib.svg?style=flat-square)](https://pypi.python.org/pypi/swarmlib) 
 [![Build Status](https://img.shields.io/travis/HaaLeo/swarmlib/master.svg?style=flat-square)](https://travis-ci.org/HaaLeo/swarmlib) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)  
-[![Donate](https://img.shields.io/badge/-Donate-blue.svg?logo=paypal&style=flat-square)](https://www.paypal.me/LeoHanisch)
+[![Donate](https://img.shields.io/badge/☕️-Buy%20Me%20a%20Coffee-blue.svg?&style=flat-square)](https://www.paypal.me/LeoHanisch/3eur)
 
 ## Description
 
@@ -99,4 +99,4 @@ Pull Requests are welcome!
 
 ## Support
 When you like this package make sure to [star the repository](https://github.com/HaaLeo/swarmlib/stargazers). I am always looking for new ideas and feedback.  
-In addition, it is possible to [donate via paypal](https://www.paypal.me/LeoHanisch).
+In addition, it is possible to [donate via paypal](https://www.paypal.me/LeoHanisch/3eur).
