@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 from matplotlib import animation
 from matplotlib import cm
 
-from swarmlib.fireflyalgorithm.firefly import Firefly
+from .firefly import Firefly
 
 LOGGER = logging.getLogger(__name__)
 

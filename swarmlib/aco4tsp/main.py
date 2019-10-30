@@ -6,7 +6,7 @@
 import logging
 import os
 
-from swarmlib.aco4tsp.aco_problem import ACOProblem
+from .aco_problem import ACOProblem
 
 LOGGER = logging.getLogger(__name__)
 

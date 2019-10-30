@@ -31,5 +31,6 @@
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
     "python.linting.enabled": true,
-    "files.eol": "\n"
+    "files.eol": "\n",
+    "python.linting.pylintEnabled": true
 }

@@ -11,9 +11,9 @@ from queue import Queue
 import tsplib95
 from matplotlib import pyplot as plt
 
-from swarmlib.aco4tsp.ant import Ant
-from swarmlib.aco4tsp.tsp_graph import Graph
-from swarmlib.aco4tsp.sketcher import draw_graph
+from .ant import Ant
+from .tsp_graph import Graph
+from .sketcher import draw_graph
 
 LOGGER = logging.getLogger(__name__)
 

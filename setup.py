@@ -73,7 +73,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'swarm=swarmlib.main:run_swarm'
+            'swarm=swarmlib.__main__:run_swarm'
         ]
     }
 )

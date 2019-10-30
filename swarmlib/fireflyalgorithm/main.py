@@ -4,8 +4,8 @@
 # ------------------------------------------------------------------------------------------------------
 
 
-from swarmlib.fireflyalgorithm.firefly_problem import FireflyProblem
-from swarmlib.fireflyalgorithm.functions import FUNCTIONS
+from .firefly_problem import FireflyProblem
+from .functions import FUNCTIONS
 
 def _run_firefly_algorithm(args):
     args['function'] = FUNCTIONS[args['function']]

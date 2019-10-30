@@ -10,9 +10,9 @@ import argparse
 # pylint: disable=import-error
 # to do remove import-error
 
-from swarmlib.aco4tsp.main import configure_parser as aco_parser
-from swarmlib.fireflyalgorithm.main import configure_parser as firefly_parser
-from swarmlib._version import __version__
+from .aco4tsp.main import configure_parser as aco_parser
+from .fireflyalgorithm.main import configure_parser as firefly_parser
+from ._version import __version__
 
 logging.basicConfig(
     format='%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s',

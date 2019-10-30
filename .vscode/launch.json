@@ -5,9 +5,8 @@
             "name": "Run: ACO",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/swarmlib/main.py",
-            "preLaunchTask": "Bundle and Install",
-            "console": "none",
+            "module": "swarmlib",
+            "console": "internalConsole",
             "args": [
                 "ants",
                 "${workspaceFolder}/resources/burma14.tsp",
@@ -22,9 +21,8 @@
             "name": "Run: FA",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/swarmlib/main.py",
-            //"preLaunchTask": "Bundle and Install",
-            "console": "none",
+            "module": "swarmlib",
+            "console": "internalConsole",
             "args": [
                 "fireflies",
                 "-f",

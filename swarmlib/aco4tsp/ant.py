@@ -6,7 +6,7 @@
 import logging
 from threading import Thread
 import random
-from swarmlib.aco4tsp.local_2_opt import run_2opt
+from .local_2_opt import run_2opt
 
 LOGGER = logging.getLogger(__name__)
 # pylint: disable=attribute-defined-outside-init,too-many-instance-attributes,too-many-arguments,super-init-not-called,invalid-name
@@ -73,9 +73,8 @@ class Ant(Thread):
             self.selected_edge = (self.__current_node,
                                   random.choice(list(attractiveness.keys())))
         else:
-
-            self.selected_edge = (self.__current_node, max(
-                attractiveness, key=attractiveness.get))
+            choice = random.choices(list(attractiveness.keys()), list(attractiveness.values()))
+            self.selected_edge = (self.__current_node, choice[0])
 
         LOGGER.debug('Selected edge: %s', (self.selected_edge,))
 
