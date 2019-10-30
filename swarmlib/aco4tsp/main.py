@@ -15,7 +15,7 @@ def _run_aco4tsp(args):
     if not os.path.isabs(args['tsp_file']):
         args['tsp_file'] = os.path.join(os.getcwd(), args['tsp_file'])
 
-    args['two_opt'] = False if args['two_opt'] == 'false' or args['two_opt'] == 'f' else True
+    args['two_opt'] = not bool(args['two_opt'] == 'false' or args['two_opt'] == 'f')
     problem = ACOProblem(**args)
     if problem.solve():
         problem.show_result()

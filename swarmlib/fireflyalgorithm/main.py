@@ -9,7 +9,7 @@ from .functions import FUNCTIONS
 
 def _run_firefly_algorithm(args):
     args['function'] = FUNCTIONS[args['function']]
-    args['continuous'] = False if args['continuous'] == 'false' or args['continuous'] == 'f' else True
+    args['continuous'] = not bool(args['continuous'] == 'false' or args['continuous'] == 'f')
     problem = FireflyProblem(**args)
     problem.solve()
 
