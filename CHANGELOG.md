@@ -3,7 +3,7 @@ All notable changes to the "swarmlib" pypi package will be documented in this fi
 This project follows [semantic versioning](https://semver.org/).
 
 
-## Unreleased
+## 2019-10-30 - v0.3.1
 * **Fixed** a bug in the ACO algorithm that chose the next node by its maximal attractiveness. Now the next node is chosen randomly weighted by its attractiveness
 
 ## 2018-12-18 - v0.3.0
