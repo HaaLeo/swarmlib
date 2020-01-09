@@ -3,6 +3,9 @@ All notable changes to the "swarmlib" pypi package will be documented in this fi
 This project follows [semantic versioning](https://semver.org/).
 
 
+## 2020-01-09 - v0.3.2
+* **Fixed** a bug in the firefly algorithm that caused the application to crash when the ackley function was selected.
+
 ## 2019-10-30 - v0.3.1
 * **Fixed** a bug in the ACO algorithm that chose the next node by its maximal attractiveness. Now the next node is chosen randomly weighted by its attractiveness
 

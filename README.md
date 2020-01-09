@@ -34,7 +34,7 @@ The implementation was part of the course [Natural computing for learning and op
 
 ### Features
 
-Enables to apply the ant colony optimization algorithm to a TSP using a [TSPLIB95](https://www.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/index.html) file and plots the result.
+Enables to apply the ant colony optimization algorithm to a TSP using a [TSPLIB95](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/) file and plots the result.
 
 ![ACO Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/ACO_Sample.png)
 

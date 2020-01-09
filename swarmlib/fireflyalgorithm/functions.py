@@ -19,15 +19,13 @@ def michalewicz(x):
     return -result
 
 
-def ackley(x):
-    a = 20
-    b = 0.2
-    c = 2 * np.pi
+def ackley(x, a=20, b=0.2, c=2*np.pi):
 
-    first_sum = reduce(lambda acc, x: acc + np.power(x, 2), x, 0.)
-    second_sum = reduce(lambda acc, x: np.cos(c * x), x, 0.)
-
-    return -a * np.exp(-b * np.sqrt(1/x.size * first_sum)-np.exp(1/x.size * second_sum)) + a + np.exp(1)
+    x = np.asarray_chkfinite(x)  # ValueError if any NaN or Inf
+    n = len(x)
+    s1 = np.sum(x**2, axis=0)
+    s2 = np.sum(np.cos(c * x), axis=0)
+    return -a*np.exp(-b*np.sqrt(s1 / n)) - np.exp(s2 / n) + a + np.exp(1)
 
 
 FUNCTIONS = {
