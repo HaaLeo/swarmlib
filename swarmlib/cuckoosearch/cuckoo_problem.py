@@ -3,6 +3,17 @@
 #  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.
 # ------------------------------------------------------------------------------------------------------
 
+# pylint: disable=too-many-instance-attributes
+
+import logging
+
+import numpy as np
+
+from .nest import Nest
+from .cuckoo import Cuckoo
+
+LOGGER = logging.getLogger(__name__)
+
 
 class CuckooProblem:
     def __init__(self, **kwargs):
@@ -15,7 +26,43 @@ class CuckooProblem:
         self.__p_a = kwargs.get('p_a', .1)
 
         self.__function = kwargs['function']
-        self.__nest_number = kwargs['nests']
+        self.__nests = [
+            Nest(self.__function, self.__lower_boundary, self.__upper_boundary)
+            for _ in range(kwargs['nests'])
+        ]
+
+        # Sort nests initally for best solution
+        self.__nests.sort(key=lambda nest: nest.value)
+        self.__best_nest = self.__nests[0]
 
     def solve(self):
-        self.__function([1,1])
+        for _ in range(self.__max_generations):
+
+            # Perform levy flights to get cuckoo's new position
+            new_cuckoo_pos = [Cuckoo.levy_flight(nest.position, self.__alpha) for nest in self.__nests]
+
+            # Randomly select nests to be updated
+            n_nests = len(self.__nests)
+            nest_indices_to_update = [np.random.randint(0, n_nests) for _ in range(n_nests)]
+
+            # Update nests
+            for index in nest_indices_to_update:
+                self.__nests[index].update_pos(new_cuckoo_pos[index])
+
+            # Abandon nests
+            self.__nests = [
+                Nest(self.__function, self.__lower_boundary, self.__upper_boundary)
+                if np.random.random_sample() < self.__p_a
+                else nest
+                for nest in self.__nests
+            ]
+
+            self.__nests.sort(key=lambda nest: nest.value)
+
+            # Update best nest
+            if self.__nests[0].value < self.__best_nest.value:
+                self.__best_nest = self.__nests[0]
+                LOGGER.info('Found new best solution="%s" at position="%s"', self.__best_nest.value, self.__best_nest.position)
+
+        LOGGER.info('Last best solution="%s" at position="%s"', self.__best_nest.value, self.__best_nest.position)
+        return self.__best_nest.position, self.__best_nest.value

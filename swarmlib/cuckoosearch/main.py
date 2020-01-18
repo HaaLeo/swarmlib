@@ -45,7 +45,7 @@ def configure_parser(sub_parsers):
     parser.add_argument(
         '-a',
         '--alpha',
-        type=int,
+        type=float,
         default=1,
         help='Randomization parameter used for levy flights. (default 1)')
     parser.add_argument(
