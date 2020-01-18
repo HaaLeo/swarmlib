@@ -12,6 +12,7 @@ def _run_cuckoo_search(args):
     args['continuous'] = not bool(args['continuous'] == 'false' or args['continuous'] == 'f')
     problem = CuckooProblem(**args)
     problem.solve()
+    problem.replay()
 
 def configure_parser(sub_parsers):
     """

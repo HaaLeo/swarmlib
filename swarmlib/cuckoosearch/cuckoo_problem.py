@@ -11,7 +11,7 @@ import numpy as np
 
 from .nest import Nest
 from .cuckoo import Cuckoo
-
+from ..util.visualizer import Visualizer
 LOGGER = logging.getLogger(__name__)
 
 
@@ -33,7 +33,12 @@ class CuckooProblem:
 
         # Sort nests initally for best solution
         self.__nests.sort(key=lambda nest: nest.value)
-        self.__best_nest = self.__nests[0]
+        self.__best_nests = [self.__nests[0]]
+
+        # Initialize visualizer for plotting
+        kwargs['iteration_number'] = kwargs['max_generations']
+        self.__visualizer = Visualizer(**kwargs)
+        self.__visualizer.add_data([nest.position for nest in self.__nests])
 
     def solve(self):
         for _ in range(self.__max_generations):
@@ -60,9 +65,18 @@ class CuckooProblem:
             self.__nests.sort(key=lambda nest: nest.value)
 
             # Update best nest
-            if self.__nests[0].value < self.__best_nest.value:
-                self.__best_nest = self.__nests[0]
-                LOGGER.info('Found new best solution="%s" at position="%s"', self.__best_nest.value, self.__best_nest.position)
+            if self.__nests[0].value < self.__best_nests[0].value:
+                self.__best_nests.insert(0, self.__nests[0])
+                LOGGER.info('Found new best solution="%s" at position="%s"', self.__best_nests[0].value, self.__best_nests[0].position)
 
-        LOGGER.info('Last best solution="%s" at position="%s"', self.__best_nest.value, self.__best_nest.position)
-        return self.__best_nest.position, self.__best_nest.value
+            # Add data for plot
+            data = [nest.position for nest in self.__nests]
+            self.__visualizer.add_data(data)
+
+        LOGGER.info('Last best solution="%s" at position="%s"', self.__best_nests[0].value, self.__best_nests[0].position)
+        return self.__best_nests[0].position, self.__best_nests[0].value
+
+    def replay(self):
+        """Start the problems visualization.
+        """
+        self.__visualizer.replay()
