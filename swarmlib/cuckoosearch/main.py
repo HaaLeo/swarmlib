@@ -4,13 +4,13 @@
 # ------------------------------------------------------------------------------------------------------
 
 
-from .firefly_problem import FireflyProblem
+from .cuckoo_problem import CuckooProblem
 from ..util.functions import FUNCTIONS
 
-def _run_firefly_algorithm(args):
+def _run_cuckoo_search(args):
     args['function'] = FUNCTIONS[args['function']]
     args['continuous'] = not bool(args['continuous'] == 'false' or args['continuous'] == 'f')
-    problem = FireflyProblem(**args)
+    problem = CuckooProblem(**args)
     problem.solve()
 
 def configure_parser(sub_parsers):
@@ -19,9 +19,9 @@ def configure_parser(sub_parsers):
     """
 
     parser = sub_parsers.add_parser(
-        'fireflies',
-        description='Solving an minimization problem using the firefly algorithm',
-        help='Firefly algorithm for minimization problem')
+        'cuckoos',
+        description='Solving an minimization problem using the cuckoo search algorithm',
+        help='Cuckoo search algorithm for minimization problem')
 
     parser.add_argument(
         '-f',
@@ -45,27 +45,21 @@ def configure_parser(sub_parsers):
     parser.add_argument(
         '-a',
         '--alpha',
-        type=float,
-        default=0.25,
-        help='Randomization parameter (default 0.25)')
+        type=int,
+        default=1,
+        help='Randomization parameter used for levy flights. (default 1)')
     parser.add_argument(
-        '-b',
-        '--beta',
-        type=float,
-        default=1.,
-        help='Attractiveness at distance=0 (default 1)')
-    parser.add_argument(
-        '-g',
-        '--gamma',
-        type=float,
-        default=0.97,
-        help='Characterizes the variation of the attractiveness. (default 0.97)')
-    parser.add_argument(
-        '-n',
-        '--iteration-number',
+        '-m',
+        '--max-generations',
         type=int,
         default=10,
-        help='Number of iterations to execute (default 10)')
+        help='Maximum number of generations. Number of iterations to execute (default 10)')
+    parser.add_argument(
+        '-p',
+        '--p-a',
+        type=float,
+        default=.1,
+        help='Fraction of nests that will be randomly abandoned after each iteration (default 0.1)')
     parser.add_argument(
         '-i',
         '--interval',
@@ -81,8 +75,8 @@ def configure_parser(sub_parsers):
         choices=['false', 'f', 'true', 't'])
 
     parser.add_argument(
-        'firefly_number',
+        'nests',
         type=int,
-        help='Number of fireflies used for solving')
+        help='Number of nests used for solving')
 
-    parser.set_defaults(func=_run_firefly_algorithm)
+    parser.set_defaults(func=_run_cuckoo_search)

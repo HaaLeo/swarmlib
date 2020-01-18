@@ -33,6 +33,23 @@
                 "-i",
                 "1000"
             ]
+        },
+        {
+            "name": "Run: CS",
+            "type": "python",
+            "request": "launch",
+            "module": "swarmlib",
+            "console": "internalConsole",
+            "args": [
+                "cuckoos",
+                "-f",
+                "michalewicz",
+                "-m",
+                "10",
+                "-i",
+                "1000",
+                "14"
+            ]
         }
     ]
 }
