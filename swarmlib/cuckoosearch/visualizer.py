@@ -10,7 +10,7 @@ from matplotlib import animation
 from matplotlib import cm
 import numpy as np
 
-# pylint:disable=too-many-locals,too-many-arguments
+# pylint:disable=too-many-locals,too-many-instance-attributes,invalid-name
 
 
 class Visualizer:
