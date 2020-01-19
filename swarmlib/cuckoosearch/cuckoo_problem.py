@@ -11,7 +11,7 @@ import numpy as np
 
 from .nest import Nest
 from .cuckoo import Cuckoo
-from ..util.visualizer import Visualizer
+from .visualizer import Visualizer
 LOGGER = logging.getLogger(__name__)
 
 
