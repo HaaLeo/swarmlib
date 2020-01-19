@@ -7,7 +7,9 @@
 
 ## Description
 
-This repository implements several optimization algorithms:
+This repository implements several swarm optimization algorithms and visualizes their (intermediate) solutions.
+To run the algorithms one can either use the command line interface or the API.
+Currently, the following algorithms are implemented:
 * [Ant Colony Optimization](#ant-colony-optimization)
 * [Firefly Algorithm](#firefly-algorithm)
 * [Cuckoo Search](#cuckoo-search)
@@ -32,7 +34,7 @@ swarm --help
 
 ## Ant Colony Optimization
 
-This repository includes an ant colony optimization algorithm for the traveling salesman problem (TSP) like Marco Dorigo, Mauro Birattari, and Thomas Stuetzle introduced in the [IEEE Computational Intelligence Magazine](https://ieeexplore.ieee.org/document/4129846) in November 2006 (DOI: 10.1109/MCI.2006.329691).  
+This repository includes an _ant colony optimization_ algorithm for the traveling salesman problem (TSP) like Marco Dorigo, Mauro Birattari, and Thomas Stuetzle introduced in the [IEEE Computational Intelligence Magazine](https://ieeexplore.ieee.org/document/4129846) in November 2006 (DOI: 10.1109/MCI.2006.329691).  
 The implementation was part of the course [Natural computing for learning and optimisation](https://is.cuni.cz/studium/eng/predmety/index.php?do=predmet&kod=NPFL107) at Charles University Prague in winter 2018/2019.
 
 ### Features
@@ -52,7 +54,7 @@ swarm ants -h
 
 ### API
 
-In addition to the client you can also use the API:
+In addition to the cli you can also use the API:
 
 ```python
 from swarmlib.aco4tsp.aco_problem import ACOProblem
@@ -85,7 +87,7 @@ swarm fireflies -h
 
 ### API
 
-In addition to the client you can also use the API:
+In addition to the cli you can also use the API:
 
 ```python
 from swarmlib.fireflyalgorithm.firefly_problem import FireflyProblem
@@ -109,6 +111,8 @@ Currently two functions can be selected:
 
 ![cukoo search](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/cuckoos.gif)
 
+The plot shows all nests of the current cuckoo generation as _red_ markers. The best nests of all (previous) generations are indicated by _yellow_ markers.
+
 To print all available options execute:
 
 ```
@@ -117,7 +121,7 @@ swarm cuckoos -h
 
 ### API
 
-In addition to the client you can also use the API:
+In addition to the cli you can also use the API:
 
 ```python
 from swarmlib.cuckoosearch.cuckoo_problem import CuckooProblem

@@ -53,7 +53,7 @@ def configure_parser(sub_parsers):
         '-a',
         '--alpha',
         type=float,
-        default=1,
+        default=1.,
         help='Scaling parameter used for levy flight step. (default 1)')
     parser.add_argument(
         '-la',
