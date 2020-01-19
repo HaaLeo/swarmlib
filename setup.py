@@ -57,7 +57,12 @@ setup(
         'matplotlib',
         'firefly',
         'fireflies',
-        'algorithm'
+        'algorithm',
+        'cuckoo',
+        'cuckoos',
+        'search',
+        'levy',
+        'flights'
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',

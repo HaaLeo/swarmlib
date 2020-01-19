@@ -2,6 +2,9 @@
 All notable changes to the "swarmlib" pypi package will be documented in this file.  
 This project follows [semantic versioning](https://semver.org/).
 
+## 2020-01-19 - v0.4.1
+* **Changed** pypi tags to enhance the package's discoverability.
+
 ## 2020-01-19 - v0.4.0
 * **Added** a feature that a feature that enables the cuckoo search for one of the provided 2D functions. After each step the intermediate solution is plotted.
 
