@@ -8,18 +8,20 @@ from typing import Tuple
 
 import numpy as np
 
+
 class Cuckoo:
 
     @staticmethod
-    def levy_flight(start: Tuple[float, float], alpha: float, param_lambda: float = 1.5) -> Tuple[float, float]:
-        """Perform a levy flight step.
+    def levy_flight(start: Tuple[float, float], alpha: float, param_lambda: float) -> Tuple[float, float]:
+        """
+        Perform a levy flight step.
 
         Arguments:
             start {Tuple[float, float]} -- The cuckoo's start position
             alpha {float} -- The step size
 
         Keyword Arguments:
-            param_lambda {float} -- lambda parameter of the levy distribution (default: {1.5})
+            param_lambda {float} -- lambda parameter of the levy distribution
 
         Returns:
             Tuple[float, float] -- The new position

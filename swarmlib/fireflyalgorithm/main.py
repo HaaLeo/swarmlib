@@ -3,15 +3,20 @@
 #  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.
 # ------------------------------------------------------------------------------------------------------
 
-
+import logging
 from .firefly_problem import FireflyProblem
 from ..util.functions import FUNCTIONS
 
+LOGGER = logging.getLogger(__name__)
+
+
 def _run_firefly_algorithm(args):
+    LOGGER.info('Start firefly algorithm with parameters="%s"', args)
     args['function'] = FUNCTIONS[args['function']]
     args['continuous'] = not bool(args['continuous'] == 'false' or args['continuous'] == 'f')
     problem = FireflyProblem(**args)
     problem.solve()
+
 
 def configure_parser(sub_parsers):
     """

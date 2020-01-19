@@ -13,6 +13,7 @@ class Nest:
         self.__lower_boundary = lower_boundary
         self.__upper_boundary = upper_boundary
 
+        # Randomly create a new nest position
         self.__position = np.random.uniform(self.__lower_boundary, self.__upper_boundary, 2)
         self.__value = self.__function(self.__position)
 
@@ -25,10 +26,11 @@ class Nest:
         return self.__value
 
     def update_pos(self, new_position: Tuple[float, float]) -> None:
-        """If the new position's value is better than the old one, update the nests position and value.
+        """
+        If the new position's value is better than the old one, update the nests position and value.
 
         Arguments:
-            new_position {[type]} -- The new position
+            new_position {Tuple[float, float]} -- The new position
         """
 
         new_value = self.__function(new_position)

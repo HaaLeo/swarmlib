@@ -3,16 +3,22 @@
 #  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.
 # ------------------------------------------------------------------------------------------------------
 
+import logging
 
 from .cuckoo_problem import CuckooProblem
 from ..util.functions import FUNCTIONS
 
+LOGGER = logging.getLogger(__name__)
+
+
 def _run_cuckoo_search(args):
+    LOGGER.info('Start cuckoo search with parameters="%s"', args)
     args['function'] = FUNCTIONS[args['function']]
     args['continuous'] = not bool(args['continuous'] == 'false' or args['continuous'] == 'f')
     problem = CuckooProblem(**args)
     problem.solve()
     problem.replay()
+
 
 def configure_parser(sub_parsers):
     """
@@ -48,7 +54,13 @@ def configure_parser(sub_parsers):
         '--alpha',
         type=float,
         default=1,
-        help='Randomization parameter used for levy flights. (default 1)')
+        help='Scaling parameter used for levy flight step. (default 1)')
+    parser.add_argument(
+        '-la',
+        '--lambda',
+        type=float,
+        default=1.5,
+        help='Randomization parameter used for the levy flights distribution. (default 1.5)')
     parser.add_argument(
         '-m',
         '--max-generations',
