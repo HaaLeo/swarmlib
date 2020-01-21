@@ -32,7 +32,6 @@ class Visualizer:
         self.__fig = plt.figure()
 
         ax = self.__fig.add_subplot(1, 1, 1, label='myAxes')
-        ax.legend()
         cs = ax.contourf(X, Y, z, cmap=get_cmap('PuBu_r'))  # pylint: disable=no-member
         self.__fig.colorbar(cs)
 
@@ -59,9 +58,9 @@ class Visualizer:
         def __init():
             self.__particles.set_data([], [])
             ax = self.__fig.gca(label='myAxes')
-            vels = ax.quiver([], [], [], [], angles='xy', scale_units='xy', scale=1)
+            velocities = ax.quiver([], [], [], [], angles='xy', scale_units='xy', scale=1)
             self.__rectangle.set_edgecolor('none')
-            return self.__particles, self.__rectangle, vels
+            return self.__particles, self.__rectangle, velocities
 
         def __animate(i):
             marker_size = int(50 * self.__fig.get_figwidth()/self.__fig.dpi)
