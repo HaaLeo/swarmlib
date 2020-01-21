@@ -11,8 +11,8 @@ from ..util.functions import FUNCTIONS
 LOGGER = logging.getLogger(__name__)
 
 
-def _run_cuckoo_search(args):
-    LOGGER.info('Start cuckoo search with parameters="%s"', args)
+def _run_pso(args):
+    LOGGER.info('Start particle swarm optimization with parameters="%s"', args)
     args['function'] = FUNCTIONS[args['function']]
     args['continuous'] = not bool(args['continuous'] == 'false' or args['continuous'] == 'f')
 
@@ -23,7 +23,7 @@ def _run_cuckoo_search(args):
 
 def configure_parser(sub_parsers):
     """
-    Get the argument parser for the firefly algorithm
+    Get the argument parser for particle swarm optimization
     """
 
     parser = sub_parsers.add_parser(
@@ -54,7 +54,7 @@ def configure_parser(sub_parsers):
         '-w',
         '--weight',
         type=float,
-        default=.6,
+        default=.5,
         help='Inertia weight balances the global and local search (default 0.5)')
     parser.add_argument(
         '-c1',
@@ -99,4 +99,4 @@ def configure_parser(sub_parsers):
         type=int,
         help='Number of particles used for solving')
 
-    parser.set_defaults(func=_run_cuckoo_search)
+    parser.set_defaults(func=_run_pso)

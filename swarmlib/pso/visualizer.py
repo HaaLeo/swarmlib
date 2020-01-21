@@ -7,7 +7,7 @@ from typing import Iterable, Tuple
 
 import matplotlib.pyplot as plt
 from matplotlib import animation
-from matplotlib import cm
+from matplotlib.cm import get_cmap
 import numpy as np
 
 # pylint:disable=too-many-locals,too-many-instance-attributes,invalid-name
@@ -33,7 +33,7 @@ class Visualizer:
 
         ax = self.__fig.add_subplot(1, 1, 1, label='myAxes')
         ax.legend()
-        cs = ax.contourf(X, Y, z, cmap=cm.PuBu_r)  # pylint: disable=no-member
+        cs = ax.contourf(X, Y, z, cmap=get_cmap('PuBu_r'))  # pylint: disable=no-member
         self.__fig.colorbar(cs)
 
         # Plot all particle pos

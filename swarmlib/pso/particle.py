@@ -55,7 +55,7 @@ class Particle:
         social_velocity = self.__c_2 * np.random.random_sample(size=2) * (global_best_pos - self.__position)
         self.__velocity = self.__w * self.__velocity + cognitive_velocity + social_velocity
 
-        # Clip velocity to two
+        # Clip velocity
         self.__clip_velocity()
 
         # Update position and clip it to boundaries

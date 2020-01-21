@@ -22,7 +22,7 @@ def _run_cuckoo_search(args):
 
 def configure_parser(sub_parsers):
     """
-    Get the argument parser for the firefly algorithm
+    Get the argument parser for the cuckoo search algorithm
     """
 
     parser = sub_parsers.add_parser(

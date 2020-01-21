@@ -15,7 +15,7 @@ LOGGER = logging.getLogger(__name__)
 class PSOProblem:
     def __init__(self, **kwargs):
         """
-        Initialize a new cuckoo search problem.
+        Initialize a new particle swarm optimization problem.
         """
 
         # Args with defaults can be safely used afterwards
