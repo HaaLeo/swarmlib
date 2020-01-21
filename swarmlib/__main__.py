@@ -13,6 +13,7 @@ import argparse
 from .aco4tsp.main import configure_parser as aco_parser
 from .fireflyalgorithm.main import configure_parser as firefly_parser
 from .cuckoosearch.main import configure_parser as cuckoo_parser
+from .pso.main import configure_parser as pso_parser
 from ._version import __version__
 
 logging.basicConfig(
@@ -41,6 +42,7 @@ def run_swarm():
     aco_parser(sub_parsers)
     firefly_parser(sub_parsers)
     cuckoo_parser(sub_parsers)
+    pso_parser(sub_parsers)
 
     args = vars(parser.parse_args())
     if args:

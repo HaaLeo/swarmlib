@@ -52,6 +52,17 @@
                 "0.5",
                 "14"
             ]
+        },
+        {
+            "name": "Run: PSO",
+            "type": "python",
+            "request": "launch",
+            "module": "swarmlib",
+            "console": "internalConsole",
+            "args": [
+                "particles",
+                "14"
+            ]
         }
     ]
 }

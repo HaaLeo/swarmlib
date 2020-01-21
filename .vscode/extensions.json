@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "ms-python.python",
-        "streetsidesoftware.code-spell-checker"
+        "streetsidesoftware.code-spell-checker",
+        "njpwerner.autodocstring"
     ]
 }

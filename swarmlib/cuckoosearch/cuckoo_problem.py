@@ -53,7 +53,7 @@ class CuckooProblem:
 
             # Randomly select nests to be updated
             n_nests = len(self.__nests)
-            nest_indices_to_update = [np.random.randint(0, n_nests) for _ in range(n_nests)]
+            nest_indices_to_update = np.random.randint(0, n_nests, n_nests)
 
             # Update nests
             for index in nest_indices_to_update:

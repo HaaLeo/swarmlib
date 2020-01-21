@@ -7,7 +7,7 @@ from typing import Iterable, Tuple
 
 import matplotlib.pyplot as plt
 from matplotlib import animation
-from matplotlib import cm
+from matplotlib.cm import get_cmap
 import numpy as np
 
 # pylint:disable=too-many-locals,too-many-instance-attributes,invalid-name
@@ -21,8 +21,8 @@ class Visualizer:
         self.__iteration_number = kwargs['iteration_number']
         self.__interval = kwargs['interval']
         self.__continuous = kwargs['continuous']
-        self.__nest_positions = []
-        self.__best_nests = [[], []]
+        self.__positions = []
+        self.__velocities = []
 
         x = np.linspace(self.__lower_boundary, self.__upper_boundary, 100)
         y = np.linspace(self.__lower_boundary, self.__upper_boundary, 100)
@@ -31,16 +31,15 @@ class Visualizer:
 
         self.__fig = plt.figure()
 
-        ax = self.__fig.add_subplot(1, 1, 1)
-        ax.legend()
-        cs = ax.contourf(X, Y, z, cmap=cm.PuBu_r)  # pylint: disable=no-member
+        ax = self.__fig.add_subplot(1, 1, 1, label='myAxes')
+        cs = ax.contourf(X, Y, z, cmap=get_cmap('PuBu_r'))  # pylint: disable=no-member
         self.__fig.colorbar(cs)
 
-        # Plot best nests of iterations
-        self.__best_particles, = ax.plot([], [], 'o', color='#ffff00', ms=6)
-
-        # Plot all nests
+        # Plot all particle pos
         self.__particles, = ax.plot([], [], 'ro', ms=6)
+
+        # Plot all velocities
+        self.__particle_vel = ax.quiver([], [], [], [], angles='xy', scale_units='xy', scale=1)
 
         self.__rectangle = plt.Rectangle([self.__lower_boundary, self.__lower_boundary],
                                          self.__upper_boundary-self.__lower_boundary,
@@ -48,35 +47,38 @@ class Visualizer:
                                          ec='none', lw=2, fc='none')
         ax.add_patch(self.__rectangle)
 
-    def add_data(self, nest_positions: Iterable[Tuple[float, float]], best_position: Tuple[float, float]) -> None:
-        x_nest = [item[0] for item in nest_positions]
-        y_nest = [item[1] for item in nest_positions]
-        self.__nest_positions.append([x_nest, y_nest])
+    def add_data(self, particle_positions: Iterable[Tuple[float, float]], particle_velocities: Iterable[Tuple[float, float]]) -> None:
+        x_pos, y_pos = zip(*particle_positions)
+        self.__positions.append([x_pos, y_pos])
 
-        self.__best_nests[0].append(best_position[0])
-        self.__best_nests[1].append(best_position[1])
+        vel_x, vel_y = zip(*particle_velocities)
+        self.__velocities.append([vel_x, vel_y])
 
     def replay(self):
         def __init():
             self.__particles.set_data([], [])
-            self.__best_particles.set_data([], [])
+            ax = self.__fig.gca(label='myAxes')
+            velocities = ax.quiver([], [], [], [], angles='xy', scale_units='xy', scale=1)
             self.__rectangle.set_edgecolor('none')
-            return self.__particles, self.__best_particles, self.__rectangle
+            return self.__particles, self.__rectangle, velocities
 
         def __animate(i):
             marker_size = int(50 * self.__fig.get_figwidth()/self.__fig.dpi)
             self.__rectangle.set_edgecolor('k')
             self.__fig.canvas.set_window_title(
-                'Generation %s/%s' % (i, self.__iteration_number))
+                'Iteration %s/%s' % (i, self.__iteration_number))
 
-            x_data, y_data = self.__nest_positions[i]
+            # Update the particle position
+            x_data, y_data = self.__positions[i]
             self.__particles.set_data(x_data, y_data)
             self.__particles.set_markersize(marker_size)
 
-            self.__best_particles.set_data(self.__best_nests[0][:i], self.__best_nests[1][:i])
-            self.__best_particles.set_markersize(marker_size)
+            # Update the velocities
+            ax = self.__fig.gca(label='myAxes')
+            vel_x, vel_y = self.__velocities[i+1]
+            velocities = ax.quiver(x_data, y_data, vel_x, vel_y, angles='xy', scale_units='xy', scale=1, color='#CFCFCF', width=marker_size*0.001)
 
-            return self.__particles, self.__best_particles, self.__rectangle
+            return self.__particles, self.__rectangle, velocities
 
             # iteration_number+1 for initialization frame
         _ = animation.FuncAnimation(self.__fig, __animate, frames=self.__iteration_number+1, interval=self.__interval,

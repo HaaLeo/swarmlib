@@ -13,6 +13,7 @@ Currently, the following algorithms are implemented:
 * [Ant Colony Optimization](#ant-colony-optimization)
 * [Firefly Algorithm](#firefly-algorithm)
 * [Cuckoo Search](#cuckoo-search)
+* [Particle Swarm Optimization](#particle-swarm-optimization)
 
 ## Installation
 
@@ -57,7 +58,7 @@ swarm ants -h
 In addition to the cli you can also use the API:
 
 ```python
-from swarmlib.aco4tsp.aco_problem import ACOProblem
+from swarmlib import ACOProblem
 
 problem = ACOProblem('/path/to/my/tsp-file.tsp', 10)
 if problem.solve():
@@ -90,8 +91,7 @@ swarm fireflies -h
 In addition to the cli you can also use the API:
 
 ```python
-from swarmlib.fireflyalgorithm.firefly_problem import FireflyProblem
-from swarmlib.util.functions import FUNCTIONS
+from swarmlib import FireflyProblem, FUNCTIONS
 
 problem = FireflyProblem(FUNCTIONS['michalewicz'], 14)
 problem.solve()
@@ -124,11 +124,43 @@ swarm cuckoos -h
 In addition to the cli you can also use the API:
 
 ```python
-from swarmlib.cuckoosearch.cuckoo_problem import CuckooProblem
-from swarmlib.util.functions import FUNCTIONS
+from swarmlib import CuckooProblem, FUNCTIONS
 
 problem = CuckooProblem(function=FUNCTIONS['michalewicz'], nests=14)
 best_nest = problem.solve()
+problem.replay()
+```
+## Particle Swarm Optimization
+
+This repository also implements modified _particle swarm optimization_ that was introduced by Yuhui Shi and Russell C. Eberhart in their paper [A modified particle swarm optimizer](https://ieeexplore.ieee.org/document/699146) in 1998 (DOI: 10.1109/ICEC.1998.699146). Their approach introduces a so called _inertia weight_ w. To get the [original particle swarm optimization](https://ieeexplore.ieee.org/document/488968) algorithm, just set the parameter `--weight=1`.
+
+### Features
+
+Enables to particle swarm optimization to one of the provided 2D functions. The algorithm tries to find the global minimum of the selected function.  
+
+Currently two functions can be selected:
+* [ackley](https://www.sfu.ca/~ssurjano/ackley.html)
+* [michalewicz](https://www.sfu.ca/~ssurjano/michal.html)
+
+![particle swarm optimization](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/particles.gif)
+
+The plot shows all particles and their velocities.
+
+To print all available options execute:
+
+```
+swarm particles -h
+```
+
+### API
+
+In addition to the cli you can also use the API:
+
+```python
+from swarmlib import PSOProblem, FUNCTIONS
+
+problem = PSOProblem(function=FUNCTIONS['michalewicz'], particles=14)
+best_particle = problem.solve()
 problem.replay()
 ```
 
