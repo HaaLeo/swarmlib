@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run: ACO",
+            "name": "Run: Ant Colony Optimization",
             "type": "python",
             "request": "launch",
             "module": "swarmlib",
@@ -18,7 +18,7 @@
             ]
         },
         {
-            "name": "Run: FA",
+            "name": "Run: Firefly Algorithm",
             "type": "python",
             "request": "launch",
             "module": "swarmlib",
@@ -29,13 +29,13 @@
                 "michalewicz",
                 "-n",
                 "10",
-                "14",
                 "-i",
-                "1000"
+                "1000",
+                "14"
             ]
         },
         {
-            "name": "Run: CS",
+            "name": "Run: Cuckoo Search",
             "type": "python",
             "request": "launch",
             "module": "swarmlib",
@@ -50,17 +50,23 @@
                 "500",
                 "-a",
                 "0.5",
+                "-c",
+                "t",
                 "14"
             ]
         },
         {
-            "name": "Run: PSO",
+            "name": "Run: Particle Swarm Optimization",
             "type": "python",
             "request": "launch",
             "module": "swarmlib",
             "console": "internalConsole",
             "args": [
                 "particles",
+                "-c",
+                "t",
+                "-n",
+                "10",
                 "14"
             ]
         }

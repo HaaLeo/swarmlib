@@ -57,10 +57,16 @@ class Visualizer:
     def replay(self):
         def __init():
             self.__particles.set_data([], [])
-            ax = self.__fig.gca(label='myAxes')
-            velocities = ax.quiver([], [], [], [], angles='xy', scale_units='xy', scale=1)
+
+            self.__particle_vel.X = []
+            self.__particle_vel.Y = []
+            self.__particle_vel.XY = []
+            self.__particle_vel.U = []
+            self.__particle_vel.V = []
+
             self.__rectangle.set_edgecolor('none')
-            return self.__particles, self.__rectangle, velocities
+
+            return self.__particles, self.__rectangle, self.__particle_vel
 
         def __animate(i):
             marker_size = int(50 * self.__fig.get_figwidth()/self.__fig.dpi)
@@ -76,9 +82,9 @@ class Visualizer:
             # Update the velocities
             ax = self.__fig.gca(label='myAxes')
             vel_x, vel_y = self.__velocities[i+1]
-            velocities = ax.quiver(x_data, y_data, vel_x, vel_y, angles='xy', scale_units='xy', scale=1, color='#CFCFCF', width=marker_size*0.001)
+            self.__particle_vel = ax.quiver(x_data, y_data, vel_x, vel_y, angles='xy', scale_units='xy', scale=1, color='#CFCFCF', width=marker_size*0.001)
 
-            return self.__particles, self.__rectangle, velocities
+            return self.__particles, self.__rectangle, self.__particle_vel
 
             # iteration_number+1 for initialization frame
         _ = animation.FuncAnimation(self.__fig, __animate, frames=self.__iteration_number+1, interval=self.__interval,
