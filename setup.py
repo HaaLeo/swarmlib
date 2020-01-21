@@ -62,7 +62,11 @@ setup(
         'cuckoos',
         'search',
         'levy',
-        'flights'
+        'flights',
+        'particle',
+        'particles',
+        'pso',
+        'PSO'
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
