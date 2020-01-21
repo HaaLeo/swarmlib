@@ -2,15 +2,15 @@
 All notable changes to the "swarmlib" pypi package will be documented in this file.  
 This project follows [semantic versioning](https://semver.org/).
 
-## Unreleased - v0.5.0
-* **Added** a feature that a feature that performs _particle swarm optimization_ for one of the provided 2D functions. After each step the intermediate solution is plotted.
+## 2020-01-22 - v0.5.0
+* **Added** a feature that performs _particle swarm optimization_ for one of the provided 2D functions. After each step the intermediate solution is plotted.
 * **Changed** the API. Now the classes `*Problem` can be directly imported from the `swarmlib` module.
 
 ## 2020-01-19 - v0.4.1
 * **Changed** pypi tags to enhance the package's discoverability.
 
 ## 2020-01-19 - v0.4.0
-* **Added** a feature that a feature that enables the _cuckoo search_ for one of the provided 2D functions. After each step the intermediate solution is plotted.
+* **Added** a feature that enables the _cuckoo search_ for one of the provided 2D functions. After each step the intermediate solution is plotted.
 
 ## 2020-01-09 - v0.3.2
 * **Fixed** a bug in the firefly algorithm that caused the application to crash when the ackley function was selected.
