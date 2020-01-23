@@ -2,6 +2,10 @@
 All notable changes to the "swarmlib" pypi package will be documented in this file.  
 This project follows [semantic versioning](https://semver.org/).
 
+## Unreleased - v0.6.0
+* **Changed** the visualization of the _firefly algorithm_ and the _cuckoo search_. Now they both include velocities.
+* **Changed** the firefly algorithm including its API. Now it replays the same problem if `--continuous` is set. 
+
 ## 2020-01-22 - v0.5.0
 * **Added** a feature that performs _particle swarm optimization_ for one of the provided 2D functions. After each step the intermediate solution is plotted.
 * **Changed** the API. Now the classes `*Problem` can be directly imported from the `swarmlib` module.

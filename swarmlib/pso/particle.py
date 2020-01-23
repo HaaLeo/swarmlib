@@ -6,36 +6,26 @@
 from typing import Tuple
 import numpy as np
 
-# pylint:disable=too-many-instance-attributes
+from ..util.coordinate import Coordinate
+
+# pylint: disable=too-many-instance-attributes
 
 
-class Particle:
+class Particle(Coordinate):
     def __init__(self, **kwargs):
-        self.__function = kwargs['function']
-        self.__lower_boundary = kwargs['lower_boundary']
-        self.__upper_boundary = kwargs['upper_boundary']
-        self.__w = kwargs['weight']
-        self.__c_1 = kwargs['c_1']
-        self.__c_2 = kwargs['c_2']
-        self.__max_velocity = kwargs['maximum_velocity']
+        super().__init__(**kwargs)
+        self.__w = kwargs.get('weight', .5)
+        self.__c_1 = kwargs.get('c_1', 2)
+        self.__c_2 = kwargs.get('c_2', 2)
+        self.__max_velocity = kwargs.get('maximum_velocity', 2)
 
         # Randomly create a new particle properties
-        self.__position = np.random.uniform(self.__lower_boundary, self.__upper_boundary, 2)
-        self.__value = self.__function(self.__position)
         self.__velocity = np.random.uniform(-1, 1, size=2)
         self.__clip_velocity()
 
         # Local best
-        self.__best_position = self.__position
-        self.__best_value = self.__value
-
-    @property
-    def position(self) -> Tuple[float, float]:
-        return self.__position
-
-    @property
-    def value(self) -> float:
-        return self.__value
+        self.__best_position = self._position
+        self.__best_value = self._value
 
     @property
     def velocity(self) -> float:
@@ -51,23 +41,23 @@ class Particle:
         """
 
         # Calculate velocity
-        cognitive_velocity = self.__c_1 * np.random.random_sample(size=2) * (self.__best_position - self.__position)
-        social_velocity = self.__c_2 * np.random.random_sample(size=2) * (global_best_pos - self.__position)
+        cognitive_velocity = self.__c_1 * np.random.random_sample(size=2) * (self.__best_position - self._position)
+        social_velocity = self.__c_2 * np.random.random_sample(size=2) * (global_best_pos - self._position)
         self.__velocity = self.__w * self.__velocity + cognitive_velocity + social_velocity
 
         # Clip velocity
         self.__clip_velocity()
 
         # Update position and clip it to boundaries
-        self.__position = np.clip(self.__position + self.__velocity, a_min=self.__lower_boundary, a_max=self.__upper_boundary)
+        self._position = np.clip(self._position + self.__velocity, a_min=self._lower_boundary, a_max=self._upper_boundary)
 
         # Update value
-        self.__value = self.__function(self.__position)
+        self._value = self._function(self._position)
 
         # Update local best
-        if self.__value < self.__best_value:
-            self.__best_position = self.__position
-            self.__best_value = self.__value
+        if self._value < self.__best_value:
+            self.__best_position = self._position
+            self.__best_value = self._value
 
     def __clip_velocity(self):
         norm = np.linalg.norm(self.__velocity)

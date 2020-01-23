@@ -94,7 +94,8 @@ In addition to the cli you can also use the API:
 from swarmlib import FireflyProblem, FUNCTIONS
 
 problem = FireflyProblem(FUNCTIONS['michalewicz'], 14)
-problem.solve()
+best_firefly = problem.solve()
+problem.replay()
 ```
 
 ## Cuckoo search
