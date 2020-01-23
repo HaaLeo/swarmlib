@@ -4,26 +4,11 @@
 # ------------------------------------------------------------------------------------------------------
 
 from typing import Tuple
-import numpy as np
+
+from ..util.coordinate import Coordinate
 
 
-class Nest:
-    def __init__(self, function, lower_boundary, upper_boundary):
-        self.__function = function
-        self.__lower_boundary = lower_boundary
-        self.__upper_boundary = upper_boundary
-
-        # Randomly create a new nest position
-        self.__position = np.random.uniform(self.__lower_boundary, self.__upper_boundary, 2)
-        self.__value = self.__function(self.__position)
-
-    @property
-    def position(self) -> Tuple[float, float]:
-        return self.__position
-
-    @property
-    def value(self) -> float:
-        return self.__value
+class Nest(Coordinate):
 
     def update_pos(self, new_position: Tuple[float, float]) -> None:
         """
@@ -33,7 +18,7 @@ class Nest:
             new_position {Tuple[float, float]} -- The new position
         """
 
-        new_value = self.__function(new_position)
-        if new_value < self.__value:
-            self.__value = new_value
-            self.__position = new_position
+        new_value = self._function(new_position)
+        if new_value < self._value:
+            self._value = new_value
+            self._position = new_position

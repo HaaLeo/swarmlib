@@ -18,7 +18,6 @@ class Visualizer(BaseVisualizer):
         self.__best_nests = [[], []]
 
     def add_data(self, **kwargs) -> None:
-        kwargs['velocities'] = np.zeros([len(kwargs['positions']), 2])
         super().add_data(**kwargs)
 
         x_pos, y_pos = kwargs['best_position']

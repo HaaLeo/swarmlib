@@ -21,18 +21,16 @@ class CuckooProblem:
         Initialize a new cuckoo search problem.
         """
 
-        self.__alpha = kwargs.get('alpha', 1)
-        self.__continuous = kwargs.get('continuous', False)
-        self.__interval = kwargs.get('interval', 1000)
         self.__upper_boundary = kwargs.get('upper_boundary', 4.)
         self.__lower_boundary = kwargs.get('lower_boundary', 0.)
-        self.__max_generations = kwargs.get('max_generations', 10)
-        self.__lambda = kwargs.get('lambda', 1.5)
-        self.__p_a = kwargs.get('p_a', .1)
+        self.__alpha = kwargs.pop('alpha', 1)
+        self.__max_generations = kwargs.pop('max_generations', 10)
+        self.__lambda = kwargs.pop('lambda', 1.5)
+        self.__p_a = kwargs.pop('p_a', .1)
 
         self.__function = kwargs['function']
         self.__nests = [
-            Nest(self.__function, self.__lower_boundary, self.__upper_boundary)
+            Nest(lower_boundary=self.__lower_boundary, upper_boundary=self.__upper_boundary, function=self.__function)
             for _ in range(kwargs['nests'])
         ]
 
@@ -41,7 +39,7 @@ class CuckooProblem:
         self.__best_nest = self.__nests[0]
 
         # Initialize visualizer for plotting
-        kwargs['iteration_number'] = kwargs['max_generations']
+        kwargs['iteration_number'] = self.__max_generations
         self.__visualizer = Visualizer(**kwargs)
         self.__visualizer.add_data(positions=[nest.position for nest in self.__nests], best_position=self.__nests[0].position)
 
@@ -64,7 +62,7 @@ class CuckooProblem:
 
             # Abandon nests randomly considering p_a
             self.__nests = [
-                Nest(self.__function, self.__lower_boundary, self.__upper_boundary)
+                Nest(lower_boundary=self.__lower_boundary, upper_boundary=self.__upper_boundary, function=self.__function)
                 if np.random.random_sample() < self.__p_a
                 else nest
                 for nest in self.__nests

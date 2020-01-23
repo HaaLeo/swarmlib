@@ -8,54 +8,32 @@
 import random
 import numpy as np
 
+from ..util.coordinate import Coordinate
 
-class Firefly():
-    def __init__(self, alpha, beta, gamma, upper_boundary, lower_boundary, function_dimension):
-        self.__alpha = alpha
-        self.__beta = beta
-        self.__gamma = gamma
-        self.__intensity = None
-        self.__lower_boundary = lower_boundary
-        self.__upper_boundary = upper_boundary
 
-        self.__position = np.array([random.uniform(self.__lower_boundary, self.__upper_boundary)
-                                    for _ in range(function_dimension)])
+class Firefly(Coordinate):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
-    @property
-    def position(self):
-        return self.__position
+        self.__alpha = kwargs.get('alpha', 0.25)
+        self.__beta = kwargs.get('beta', 1)
+        self.__gamma = kwargs.get('gamma', 0.97)
+        self.__upper_boundary = kwargs.get('upper_boundary', 0.)
+        self.__lower_boundary = kwargs.get('lower_boundary', 4.)
 
-    @position.setter
-    def position(self, value):
-        self.__position = value
-
-    @property
-    def intensity(self):
-        return self.__intensity
-
-    def update_intensity(self, func):
-        self.__intensity = -func(self.__position)
+    def update_intensity(self):
+        self._value = self._function(self._position)
 
     def move_towards(self, better_position):
         # euclidean distance
-        distance = np.linalg.norm(self.__position - better_position)
+        distance = np.linalg.norm(self._position - better_position)
 
         # update position
-        self.__position = self.__position + \
-            self.__beta*np.exp(-self.__gamma*(distance**2)) * (better_position-self.__position) + \
+        self._position = self._position + \
+            self.__beta*np.exp(-self.__gamma*(distance**2)) * (better_position-self._position) + \
             self.__alpha*(random.uniform(0, 1)-0.5)
 
-        self.__check_boundaries()
+        self._position = np.clip(self._position, a_min=self.__lower_boundary, a_max=self.__upper_boundary)
 
     def random_walk(self, area):
-        self.__position = np.array([random.uniform(cord-area, cord+area)
-                                    for _, cord in np.ndenumerate(self.__position)])
-
-    def __check_boundaries(self):
-        for i, cord in np.ndenumerate(self.__position):
-            if cord < self.__lower_boundary:
-                self.__position[i] = self.__lower_boundary
-            elif cord > self.__upper_boundary:
-                self.__position[i] = self.__upper_boundary
-            else:
-                self.__position[i] = cord
+        self._position = np.array([np.random.uniform(cord-area, cord+area) for cord in self._position])

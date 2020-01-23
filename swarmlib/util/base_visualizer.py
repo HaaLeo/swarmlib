@@ -15,12 +15,16 @@ import numpy as np
 
 class BaseVisualizer:
     def __init__(self, **kwargs):
-        self.__lower_boundary = kwargs['lower_boundary']
-        self.__upper_boundary = kwargs['upper_boundary']
+        self.__lower_boundary = kwargs.get('lower_boundary', 0.)
+        self.__upper_boundary = kwargs.get('upper_boundary', 4.)
+        self._iteration_number = kwargs.get('iteration_number', 10)
+        self.__interval = kwargs.get('interval', 1000)
+        self.__continuous = kwargs.get('continuous', False)
+
         self.__function = kwargs['function']
-        self._iteration_number = kwargs['iteration_number']
-        self.__interval = kwargs['interval']
-        self.__continuous = kwargs['continuous']
+
+        self._marker_size = 0
+        self._index = 0
 
         self._positions = []
         self._velocities = []
@@ -51,7 +55,7 @@ class BaseVisualizer:
 
     def add_data(self, **kwargs) -> None:
         positions: Iterable[Tuple[float, float]] = kwargs['positions']
-        velocities: Iterable[Tuple[float, float]] = kwargs['velocities']
+        velocities: Iterable[Tuple[float, float]] = kwargs.get('velocities', np.zeros([len(kwargs['positions']), 2]))
 
         x_pos, y_pos = zip(*positions)
         self._positions.append(np.array([np.array(x_pos), np.array(y_pos)]))
@@ -99,15 +103,15 @@ class BaseVisualizer:
         self._fig.canvas.set_window_title(f'Iteration {self._index}/{self._iteration_number}')
 
         # Calculate the scale to apply to the data in order to generate a more dynamic visualization
-        self._scale = (i-self._index*(frames/(self._iteration_number+1))) / (frames/(self._iteration_number+1))
+        scale = (i-self._index*(frames/(self._iteration_number+1))) / (frames/(self._iteration_number+1))
 
         # Calculate scaled position and velocity
         x_data, y_data = self._positions[self._index]
         vel_x, vel_y = self._velocities[self._index+1]
-        pos_x_scaled = np.clip(x_data + self._scale * vel_x, a_min=self.__lower_boundary, a_max=self.__upper_boundary)
-        pos_y_scaled = np.clip(y_data + self._scale * vel_y, a_min=self.__lower_boundary, a_max=self.__upper_boundary)
-        vel_x_scaled = (1-self._scale)*vel_x
-        vel_y_scaled = (1-self._scale)*vel_y
+        pos_x_scaled = np.clip(x_data + scale * vel_x, a_min=self.__lower_boundary, a_max=self.__upper_boundary)
+        pos_y_scaled = np.clip(y_data + scale * vel_y, a_min=self.__lower_boundary, a_max=self.__upper_boundary)
+        vel_x_scaled = (1-scale)*vel_x
+        vel_y_scaled = (1-scale)*vel_y
 
         # Update the particle position
         self.__particles.set_data(pos_x_scaled, pos_y_scaled)

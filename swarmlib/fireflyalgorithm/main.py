@@ -14,8 +14,10 @@ def _run_firefly_algorithm(args):
     LOGGER.info('Start firefly algorithm with parameters="%s"', args)
     args['function'] = FUNCTIONS[args['function']]
     args['continuous'] = not bool(args['continuous'] == 'false' or args['continuous'] == 'f')
+
     problem = FireflyProblem(**args)
     problem.solve()
+    problem.replay()
 
 
 def configure_parser(sub_parsers):
@@ -75,8 +77,8 @@ def configure_parser(sub_parsers):
         '-i',
         '--interval',
         type=int,
-        default=500,
-        help='Interval between two animation frames in ms (default 500)')
+        default=1000,
+        help='Interval between two animation frames in ms (default 1000)')
     parser.add_argument(
         '-c',
         '--continuous',
