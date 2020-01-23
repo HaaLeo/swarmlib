@@ -8,7 +8,7 @@
 import logging
 
 from .particle import Particle
-from .visualizer import Visualizer
+from ..util.base_visualizer import BaseVisualizer
 LOGGER = logging.getLogger(__name__)
 
 
@@ -42,8 +42,8 @@ class PSOProblem:
         # Initialize visualizer for plotting
         positions = [particle.position for particle in self.__particles]
         velocities = [particle.velocity for particle in self.__particles]
-        self.__visualizer = Visualizer(**args)
-        self.__visualizer.add_data(positions, velocities)
+        self.__visualizer = BaseVisualizer(**args)
+        self.__visualizer.add_data(positions=positions, velocities=velocities)
 
     def solve(self):
         # Iterate to iteration_number+1 to generate iteration_number+1 velocities for visualization
@@ -59,7 +59,7 @@ class PSOProblem:
             # Add data for plot
             positions = [particle.position for particle in self.__particles]
             velocities = [particle.velocity for particle in self.__particles]
-            self.__visualizer.add_data(positions, velocities)
+            self.__visualizer.add_data(positions=positions, velocities=velocities)
 
         LOGGER.info('Last best solution="%s" at position="%s"', global_best_particle.value, global_best_particle.position)
         return global_best_particle

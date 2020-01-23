@@ -77,8 +77,8 @@ def configure_parser(sub_parsers):
         '-i',
         '--interval',
         type=int,
-        default=500,
-        help='Interval between two animation frames in ms (default 500)')
+        default=1000,
+        help='Interval between two animation frames in ms (default 1000)')
     parser.add_argument(
         '-c',
         '--continuous',

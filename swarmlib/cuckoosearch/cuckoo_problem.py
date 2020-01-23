@@ -43,13 +43,16 @@ class CuckooProblem:
         # Initialize visualizer for plotting
         kwargs['iteration_number'] = kwargs['max_generations']
         self.__visualizer = Visualizer(**kwargs)
-        self.__visualizer.add_data([nest.position for nest in self.__nests], self.__nests[0].position)
+        self.__visualizer.add_data(positions=[nest.position for nest in self.__nests], best_position=self.__nests[0].position)
 
     def solve(self):
         for _ in range(self.__max_generations):
 
             # Perform levy flights to get cuckoo's new position
-            new_cuckoo_pos = [Cuckoo.levy_flight(nest.position, self.__alpha, self.__lambda) for nest in self.__nests]
+            new_cuckoo_pos = [
+                np.clip(Cuckoo.levy_flight(nest.position, self.__alpha, self.__lambda), a_min=self.__lower_boundary, a_max=self.__upper_boundary)
+                for nest in self.__nests
+            ]
 
             # Randomly select nests to be updated
             n_nests = len(self.__nests)
@@ -76,7 +79,7 @@ class CuckooProblem:
 
             # Add data for plot
             data = [nest.position for nest in self.__nests]
-            self.__visualizer.add_data(data, self.__nests[0].position)
+            self.__visualizer.add_data(positions=data, best_position=self.__nests[0].position)
 
         LOGGER.info('Last best solution="%s" at position="%s"', self.__best_nest.value, self.__best_nest.position)
         return self.__best_nest
