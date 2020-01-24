@@ -12,6 +12,8 @@ LOGGER = logging.getLogger(__name__)
 
 
 def _run_aco4tsp(args):
+    LOGGER.info('Start ant colony optimization with parameters="%s"', args)
+
     if not os.path.isabs(args['tsp_file']):
         args['tsp_file'] = os.path.join(os.getcwd(), args['tsp_file'])
 
@@ -70,10 +72,9 @@ def configure_parser(sub_parsers):
     parser.add_argument(
         '-o',
         '--two-opt',
-        type=str,
-        default='true',
-        help='Additionally use 2-opt local search after each iteration (default true)',
-        choices=['false', 'f', 'true', 't'])
+        action='store_true',
+        default=False,
+        help='Enable to use 2-opt local search after each iteration (default off)')
 
     parser.add_argument(
         'tsp_file',
