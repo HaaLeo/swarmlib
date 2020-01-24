@@ -41,7 +41,8 @@ class CuckooProblem:
         # Initialize visualizer for plotting
         kwargs['iteration_number'] = self.__max_generations
         self.__visualizer = Visualizer(**kwargs)
-        self.__visualizer.add_data(positions=[nest.position for nest in self.__nests], best_position=self.__nests[0].position)
+        positions, generated = zip(*[(nest.position, nest.generated) for nest in self.__nests])
+        self.__visualizer.add_data(positions=positions, best_position=self.__nests[0].position, generated=generated)
 
     def solve(self):
         nest_indices = np.array(range(len(self.__nests)))
@@ -76,8 +77,8 @@ class CuckooProblem:
                 LOGGER.info('Found new best solution="%s" at position="%s"', self.__best_nest.value, self.__best_nest.position)
 
             # Add data for plot
-            data = [nest.position for nest in self.__nests]
-            self.__visualizer.add_data(positions=data, best_position=self.__nests[0].position)
+            positions, generated = zip(*[(nest.position, nest.generated) for nest in self.__nests])
+            self.__visualizer.add_data(positions=positions, best_position=self.__nests[0].position, generated=generated)
 
         LOGGER.info('Last best solution="%s" at position="%s"', self.__best_nest.value, self.__best_nest.position)
         return self.__best_nest

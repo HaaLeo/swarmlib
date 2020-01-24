@@ -16,9 +16,14 @@ class Visualizer(BaseVisualizer):
         ax = self._fig.gca(label='BaseAxis')
         self.__best_nests_artist, = ax.plot([], [], 'o', color='#ffff00', ms=6)
         self.__best_nests = [[], []]
+        self.__calculate_velocity = []
 
     def add_data(self, **kwargs) -> None:
         super().add_data(**kwargs)
+        # Indicates for which nest shall be a velocity calculated (True) or not (False)
+        # Used to avoid velocity calculation for new generated nests.
+        calculate_velocity = ~np.array(kwargs['generated'])
+        self.__calculate_velocity.append(np.array([calculate_velocity, calculate_velocity]))
 
         x_pos, y_pos = kwargs['best_position']
         self.__best_nests[0].append(x_pos)
@@ -26,7 +31,7 @@ class Visualizer(BaseVisualizer):
 
     def replay(self):
         # Prepare velocities before starting replay
-        self._velocities = [self._positions[index+1]-position for index, position in enumerate(self._positions[:-1])]
+        self._velocities = [(self._positions[index+1]-position)*self.__calculate_velocity[index+1] for index, position in enumerate(self._positions[:-1])]
         self._velocities.insert(0, np.zeros(self._positions[0].shape))
         self._velocities.append(np.zeros(self._positions[0].shape))
 
