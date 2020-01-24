@@ -10,10 +10,10 @@
 This repository implements several swarm optimization algorithms and visualizes their (intermediate) solutions.
 To run the algorithms one can either use the command line interface or the API.
 Currently, the following algorithms are implemented:
-* [Ant Colony Optimization](#ant-colony-optimization)
 * [Firefly Algorithm](#firefly-algorithm)
 * [Cuckoo Search](#cuckoo-search)
 * [Particle Swarm Optimization](#particle-swarm-optimization)
+* [Ant Colony Optimization](#ant-colony-optimization)
 
 ## Installation
 
@@ -31,38 +31,6 @@ To print all available algorithms:
 
 ```
 swarm --help
-```
-
-## Ant Colony Optimization
-
-This repository includes an _ant colony optimization_ algorithm for the traveling salesman problem (TSP) like Marco Dorigo, Mauro Birattari, and Thomas Stuetzle introduced in the [IEEE Computational Intelligence Magazine](https://ieeexplore.ieee.org/document/4129846) in November 2006 (DOI: 10.1109/MCI.2006.329691).  
-The implementation was part of the course [Natural computing for learning and optimisation](https://is.cuni.cz/studium/eng/predmety/index.php?do=predmet&kod=NPFL107) at Charles University Prague in winter 2018/2019.
-
-### Features
-
-Enables to apply the ant colony optimization algorithm to a TSP using a [TSPLIB95](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/) file and plots the result.
-
-![ACO Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/ACO_Sample.png)
-
-The algorithm solves the TSP and plots the result all _n_ iterations.  
-The nodes are plot according to their coordinates read from the TSPLIB95 file. The _widths_ of the edges indicate the _amount of pheromone_ that is associated with this edge. If an edge is _blue_, it is part of the _best found path_.
-
-To print all available options execute:
-
-```
-swarm ants -h
-```
-
-### API
-
-In addition to the cli you can also use the API:
-
-```python
-from swarmlib import ACOProblem
-
-problem = ACOProblem('/path/to/my/tsp-file.tsp', 10)
-if problem.solve():
-    problem.show_result()
 ```
 
 ## Firefly Algorithm
@@ -163,6 +131,38 @@ from swarmlib import PSOProblem, FUNCTIONS
 problem = PSOProblem(function=FUNCTIONS['michalewicz'], particles=14)
 best_particle = problem.solve()
 problem.replay()
+```
+
+## Ant Colony Optimization
+
+This repository includes an _ant colony optimization_ algorithm for the traveling salesman problem (TSP) like Marco Dorigo, Mauro Birattari, and Thomas Stuetzle introduced in the [IEEE Computational Intelligence Magazine](https://ieeexplore.ieee.org/document/4129846) in November 2006 (DOI: 10.1109/MCI.2006.329691).  
+The implementation was part of the course [Natural computing for learning and optimisation](https://is.cuni.cz/studium/eng/predmety/index.php?do=predmet&kod=NPFL107) at Charles University Prague in winter 2018/2019.
+
+### Features
+
+Enables to apply the ant colony optimization algorithm to a TSP using a [TSPLIB95](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/) file and plots the result.
+
+![ACO Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/ACO_Sample.png)
+
+The algorithm solves the TSP and plots the result all _n_ iterations.  
+The nodes are plot according to their coordinates read from the TSPLIB95 file. The _widths_ of the edges indicate the _amount of pheromone_ that is associated with this edge. If an edge is _blue_, it is part of the _best found path_.
+
+To print all available options execute:
+
+```
+swarm ants -h
+```
+
+### API
+
+In addition to the cli you can also use the API:
+
+```python
+from swarmlib import ACOProblem
+
+problem = ACOProblem('/path/to/my/tsp-file.tsp', 10)
+if problem.solve():
+    problem.show_result()
 ```
 
 ## Contribution

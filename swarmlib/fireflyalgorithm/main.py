@@ -13,7 +13,6 @@ LOGGER = logging.getLogger(__name__)
 def _run_firefly_algorithm(args):
     LOGGER.info('Start firefly algorithm with parameters="%s"', args)
     args['function'] = FUNCTIONS[args['function']]
-    args['continuous'] = not bool(args['continuous'] == 'false' or args['continuous'] == 'f')
 
     problem = FireflyProblem(**args)
     problem.solve()
@@ -82,10 +81,9 @@ def configure_parser(sub_parsers):
     parser.add_argument(
         '-c',
         '--continuous',
-        type=str,
-        default='false',
-        help='Indicates whether the algorithm should run continuously (default false)',
-        choices=['false', 'f', 'true', 't'])
+        default=False,
+        action='store_true',
+        help='Enable the algorithm to run continuously (default off)')
 
     parser.add_argument(
         'firefly_number',

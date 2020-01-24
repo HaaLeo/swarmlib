@@ -4,7 +4,9 @@ This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased - v0.6.0
 * **Changed** the visualization of the _firefly algorithm_ and the _cuckoo search_. Now they both include velocities.
-* **Changed** the firefly algorithm including its API. Now it replays the same problem if `--continuous` is set. 
+* **Changed** the firefly algorithm including its API. Now it replays the same problem if `--continuous` is set.
+* **Changed** the `--continuous` flag. It requires no parameter anymore.
+* **Changed** the `--two-opt` flag. It requires no parameter anymore.
 
 ## 2020-01-22 - v0.5.0
 * **Added** a feature that performs _particle swarm optimization_ for one of the provided 2D functions. After each step the intermediate solution is plotted.
