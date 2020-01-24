@@ -44,6 +44,7 @@ class CuckooProblem:
         self.__visualizer.add_data(positions=[nest.position for nest in self.__nests], best_position=self.__nests[0].position)
 
     def solve(self):
+        nest_indices = np.array(range(len(self.__nests)))
         for _ in range(self.__max_generations):
 
             # Perform levy flights to get cuckoo's new position
@@ -53,11 +54,10 @@ class CuckooProblem:
             ]
 
             # Randomly select nests to be updated
-            n_nests = len(self.__nests)
-            nest_indices_to_update = np.random.randint(0, n_nests, n_nests)
+            np.random.shuffle(nest_indices)
 
             # Update nests
-            for index in nest_indices_to_update:
+            for index in nest_indices:
                 self.__nests[index].update_pos(new_cuckoo_pos[index])
 
             # Abandon nests randomly considering p_a
