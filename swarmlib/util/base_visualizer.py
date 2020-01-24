@@ -20,6 +20,7 @@ class BaseVisualizer:
         self._iteration_number = kwargs.get('iteration_number', 10)
         self.__interval = kwargs.get('interval', 1000)
         self.__continuous = kwargs.get('continuous', False)
+        self._dark = kwargs.get('dark', False)
 
         self.__function = kwargs['function']
 
@@ -30,6 +31,9 @@ class BaseVisualizer:
         self._velocities = []
         self.__frame_interval = 50  # ms
 
+        if self._dark:
+            plt.style.use('dark_background')
+
         x = np.linspace(self.__lower_boundary, self.__upper_boundary, 100)
         y = np.linspace(self.__lower_boundary, self.__upper_boundary, 100)
         X, Y = np.meshgrid(x, y)
@@ -38,11 +42,11 @@ class BaseVisualizer:
         self._fig = plt.figure()
 
         ax = self._fig.add_subplot(1, 1, 1, label='BaseAxis')
-        cs = ax.contourf(X, Y, z, cmap=get_cmap('PuBu_r'))  # pylint: disable=no-member
+        cs = ax.contourf(X, Y, z, cmap=get_cmap('inferno' if self._dark else 'PuBu_r'))
         self._fig.colorbar(cs)
 
         # Plot all particle pos
-        self.__particles, = ax.plot([], [], 'ro', ms=6)
+        self.__particles, = ax.plot([], [], 'o', color='#0078D7' if self._dark else 'r', ms=6)
 
         # Plot all velocities
         self.__particle_vel = ax.quiver([], [], [], [], angles='xy', scale_units='xy', scale=1)

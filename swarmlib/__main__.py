@@ -34,7 +34,12 @@ def run_swarm():
         action='version',
         version='swarmlib v' + __version__,
         help='Show version and exit')
-
+    parser.add_argument(
+        '-d',
+        '--dark',
+        action='store_true',
+        help='Enable dark mode.',
+        default=False)
     sub_parsers = parser.add_subparsers(
         title='Commands',
         description='Valid commands',
