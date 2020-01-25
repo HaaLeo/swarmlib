@@ -5,6 +5,7 @@
 
 # pylint: disable=too-many-instance-attributes
 
+from copy import deepcopy
 import logging
 
 import numpy as np
@@ -36,17 +37,19 @@ class CuckooProblem:
 
         # Sort nests initally for best solution
         self.__nests.sort(key=lambda nest: nest.value)
-        self.__best_nest = self.__nests[0]
 
         # Initialize visualizer for plotting
         kwargs['iteration_number'] = self.__max_generations
         self.__visualizer = Visualizer(**kwargs)
-        positions, generated = zip(*[(nest.position, nest.generated) for nest in self.__nests])
-        self.__visualizer.add_data(positions=positions, best_position=self.__nests[0].position, generated=generated)
+        positions, abandoned = zip(*[(nest.position, nest.abandoned) for nest in self.__nests])
+        self.__visualizer.add_data(positions=positions, best_position=self.__nests[0].position, abandoned=abandoned)
 
     def solve(self):
         nest_indices = np.array(range(len(self.__nests)))
-        for _ in range(self.__max_generations):
+        best_nest = deepcopy(self.__nests[0])
+        LOGGER.info('Iteration 0 best solution="%s" at position="%s"', best_nest.value, best_nest.position)
+
+        for iteration in range(self.__max_generations):
 
             # Perform levy flights to get cuckoo's new position
             new_cuckoo_pos = [
@@ -58,30 +61,27 @@ class CuckooProblem:
             np.random.shuffle(nest_indices)
 
             # Update nests
-            for index in nest_indices:
-                self.__nests[index].update_pos(new_cuckoo_pos[index])
+            for index, pos in zip(nest_indices, new_cuckoo_pos):
+                self.__nests[index].update_pos(pos)
 
             # Abandon nests randomly considering p_a
-            self.__nests = [
-                Nest(lower_boundary=self.__lower_boundary, upper_boundary=self.__upper_boundary, function=self.__function)
-                if np.random.random_sample() < self.__p_a
-                else nest
-                for nest in self.__nests
-            ]
+            for nest in self.__nests:
+                if np.random.random_sample() < self.__p_a:
+                    nest.abandon()
 
             self.__nests.sort(key=lambda nest: nest.value)
 
             # Update best nest
-            if self.__nests[0].value < self.__best_nest.value:
-                self.__best_nest = self.__nests[0]
-                LOGGER.info('Found new best solution="%s" at position="%s"', self.__best_nest.value, self.__best_nest.position)
+            if self.__nests[0].value < best_nest.value:
+                best_nest = deepcopy(self.__nests[0])
+                LOGGER.info('Iteration %i Found new best solution="%s" at position="%s"', iteration+1, best_nest.value, best_nest.position)
 
             # Add data for plot
-            positions, generated = zip(*[(nest.position, nest.generated) for nest in self.__nests])
-            self.__visualizer.add_data(positions=positions, best_position=self.__nests[0].position, generated=generated)
+            positions, abandoned = zip(*[(nest.position, nest.abandoned) for nest in self.__nests])
+            self.__visualizer.add_data(positions=positions, best_position=self.__nests[0].position, abandoned=abandoned)
 
-        LOGGER.info('Last best solution="%s" at position="%s"', self.__best_nest.value, self.__best_nest.position)
-        return self.__best_nest
+        LOGGER.info('Last best solution="%s" at position="%s"', best_nest.value, best_nest.position)
+        return best_nest
 
     def replay(self):
         """

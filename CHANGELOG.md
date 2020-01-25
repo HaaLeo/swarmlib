@@ -3,7 +3,7 @@ All notable changes to the "swarmlib" pypi package will be documented in this fi
 This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased
-* **Changed** cuckoo search visualization: do not plot velocities if target position was abandoned
+* **Changed** cuckoo search visualization: when a nest is abandoned / newly generated color its transition differently.
 
 ## 2019-01-24 - v0.6.1
 * **Changed** cuckoo search: Ensure each nest is assigned a cuckoo position in the update step
