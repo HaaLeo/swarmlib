@@ -15,6 +15,8 @@ Currently, the following algorithms are implemented:
 * [Particle Swarm Optimization](#particle-swarm-optimization)
 * [Ant Colony Optimization](#ant-colony-optimization)
 
+Due to recording issues the following GIFs are kind of blurry, however this is not the case when executing the algorithms locally.
+
 ## Installation
 
 You can install the package with `pip` from [pypi](https://pypi.org/project/swarmlib):
@@ -91,7 +93,7 @@ Currently two functions can be selected:
 
 ![cukoo search](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/cuckoos.gif)
 
-The plot shows all nests of the current cuckoo generation as _red_ markers. The best nests of all (previous) generations are indicated by _yellow_ markers.
+The plot shows all nests of the current cuckoo generation as _red_ markers. The best nests of all (previous) generations are indicated by _yellow_ markers. The abandonment of a nest is indicated by a _dark grey_ transition.
 
 To print all available options execute:
 
