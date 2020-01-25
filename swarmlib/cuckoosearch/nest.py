@@ -3,7 +3,6 @@
 #  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.
 # ------------------------------------------------------------------------------------------------------
 
-from copy import deepcopy
 from typing import Tuple
 
 import numpy as np
@@ -45,4 +44,4 @@ class Nest(Coordinate):
             if self.__abandoned:
                 self.__abandoned = False
             self._value = new_value
-            self._position = deepcopy(new_position)
+            self._position = new_position

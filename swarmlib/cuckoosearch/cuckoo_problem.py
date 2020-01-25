@@ -35,18 +35,17 @@ class CuckooProblem:
             for _ in range(kwargs['nests'])
         ]
 
-        # Sort nests initally for best solution
-        self.__nests.sort(key=lambda nest: nest.value)
-
         # Initialize visualizer for plotting
         kwargs['iteration_number'] = self.__max_generations
         self.__visualizer = Visualizer(**kwargs)
-        positions, abandoned = zip(*[(nest.position, nest.abandoned) for nest in self.__nests])
-        self.__visualizer.add_data(positions=positions, best_position=self.__nests[0].position, abandoned=abandoned)
 
     def solve(self):
         nest_indices = np.array(range(len(self.__nests)))
-        best_nest = deepcopy(self.__nests[0])
+        best_nest = deepcopy(min(self.__nests, key=lambda nest: nest.value))
+
+        positions, abandoned = zip(*[(nest.position, nest.abandoned) for nest in self.__nests])
+        self.__visualizer.add_data(positions=positions, best_position=best_nest.position, abandoned=abandoned)
+
         LOGGER.info('Iteration 0 best solution="%s" at position="%s"', best_nest.value, best_nest.position)
 
         for iteration in range(self.__max_generations):
@@ -69,16 +68,15 @@ class CuckooProblem:
                 if np.random.random_sample() < self.__p_a:
                     nest.abandon()
 
-            self.__nests.sort(key=lambda nest: nest.value)
-
             # Update best nest
-            if self.__nests[0].value < best_nest.value:
-                best_nest = deepcopy(self.__nests[0])
+            current_best = min(self.__nests, key=lambda nest: nest.value)
+            if current_best.value < best_nest.value:
+                best_nest = deepcopy(current_best)
                 LOGGER.info('Iteration %i Found new best solution="%s" at position="%s"', iteration+1, best_nest.value, best_nest.position)
 
             # Add data for plot
             positions, abandoned = zip(*[(nest.position, nest.abandoned) for nest in self.__nests])
-            self.__visualizer.add_data(positions=positions, best_position=self.__nests[0].position, abandoned=abandoned)
+            self.__visualizer.add_data(positions=positions, best_position=current_best.position, abandoned=abandoned)
 
         LOGGER.info('Last best solution="%s" at position="%s"', best_nest.value, best_nest.position)
         return best_nest

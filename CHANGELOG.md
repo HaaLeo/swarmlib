@@ -4,6 +4,7 @@ This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased
 * **Changed** cuckoo search visualization: when a nest is abandoned / newly generated color its transition differently.
+* **Fixed** cuckoo search visualization: now the abandon transition is mapped to the correct nest.
 
 ## 2019-01-24 - v0.6.1
 * **Changed** cuckoo search: Ensure each nest is assigned a cuckoo position in the update step
