@@ -71,7 +71,7 @@ class Visualizer:  # pylint:disable=too-many-instance-attributes
         plt.show()
 
     @staticmethod
-    def __scale_range(seq, new_max=6, new_min=0.1):
+    def __scale_range(seq, new_max=6, new_min=0.01):
         old_max = max(seq)
         old_min = min(seq)
         return [
