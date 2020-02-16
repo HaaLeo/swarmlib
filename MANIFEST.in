@@ -1,0 +1,3 @@
+include swarmlib/aco4tsp/resources/**
+include swarmlib/ThirdPartyNotices.txt
+include swarmlib/LICENSE.txt
