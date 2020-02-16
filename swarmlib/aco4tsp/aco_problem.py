@@ -68,7 +68,7 @@ class ACOProblem():
             for _ in range(self.__ant_number)
         ]
 
-        for idx in range(self.__num_iterations):
+        for _ in range(self.__num_iterations):
             # Start all multithreaded ants
             for ant in ants:
                 ant.start()

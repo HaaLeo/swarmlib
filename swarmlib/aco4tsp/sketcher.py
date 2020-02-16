@@ -21,7 +21,7 @@ def draw_graph(graph, results, dark, continuous, interval):
         edge_color = 'black'
         best_edge_color = 'blue'
 
-    fig, ax = plt.subplots(frameon=False)
+    fig, ax = plt.subplots(frameon=False)  # pylint:disable=invalid-name
     plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
 
     node_pos = graph.node_coordinates

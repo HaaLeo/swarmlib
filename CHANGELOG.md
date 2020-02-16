@@ -5,6 +5,7 @@ This project follows [semantic versioning](https://semver.org/).
 ## Unreleased
 * **Added** dark mode. It is enabled via the `--dark` flag.
 * **Changed** `--continuous` and `--interval` flags. Both are now top level flags.
+* **Changed** the API of the ant colony optimization.
 
 ## 2019-01-25 - v0.6.2
 * **Changed** cuckoo search visualization: when a nest is abandoned / newly generated color its transition differently.
