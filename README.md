@@ -174,6 +174,6 @@ In addition to the cli you can also use the API:
 from swarmlib import ACOProblem
 
 problem = ACOProblem('/path/to/my/tsp-file.tsp', 10)
-if problem.solve():
-    problem.show_result()
+path, distance = problem.solve()
+problem.replay()
 ```

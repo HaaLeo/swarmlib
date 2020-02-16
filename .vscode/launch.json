@@ -8,13 +8,12 @@
             "module": "swarmlib",
             "console": "internalConsole",
             "args": [
+                "--dark",
                 "ants",
                 "${workspaceFolder}/resources/burma14.tsp",
                 "14",
-                "-i",
+                "-n",
                 "10",
-                "-p",
-                "1"
             ]
         },
         {
@@ -24,10 +23,11 @@
             "module": "swarmlib",
             "console": "internalConsole",
             "args": [
+                "--dark",
+                "--continuous",
                 "fireflies",
                 "-f",
                 "michalewicz",
-                "-c",
                 "14"
             ]
         },
@@ -38,6 +38,8 @@
             "module": "swarmlib",
             "console": "internalConsole",
             "args": [
+                "--dark",
+                "--continuous",
                 "cuckoos",
                 "-f",
                 "michalewicz",
@@ -45,7 +47,6 @@
                 "20",
                 "-a",
                 "0.5",
-                "-c",
                 "14"
             ]
         },
@@ -56,8 +57,9 @@
             "module": "swarmlib",
             "console": "internalConsole",
             "args": [
+                "--dark",
+                "--continuous",
                 "particles",
-                "-c",
                 "-n",
                 "10",
                 "14"

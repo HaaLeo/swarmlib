@@ -14,7 +14,7 @@ class Visualizer(BaseVisualizer):
         super().__init__(**kwargs)
 
         ax = self._fig.gca(label='BaseAxis')
-        self.__best_nests_artist, = ax.plot([], [], 'o', color='#ffff00', ms=6)
+        self.__best_nests_artist, = ax.plot([], [], 'o', color='#FFA500' if self._dark else '#ffff00', ms=6)
         self.__best_nests = [[], []]
         self._abandon_map = []
 
