@@ -83,7 +83,7 @@ def configure_parser(sub_parsers):
         '--continuous',
         default=False,
         action='store_true',
-        help='Enable the algorithm to run continuously (default false)')
+        help='Enable the algorithm to run continuously (default off)')
 
     parser.add_argument(
         'firefly_number',

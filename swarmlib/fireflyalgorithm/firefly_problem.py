@@ -3,7 +3,7 @@
 #  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.
 # ------------------------------------------------------------------------------------------------------
 
-
+from copy import deepcopy
 import logging
 
 from .firefly import Firefly
@@ -53,15 +53,15 @@ class FireflyProblem():
                         i.move_towards(j.position)
                         i.update_intensity()
 
-            self.__fireflies.sort(key=lambda firefly: firefly.value)
-            if not best or self.__fireflies[0].value < best.value:
-                best = self.__fireflies[0]
+            current_best = min(self.__fireflies, key=lambda firefly: firefly.value)
+            if not best or current_best.value < best.value:
+                best = deepcopy(current_best)
 
-            LOGGER.info('Current best value: %s, Overall best value: %s', self.__fireflies[0].value, best.value)
+            LOGGER.info('Current best value: %s, Overall best value: %s', current_best.value, best.value)
 
             # randomly walk the best firefly
-            self.__fireflies[0].random_walk(0.1)
-            self.__fireflies[0].update_intensity()
+            current_best.random_walk(0.1)
+            current_best.update_intensity()
 
             # Add data for visualization
             self.__visualizer.add_data(positions=[firefly.position for firefly in self.__fireflies])

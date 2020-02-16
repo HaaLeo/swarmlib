@@ -26,6 +26,7 @@ class BaseVisualizer:
 
         self._marker_size = 0
         self._index = 0
+        self._vel_color = '#CFCFCF'
 
         self._positions = []
         self._velocities = []
@@ -34,8 +35,8 @@ class BaseVisualizer:
         if self._dark:
             plt.style.use('dark_background')
 
-        x = np.linspace(self.__lower_boundary, self.__upper_boundary, 100)
-        y = np.linspace(self.__lower_boundary, self.__upper_boundary, 100)
+        x = np.linspace(self.__lower_boundary, self.__upper_boundary, 400)
+        y = np.linspace(self.__lower_boundary, self.__upper_boundary, 400)
         X, Y = np.meshgrid(x, y)
         z = self.__function([X, Y])
 
@@ -122,6 +123,6 @@ class BaseVisualizer:
         self.__particles.set_markersize(self._marker_size)
 
         # Update the velocities
-        self.__particle_vel = ax.quiver(pos_x_scaled, pos_y_scaled, vel_x_scaled, vel_y_scaled, angles='xy', scale_units='xy', scale=1, color='#CFCFCF', width=self._marker_size*0.001)
+        self.__particle_vel = ax.quiver(pos_x_scaled, pos_y_scaled, vel_x_scaled, vel_y_scaled, angles='xy', scale_units='xy', scale=1, color=self._vel_color, width=self._marker_size*0.001)
 
         return self.__particles, self.__rectangle, self.__particle_vel

@@ -16,9 +16,13 @@ class Visualizer(BaseVisualizer):
         ax = self._fig.gca(label='BaseAxis')
         self.__best_nests_artist, = ax.plot([], [], 'o', color='#FFA500' if self._dark else '#ffff00', ms=6)
         self.__best_nests = [[], []]
+        self._abandon_map = []
 
     def add_data(self, **kwargs) -> None:
         super().add_data(**kwargs)
+        # Indicates whether the nest was generated this iteration or not
+        abandoned = np.array(kwargs['abandoned'])
+        self._abandon_map.append(np.array([abandoned, abandoned]))
 
         x_pos, y_pos = kwargs['best_position']
         self.__best_nests[0].append(x_pos)
@@ -39,9 +43,12 @@ class Visualizer(BaseVisualizer):
         return [*base_artists, self.__best_nests_artist]
 
     def _animate(self, i: int, frames: int):
+        if self._index < len(self._abandon_map)-1:
+            # Color the velocity different when the nest is abandoned
+            self._vel_color = np.where(self._abandon_map[self._index+1].sum(axis=0), '#373737', '#CFCFCF')
         base_artists = super()._animate(i, frames)
 
-        self.__best_nests_artist.set_data(self.__best_nests[0][:self._index], self.__best_nests[1][:self._index])
+        self.__best_nests_artist.set_data(self.__best_nests[0][:self._index+1], self.__best_nests[1][:self._index+1])
         self.__best_nests_artist.set_markersize(self._marker_size)
 
         return [*base_artists, self.__best_nests_artist]

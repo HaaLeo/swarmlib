@@ -5,10 +5,31 @@
 
 from typing import Tuple
 
+import numpy as np
+
 from ..util.coordinate import Coordinate
 
 
 class Nest(Coordinate):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.__abandoned = True
+
+    @property
+    def abandoned(self) -> bool:
+        """
+        Indicates whether a nest was abandoned or not
+
+        Returns:
+            bool: True the nest was abandoned otherwise False
+        """
+        return self.__abandoned
+
+    def abandon(self) -> None:
+        self.__abandoned = True
+        self._position = np.random.uniform(self._lower_boundary, self._upper_boundary, 2)
+        self._value = self._function(self._position)
 
     def update_pos(self, new_position: Tuple[float, float]) -> None:
         """
@@ -20,5 +41,7 @@ class Nest(Coordinate):
 
         new_value = self._function(new_position)
         if new_value < self._value:
+            if self.__abandoned:
+                self.__abandoned = False
             self._value = new_value
             self._position = new_position
