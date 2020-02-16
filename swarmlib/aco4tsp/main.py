@@ -17,8 +17,6 @@ def _run_aco4tsp(args):
     if not os.path.isabs(args['tsp_file']):
         args['tsp_file'] = os.path.join(os.getcwd(), args['tsp_file'])
 
-    args['two_opt'] = not bool(args['two_opt'] == 'false' or args['two_opt'] == 'f')
-
     problem = ACOProblem(**args)
     problem.solve()
     problem.replay()
@@ -64,12 +62,6 @@ def configure_parser(sub_parsers):
         type=int,
         default=10,
         help='Number of iterations to execute (default 10)')
-    parser.add_argument(
-        '-i',
-        '--interval',
-        type=int,
-        default=1000,
-        help='Interval between two animation frames in ms (default 1000)')
     parser.add_argument(
         '-o',
         '--two-opt',

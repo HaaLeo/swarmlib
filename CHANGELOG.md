@@ -2,6 +2,10 @@
 All notable changes to the "swarmlib" pypi package will be documented in this file.  
 This project follows [semantic versioning](https://semver.org/).
 
+## Unreleased
+* **Added** dark mode. It is enabled via the `--dark` flag.
+* **Changed** `--continuous` and `--interval` flags. Both are now top level flags.
+
 ## 2019-01-25 - v0.6.2
 * **Changed** cuckoo search visualization: when a nest is abandoned / newly generated color its transition differently.
 * **Fixed** cuckoo search visualization: now the abandon transition is mapped to the correct nest.

@@ -18,7 +18,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 class ACOProblem():
-    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, q=1, iteration_number=100, interval=1000, two_opt=True, dark=False):
+    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, q=1, iteration_number=100, interval=1000, two_opt=True, dark=False, continuous=False):
         """Initializes a new instance of the `ACOProblem` class.
 
         Arguments:  \r
@@ -47,8 +47,10 @@ class ACOProblem():
         self.__best_path = None
         self.__shortest_distance = None
         self.__use_2_opt = two_opt
+
         self.__dark = dark
         self.__interval = interval
+        self.__continuous = continuous
 
     def solve(self):
         """
@@ -110,4 +112,4 @@ class ACOProblem():
         """
         Play the visualization of the problem
         """
-        draw_graph(self.__graph, self.__result_data, self.__dark)
+        draw_graph(self.__graph, self.__result_data, self.__dark, self.__continuous, self.__interval)

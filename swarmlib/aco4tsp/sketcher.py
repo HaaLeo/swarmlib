@@ -8,7 +8,7 @@ from matplotlib import pyplot as plt
 import networkx as nx
 
 
-def draw_graph(graph, results, dark):
+def draw_graph(graph, results, dark, continuous, interval):
     """Draw the given graph."""
 
     if dark:
@@ -53,7 +53,7 @@ def draw_graph(graph, results, dark):
         nx.draw_networkx_labels(graph.networkx_graph, pos=node_pos, ax=ax)
         nx.draw_networkx_edges(graph.networkx_graph, pos=node_pos, width=_scale_range(edge_widths), edge_color=edge_colors, ax=ax)
 
-    _ = animation.FuncAnimation(fig, update, frames=len(results), interval=1000, repeat=True)
+    _ = animation.FuncAnimation(fig, update, frames=len(results), interval=interval, repeat=continuous)
     plt.show()
 
 

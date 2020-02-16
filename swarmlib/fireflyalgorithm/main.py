@@ -72,18 +72,6 @@ def configure_parser(sub_parsers):
         type=int,
         default=10,
         help='Number of iterations to execute (default 10)')
-    parser.add_argument(
-        '-i',
-        '--interval',
-        type=int,
-        default=1000,
-        help='Interval between two animation frames in ms (default 1000)')
-    parser.add_argument(
-        '-c',
-        '--continuous',
-        default=False,
-        action='store_true',
-        help='Enable the algorithm to run continuously (default off)')
 
     parser.add_argument(
         'firefly_number',

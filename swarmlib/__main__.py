@@ -40,6 +40,19 @@ def run_swarm():
         action='store_true',
         help='Enable dark mode.',
         default=False)
+    parser.add_argument(
+        '-i',
+        '--interval',
+        type=int,
+        default=1000,
+        help='Interval between two animation frames in ms (default 1000)')
+    parser.add_argument(
+        '-c',
+        '--continuous',
+        default=False,
+        action='store_true',
+        help='Enable the algorithm to run continuously (default off)')
+
     sub_parsers = parser.add_subparsers(
         title='Commands',
         description='Valid commands',

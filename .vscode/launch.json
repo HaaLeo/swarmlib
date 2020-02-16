@@ -24,10 +24,10 @@
             "console": "internalConsole",
             "args": [
                 "--dark",
+                "--continuous",
                 "fireflies",
                 "-f",
                 "michalewicz",
-                "-c",
                 "14"
             ]
         },
@@ -39,6 +39,7 @@
             "console": "internalConsole",
             "args": [
                 "--dark",
+                "--continuous",
                 "cuckoos",
                 "-f",
                 "michalewicz",
@@ -46,7 +47,6 @@
                 "20",
                 "-a",
                 "0.5",
-                "-c",
                 "14"
             ]
         },
@@ -57,9 +57,9 @@
             "module": "swarmlib",
             "console": "internalConsole",
             "args": [
-               "--dark",
+                "--dark",
+                "--continuous",
                 "particles",
-                "-c",
                 "-n",
                 "10",
                 "14"
