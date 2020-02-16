@@ -6,6 +6,7 @@ This project follows [semantic versioning](https://semver.org/).
 * **Added** dark mode. It is enabled via the `--dark` flag.
 * **Changed** `--continuous` and `--interval` flags. Both are now top level flags.
 * **Changed** the API of the ant colony optimization.
+* **Changed** the `tsp_file` argument to an option. Now `--tsp-file` is optional. By default the built-in burma14 problem is used.
 
 ## 2019-01-25 - v0.6.2
 * **Changed** cuckoo search visualization: when a nest is abandoned / newly generated color its transition differently.

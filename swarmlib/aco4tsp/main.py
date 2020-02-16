@@ -4,8 +4,8 @@
 # ------------------------------------------------------------------------------------------------------
 
 import logging
-import os
-
+from os import path, getcwd
+import inspect
 from .aco_problem import ACOProblem
 
 LOGGER = logging.getLogger(__name__)
@@ -14,8 +14,8 @@ LOGGER = logging.getLogger(__name__)
 def _run_aco4tsp(args):
     LOGGER.info('Start ant colony optimization with parameters="%s"', args)
 
-    if not os.path.isabs(args['tsp_file']):
-        args['tsp_file'] = os.path.join(os.getcwd(), args['tsp_file'])
+    if not path.isabs(args['tsp_file']):
+        args['tsp_file'] = path.join(getcwd(), args['tsp_file'])
 
     problem = ACOProblem(**args)
     problem.solve()
@@ -68,11 +68,13 @@ def configure_parser(sub_parsers):
         action='store_true',
         default=False,
         help='Enable to use 2-opt local search after each iteration (default off)')
-
     parser.add_argument(
-        'tsp_file',
+        '-t',
+        '--tsp-file',
         type=str,
-        help='Path of the tsp file that shall be loaded')
+        default=path.join(path.abspath(path.dirname(inspect.getfile(inspect.currentframe()))), 'resources/burma14.tsp'),
+        help='Path of the tsp file that shall be loaded (default loads the built-in burma14.tsp)')
+
     parser.add_argument(
         'ant_number',
         type=int,

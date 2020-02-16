@@ -173,7 +173,7 @@ In addition to the cli you can also use the API:
 ```python
 from swarmlib import ACOProblem
 
-problem = ACOProblem('/path/to/my/tsp-file.tsp', 10)
+problem = ACOProblem(ant_number=10)
 path, distance = problem.solve()
 problem.replay()
 ```

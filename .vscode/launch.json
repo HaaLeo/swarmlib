@@ -10,7 +10,6 @@
             "args": [
                 "--dark",
                 "ants",
-                "${workspaceFolder}/resources/burma14.tsp",
                 "14",
                 "-n",
                 "10",

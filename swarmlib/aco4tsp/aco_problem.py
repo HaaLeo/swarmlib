@@ -3,7 +3,9 @@
 #  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.
 # ------------------------------------------------------------------------------------------------------
 
+import inspect
 import logging
+from os import path
 import random
 
 import tsplib95
@@ -36,8 +38,9 @@ class ACOProblem():
         """
 
         self.__ant_number = kwargs['ant_number']  # Number of ants
-        self.__graph = Graph(tsplib95.load_problem(kwargs['tsp_file']))
-        LOGGER.info('Loaded tsp problem="%s"', kwargs['tsp_file'])
+        tsp_file = kwargs.get('tsp_file', path.join(path.abspath(path.dirname(inspect.getfile(inspect.currentframe()))), 'resources/burma14.tsp'))
+        self.__graph = Graph(tsplib95.load_problem(tsp_file))
+        LOGGER.info('Loaded tsp problem="%s"', tsp_file)
 
         self.__rho = kwargs.get('rho', 0.5)  # evaporation rate
         self.__alpha = kwargs.get('alpha', 0.5)  # used for edge detection
