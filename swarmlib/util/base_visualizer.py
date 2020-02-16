@@ -46,7 +46,7 @@ class BaseVisualizer:
         self._fig.colorbar(cs)
 
         # Plot all particle pos
-        self.__particles, = ax.plot([], [], 'o', color='#0078D7' if self._dark else 'r', ms=6)
+        self.__particles, = ax.plot([], [], 'o', color='#0078D7' if self._dark else 'red', ms=6)
 
         # Plot all velocities
         self.__particle_vel = ax.quiver([], [], [], [], angles='xy', scale_units='xy', scale=1)

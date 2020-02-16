@@ -5,11 +5,8 @@
 
 import logging
 import random
-from threading import Thread, Event
-from copy import deepcopy
-from queue import Queue
+
 import tsplib95
-from matplotlib import pyplot as plt
 
 from .ant import Ant
 from .tsp_graph import Graph
@@ -21,7 +18,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 class ACOProblem():
-    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, q=1, iterations=100, plot_interval=10, two_opt=True):
+    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, q=1, iteration_number=100, interval=1000, two_opt=True, dark=False):
         """Initializes a new instance of the `ACOProblem` class.
 
         Arguments:  \r
@@ -40,73 +37,36 @@ class ACOProblem():
 
         self.__graph = Graph(tsplib95.load_problem(tsp_file))
         LOGGER.info('Loaded tsp problem="%s"', tsp_file)
-        self.rho = rho  # evaporation rate
-        self.alpha = alpha  # used for edge detection
-        self.beta = beta  # used for edge detection
-        self.Q = q  # Hyperparameter Q
-        self.ant_number = ant_number  # Number of ants
-        self.num_iterations = iterations  # Number of iterations
-        self.plot_iter = plot_interval  # plot intervall
-        self.__stop_event = Event()  # Event used to stop the plotting thread
-        self.__result_queue = Queue()
-        self.__last_result = None
-        self.best_path = None
-        self.shortest_distance = None
+        self.__rho = rho  # evaporation rate
+        self.__alpha = alpha  # used for edge detection
+        self.__beta = beta  # used for edge detection
+        self.__Q = q  # Hyperparameter Q
+        self.__ant_number = ant_number  # Number of ants
+        self.__num_iterations = iteration_number  # Number of iterations
+        self.__result_data = []
+        self.__best_path = None
+        self.__shortest_distance = None
         self.__use_2_opt = two_opt
+        self.__dark = dark
+        self.__interval = interval
 
     def solve(self):
         """
         Solve the given problem.
-
-        Returns `true` if problem was solved successfully otherwise `false`.
         """
-        success = False
-        args = deepcopy([self.ant_number, self.alpha, self.beta,
-                         self.Q, self.rho, self.num_iterations, self.plot_iter, self.__use_2_opt])
-        solving_thread = Thread(target=self.__solve, args=args)
-        solving_thread.start()
 
-        fig = plt.figure(self.__graph.name)
-
-        try:
-            while solving_thread.is_alive():
-                self.__show_result()
-
-                # Check whether plot was closed by user
-                if not plt.fignum_exists(fig.number):
-                    self.__stop_event.set()
-                    break
-
-            # Plot results that could be still queued
-            while self.__result_queue.qsize() != 0:
-                self.__show_result()
-
-                # Check whether plot was closed by user
-                if not plt.fignum_exists(fig.number):
-                    self.__stop_event.set()
-                    break
-
-            if plt.fignum_exists(fig.number):
-                success = True
-        except KeyboardInterrupt:
-            LOGGER.debug('The user closed the app. Stop calculation thread.')
-            self.__stop_event.set()
-
-        return success
-
-    def __solve(self, ant_number, alpha, beta, Q, rho, num_iterations, plot_batch, use_2_opt):
-        """Solve the problem."""
         ants = []
         shortest_distance = None
         best_path = None
 
         # Create ants
-        for _ in range(ant_number):
-            ant = Ant(random.choice(self.__graph.get_nodes()),
-                      self.__graph, alpha, beta, Q, use_2_opt)
-            ants.append(ant)
+        ants = [
+            Ant(random.choice(self.__graph.get_nodes()),
+                self.__graph, self.__alpha, self.__beta, self.__Q, self.__use_2_opt)
+            for _ in range(self.__ant_number)
+        ]
 
-        for idx in range(num_iterations):
+        for idx in range(self.__num_iterations):
             # Start all multithreaded ants
             for ant in ants:
                 ant.start()
@@ -116,9 +76,10 @@ class ACOProblem():
                 ant.join()
 
             # decay pheromone
-            for edge in self.__graph.get_edges():
+            edges = self.__graph.get_edges()
+            for edge in edges:
                 pheromone = self.__graph.get_edge_pheromone(edge)
-                pheromone *= 1-rho
+                pheromone *= 1-self.__rho
                 self.__graph.set_pheromone(edge, pheromone)
 
             # Add each ant's pheromone
@@ -136,41 +97,17 @@ class ACOProblem():
                 # Reset ants' thread
                 ant.initialize(random.choice(self.__graph.get_nodes()))
 
-            if self.__stop_event.is_set():
-                LOGGER.debug('Stop event detected. Shut down thread.')
-                break
-
-            if (idx+1) % plot_batch == 0 or (idx+1) == num_iterations:
-                self.__result_queue.put({
-                    'best_path': best_path,
-                    'current_iter': idx+1,
-                    'total_iter': num_iterations
-                })
+            self.__result_data.append({
+                'best_path': best_path,
+                'edge_dict': {edge: self.__graph.get_edge_pheromone(edge) for edge in edges}
+            })
 
         LOGGER.info('Finish! Shortest_distance="%s" and best_path="%s"',
                     shortest_distance, best_path)
+        return best_path, shortest_distance
 
-    def show_result(self):
+    def replay(self):
         """
-        Plot the result using `matplotlib`.
+        Play the visualization of the problem
         """
-
-        self.__show_result(False)
-
-    def __show_result(self, update=True):
-        """Show the result. When update=True re-draw the figure if possible."""
-        fig = plt.figure(self.__graph.name)
-
-        if update:
-            if self.__result_queue.qsize() != 0:
-                self.__last_result = self.__result_queue.get()
-                draw_graph(self.__graph, self.__last_result)
-                self.__result_queue.task_done()
-
-            plt.ion()
-            fig.canvas.flush_events()
-            plt.pause(0.01)
-
-        else:
-            plt.ioff()
-            plt.show(block=True)
+        draw_graph(self.__graph, self.__result_data, self.__dark)

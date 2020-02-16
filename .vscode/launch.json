@@ -12,10 +12,8 @@
                 "ants",
                 "${workspaceFolder}/resources/burma14.tsp",
                 "14",
-                "-i",
+                "-n",
                 "10",
-                "-p",
-                "1"
             ]
         },
         {
