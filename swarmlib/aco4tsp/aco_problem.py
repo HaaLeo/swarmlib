@@ -10,15 +10,15 @@ import tsplib95
 
 from .ant import Ant
 from .tsp_graph import Graph
-from .sketcher import draw_graph
+from .visualizer import Visualizer
 
 LOGGER = logging.getLogger(__name__)
 
-# pylint: disable=too-many-instance-attributes,too-many-arguments,invalid-name,too-many-locals
+# pylint: disable=too-many-instance-attributes,invalid-name,too-many-locals
 
 
 class ACOProblem():
-    def __init__(self, tsp_file, ant_number, rho=0.5, alpha=0.5, beta=0.5, q=1, iteration_number=100, interval=1000, two_opt=True, dark=False, continuous=False):
+    def __init__(self, **kwargs):
         """Initializes a new instance of the `ACOProblem` class.
 
         Arguments:  \r
@@ -30,27 +30,23 @@ class ACOProblem():
         `alpha`         -- Relative importance of the pheromone (default 0.5)  \r
         `beta`          -- Relative importance of the heuristic information (default 0.5)  \r
         `q`             -- Constant Q. Used to calculate the pheromone, laid down on an edge (default 1)  \r
-        `iterations`    -- Number of iterations to execute (default 100)  \r
+        `iterations`    -- Number of iterations to execute (default 10)  \r
         `plot_interval` -- Plot intermediate result after this amount of iterations (default 10) \r
         `two_opt`       -- Additionally use 2-opt local search after each iteration (default true)
         """
 
-        self.__graph = Graph(tsplib95.load_problem(tsp_file))
-        LOGGER.info('Loaded tsp problem="%s"', tsp_file)
-        self.__rho = rho  # evaporation rate
-        self.__alpha = alpha  # used for edge detection
-        self.__beta = beta  # used for edge detection
-        self.__Q = q  # Hyperparameter Q
-        self.__ant_number = ant_number  # Number of ants
-        self.__num_iterations = iteration_number  # Number of iterations
-        self.__result_data = []
-        self.__best_path = None
-        self.__shortest_distance = None
-        self.__use_2_opt = two_opt
+        self.__ant_number = kwargs['ant_number']  # Number of ants
+        self.__graph = Graph(tsplib95.load_problem(kwargs['tsp_file']))
+        LOGGER.info('Loaded tsp problem="%s"', kwargs['tsp_file'])
 
-        self.__dark = dark
-        self.__interval = interval
-        self.__continuous = continuous
+        self.__rho = kwargs.get('rho', 0.5)  # evaporation rate
+        self.__alpha = kwargs.get('alpha', 0.5)  # used for edge detection
+        self.__beta = kwargs.get('beta', 0.5)  # used for edge detection
+        self.__Q = kwargs.get('q', 1)  # Hyperparameter Q
+        self.__num_iterations = kwargs.get('iteration_number', 10)  # Number of iterations
+        self.__use_2_opt = kwargs.get('two_opt', False)
+
+        self.__visualizer = Visualizer(**kwargs)
 
     def solve(self):
         """
@@ -99,10 +95,10 @@ class ACOProblem():
                 # Reset ants' thread
                 ant.initialize(random.choice(self.__graph.get_nodes()))
 
-            self.__result_data.append({
-                'best_path': best_path,
-                'edge_dict': {edge: self.__graph.get_edge_pheromone(edge) for edge in edges}
-            })
+            self.__visualizer.add_data(
+                best_path=best_path,
+                pheromone_map={edge: self.__graph.get_edge_pheromone(edge) for edge in edges}
+            )
 
         LOGGER.info('Finish! Shortest_distance="%s" and best_path="%s"',
                     shortest_distance, best_path)
@@ -112,4 +108,4 @@ class ACOProblem():
         """
         Play the visualization of the problem
         """
-        draw_graph(self.__graph, self.__result_data, self.__dark, self.__continuous, self.__interval)
+        self.__visualizer.replay(self.__graph)
