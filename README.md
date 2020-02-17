@@ -155,7 +155,7 @@ The implementation was part of the course [Natural computing for learning and op
 
 Enables to apply the ant colony optimization algorithm to a TSP using a [TSPLIB95](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/) file and plots the result.
 
-![ACO Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/ACO_Sample.png)
+![ACO Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/ants.gif)
 
 The algorithm solves the TSP and plots the result all _n_ iterations.  
 The nodes are plot according to their coordinates read from the TSPLIB95 file. The _widths_ of the edges indicate the _amount of pheromone_ that is associated with this edge. If an edge is _blue_, it is part of the _best found path_.

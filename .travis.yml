@@ -23,7 +23,9 @@ jobs:
       python: 3.8
 
     - stage: bundle
-      script: python setup.py sdist bdist_wheel
+      script:
+        - cp {ThirdPartyNotices.txt,LICENSE.txt} ./swarmlib
+        - python setup.py sdist bdist_wheel
       python: 3.8
 
     - stage: deploy

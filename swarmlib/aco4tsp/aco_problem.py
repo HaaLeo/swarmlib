@@ -24,10 +24,10 @@ class ACOProblem():
         """Initializes a new instance of the `ACOProblem` class.
 
         Arguments:  \r
-        `tsp_file`   -- Path of the tsp file that shall be loaded  \r
         `ant_number` -- Number of ants used for solving
 
         Keyword arguments:  \r
+        `tsp_file`   -- Path of the tsp file that shall be loaded  \r
         `rho`           -- Evaporation rate (default 0.5)  \r
         `alpha`         -- Relative importance of the pheromone (default 0.5)  \r
         `beta`          -- Relative importance of the heuristic information (default 0.5)  \r
