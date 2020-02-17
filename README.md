@@ -15,8 +15,6 @@ Currently, the following algorithms are implemented:
 * [Particle Swarm Optimization](#particle-swarm-optimization)
 * [Ant Colony Optimization](#ant-colony-optimization)
 
-Due to recording issues the following GIFs are kind of blurry, however this is not the case when executing the algorithms locally.
-
 ## Installation
 
 You can install the package with `pip` from [pypi](https://pypi.org/project/swarmlib):

@@ -9,6 +9,7 @@
             "console": "internalConsole",
             "args": [
                 "--dark",
+                "--continuous",
                 "ants",
                 "14",
                 "-n",
@@ -43,7 +44,7 @@
                 "-f",
                 "michalewicz",
                 "-m",
-                "20",
+                "15",
                 "-a",
                 "0.5",
                 "14"
