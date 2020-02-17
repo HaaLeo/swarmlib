@@ -3,6 +3,8 @@ All notable changes to the "swarmlib" pypi package will be documented in this fi
 This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased
+
+## 2019-02-17 -v0.7.0
 * **Added** dark mode. It is enabled via the `--dark` flag.
 * **Changed** `--continuous` and `--interval` flags. Both are now top level flags.
 * **Changed** the API of the ant colony optimization.
