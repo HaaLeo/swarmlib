@@ -64,6 +64,21 @@
                 "10",
                 "14"
             ]
+        },
+        {
+            "name": "Run: Artificial Bee Colony",
+            "type": "python",
+            "request": "launch",
+            "module": "swarmlib",
+            "console": "internalConsole",
+            "args": [
+                "--dark",
+                "--continuous",
+                "bees",
+                "-n",
+                "10",
+                "14"
+            ]
         }
     ]
 }

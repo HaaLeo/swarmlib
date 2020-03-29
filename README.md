@@ -14,6 +14,7 @@ Currently, the following algorithms are implemented:
 * [Cuckoo Search](#cuckoo-search)
 * [Particle Swarm Optimization](#particle-swarm-optimization)
 * [Ant Colony Optimization](#ant-colony-optimization)
+* [Artificial Bee Colony](#artificial-bee-colony)
 
 ## Installation
 
@@ -72,7 +73,7 @@ In addition to the cli you can also use the API:
 ```python
 from swarmlib import FireflyProblem, FUNCTIONS
 
-problem = FireflyProblem(FUNCTIONS['michalewicz'], 14)
+problem = FireflyProblem(function=FUNCTIONS['michalewicz'], firefly_number=14)
 best_firefly = problem.solve()
 problem.replay()
 ```
@@ -173,5 +174,35 @@ from swarmlib import ACOProblem
 
 problem = ACOProblem(ant_number=10)
 path, distance = problem.solve()
+problem.replay()
+```
+
+### Artificial Bee Colony
+
+TBD
+
+#### Features
+
+TBD
+
+![ABC Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/bees.gif)
+
+TBD
+
+To print all available options execute:
+
+```
+swarm bees -h
+```
+
+#### API
+
+In addition to the cli you can also use the API:
+
+```python
+from swarmlib import ABCProblem, FUNCTIONS
+
+problem = ABCProblem(bees=10, function=FUNCTIONS['michalewicz'])
+best_bee = problem.solve()
 problem.replay()
 ```
