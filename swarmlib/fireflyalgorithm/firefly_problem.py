@@ -35,10 +35,6 @@ class FireflyProblem():
             for _ in range(kwargs['firefly_number'])
         ]
 
-        # Initialize intensity
-        for firefly in self.__fireflies:
-            firefly.update_intensity()
-
         # Initialize visualizer for plotting
         self.__visualizer = Visualizer(**kwargs)
         self.__visualizer.add_data(positions=[firefly.position for firefly in self.__fireflies])
@@ -51,7 +47,6 @@ class FireflyProblem():
                 for j in self.__fireflies:
                     if j.value < i.value:
                         i.move_towards(j.position)
-                        i.update_intensity()
 
             current_best = min(self.__fireflies, key=lambda firefly: firefly.value)
             if not best or current_best.value < best.value:
@@ -61,7 +56,6 @@ class FireflyProblem():
 
             # randomly walk the best firefly
             current_best.random_walk(0.1)
-            current_best.update_intensity()
 
             # Add data for visualization
             self.__visualizer.add_data(positions=[firefly.position for firefly in self.__fireflies])

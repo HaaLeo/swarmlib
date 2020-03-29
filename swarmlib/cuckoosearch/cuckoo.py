@@ -19,8 +19,6 @@ class Cuckoo:
         Arguments:
             start {Tuple[float, float]} -- The cuckoo's start position
             alpha {float} -- The step size
-
-        Keyword Arguments:
             param_lambda {float} -- lambda parameter of the levy distribution
 
         Returns:

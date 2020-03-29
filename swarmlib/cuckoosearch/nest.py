@@ -5,8 +5,6 @@
 
 from typing import Tuple
 
-import numpy as np
-
 from ..util.coordinate import Coordinate
 
 
@@ -28,8 +26,7 @@ class Nest(Coordinate):
 
     def abandon(self) -> None:
         self.__abandoned = True
-        self._position = np.random.uniform(self._lower_boundary, self._upper_boundary, 2)
-        self._value = self._function(self._position)
+        self._initialize()
 
     def update_pos(self, new_position: Tuple[float, float]) -> None:
         """
@@ -40,8 +37,8 @@ class Nest(Coordinate):
         """
 
         new_value = self._function(new_position)
-        if new_value < self._value:
+        if new_value < self.value:
             if self.__abandoned:
                 self.__abandoned = False
-            self._value = new_value
+            # Value is updated automatically in base class
             self._position = new_position

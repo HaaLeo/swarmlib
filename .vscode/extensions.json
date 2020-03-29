@@ -2,6 +2,7 @@
     "recommendations": [
         "ms-python.python",
         "streetsidesoftware.code-spell-checker",
-        "njpwerner.autodocstring"
+        "njpwerner.autodocstring",
+        "gruntfuggly.todo-tree"
     ]
 }

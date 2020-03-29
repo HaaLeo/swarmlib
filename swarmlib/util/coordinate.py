@@ -10,17 +10,53 @@ import numpy as np
 
 class Coordinate:
     def __init__(self, **kwargs) -> None:
-        self._lower_boundary = kwargs.get('lower_boundary', 0.)
-        self._upper_boundary = kwargs.get('upper_boundary', 4.)
+        """
+        Initializes a new random coordinate.
+        """
+        self.__lower_boundary = kwargs.get('lower_boundary', 0.)
+        self.__upper_boundary = kwargs.get('upper_boundary', 4.)
         self._function = kwargs['function']
 
-        self._position = np.random.uniform(self._lower_boundary, self._upper_boundary, 2)
-        self._value = self._function(self._position)
+        self.__value = None
+        self.__position = None
+        self._initialize()
+
+    def _initialize(self) -> None:
+        """
+        Initialize a new random position and its value
+        """
+        self._position = np.random.uniform(self.__lower_boundary, self.__upper_boundary, 2)
+
 
     @property
     def position(self) -> Tuple[float, float]:
+        """
+        Get the coordinate's position
+
+        Returns:
+            Tuple[float, float]: the Position
+        """
         return self._position
+
+    # Internal Getter
+    @property
+    def _position(self) -> Tuple[float, float]:
+        return self.__position
+
+    # Internal Setter for automatic position clipping and value update
+    @_position.setter
+    def _position(self, new_pos: Tuple[float, float]) -> None:
+        """
+        Set the coordinate's new position.
+        Also updates checks whether the position is within the set boundaries
+        and updates the coordinate's value.
+
+        Args:
+            value (Tuple[float, float]): The new coordinate position
+        """
+        self.__position = np.clip(new_pos, a_min=self.__lower_boundary, a_max=self.__upper_boundary)
+        self.__value = self._function(self.__position)
 
     @property
     def value(self) -> float:
-        return self._value
+        return self.__value

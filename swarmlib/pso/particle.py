@@ -25,7 +25,7 @@ class Particle(Coordinate):
 
         # Local best
         self.__best_position = self._position
-        self.__best_value = self._value
+        self.__best_value = self.value
 
     @property
     def velocity(self) -> float:
@@ -49,15 +49,12 @@ class Particle(Coordinate):
         self.__clip_velocity()
 
         # Update position and clip it to boundaries
-        self._position = np.clip(self._position + self.__velocity, a_min=self._lower_boundary, a_max=self._upper_boundary)
-
-        # Update value
-        self._value = self._function(self._position)
+        self._position = self._position + self.__velocity
 
         # Update local best
-        if self._value < self.__best_value:
+        if self.value < self.__best_value:
             self.__best_position = self._position
-            self.__best_value = self._value
+            self.__best_value = self.value
 
     def __clip_velocity(self):
         norm = np.linalg.norm(self.__velocity)
