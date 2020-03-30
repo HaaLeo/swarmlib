@@ -30,7 +30,7 @@ class PSOProblem:
         self.__visualizer = BaseVisualizer(**kwargs)
         self.__visualizer.add_data(positions=positions, velocities=velocities)
 
-    def solve(self):
+    def solve(self) -> Particle:
         # Iterate to iteration_number+1 to generate iteration_number+1 velocities for visualization
         # And also update global_best_particle
         for _ in range(self.__iteration_number+1):

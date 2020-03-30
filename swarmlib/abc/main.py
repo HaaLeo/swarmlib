@@ -56,7 +56,24 @@ def configure_parser(sub_parsers):
         type=int,
         default=30,
         help='Number of iterations to execute (default 30)')
-
+    parser.add_argument(
+        '-t',
+        '--trials',
+        type=int,
+        default=3,
+        help='Maximum number of trials a bee tries to find a new, better food source before it becomes exhausted.')
+    parser.add_argument(
+        '-a',
+        '--alpha',
+        type=float,
+        default=1.,
+        help='Scaling parameter used for levy flight step. (default 1)')
+    parser.add_argument(
+        '-la',
+        '--lambda',
+        type=float,
+        default=1.5,
+        help='Randomization parameter used for the levy flights distribution. (default 1.5)')
 
     parser.add_argument(
         'bees',

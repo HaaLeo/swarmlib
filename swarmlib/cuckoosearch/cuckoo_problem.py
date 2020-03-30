@@ -11,7 +11,7 @@ import logging
 import numpy as np
 
 from .nest import Nest
-from .cuckoo import Cuckoo
+from ..util import levy_flight as cuckoo
 from .visualizer import Visualizer
 LOGGER = logging.getLogger(__name__)
 
@@ -39,7 +39,7 @@ class CuckooProblem:
         kwargs['iteration_number'] = self.__max_generations
         self.__visualizer = Visualizer(**kwargs)
 
-    def solve(self):
+    def solve(self) -> Nest:
         nest_indices = np.array(range(len(self.__nests)))
         best_nest = deepcopy(min(self.__nests, key=lambda nest: nest.value))
 
@@ -52,7 +52,7 @@ class CuckooProblem:
 
             # Perform levy flights to get cuckoo's new position
             new_cuckoo_pos = [
-                np.clip(Cuckoo.levy_flight(nest.position, self.__alpha, self.__lambda), a_min=self.__lower_boundary, a_max=self.__upper_boundary)
+                np.clip(cuckoo.levy_flight(nest.position, self.__alpha, self.__lambda), a_min=self.__lower_boundary, a_max=self.__upper_boundary)
                 for nest in self.__nests
             ]
 

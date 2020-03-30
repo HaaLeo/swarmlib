@@ -39,7 +39,7 @@ class FireflyProblem():
         self.__visualizer = Visualizer(**kwargs)
         self.__visualizer.add_data(positions=[firefly.position for firefly in self.__fireflies])
 
-    def solve(self):
+    def solve(self) -> Firefly:
         """Solve the problem."""
         best = None
         for _ in range(self.__iteration_number):

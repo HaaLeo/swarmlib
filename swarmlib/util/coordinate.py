@@ -27,7 +27,6 @@ class Coordinate:
         """
         self._position = np.random.uniform(self.__lower_boundary, self.__upper_boundary, 2)
 
-
     @property
     def position(self) -> Tuple[float, float]:
         """
