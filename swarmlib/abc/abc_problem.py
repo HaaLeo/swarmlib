@@ -41,8 +41,7 @@ class ABCProblem():
         Solve the ABC problem
         """
         best = min(self.__employee_bees + self.__onlooker_bees, key=lambda bee: bee.value)
-        positions, reset = zip(*[(bee.position, bee.is_reset) for bee in self.__employee_bees + self.__onlooker_bees])
-        self.__visualizer.add_data(positions=positions, best_position=best.position, abandoned=reset)
+        self.__visualizer.add_data(employee_bees=self.__employee_bees, onlooker_bees=self.__onlooker_bees, best_position=best.position)
 
         # Iterate to iteration_number+1 to generate iteration_number+1 velocities for visualization
         for iteration in range(self.__iteration_number+1):
@@ -73,8 +72,7 @@ class ABCProblem():
                 LOGGER.info('Iteration %i Found new best solution="%s" at position="%s"', iteration+1, best.value, best.position)
 
             # Add data for plotting
-            positions, reset = zip(*[(bee.position, bee.is_reset) for bee in self.__employee_bees + self.__onlooker_bees])
-            self.__visualizer.add_data(positions=positions, best_position=best.position, abandoned=reset)
+            self.__visualizer.add_data(employee_bees=self.__employee_bees, onlooker_bees=self.__onlooker_bees, best_position=best.position)
 
         return best
 

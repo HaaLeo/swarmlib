@@ -15,7 +15,7 @@ class BeeBase(Coordinate):
         Initializes a new instance of the Bee class
         """
         super().__init__(**kwargs)
-        self.__limit = kwargs.get('limit', 3)
+        self.__limit = kwargs.get('trials', 3)
         self.__lambda = kwargs.get('lambda', 1.5)
         self.__alpha = kwargs.get('alpha', 1.)
         self.__trials = 0
