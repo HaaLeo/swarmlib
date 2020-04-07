@@ -8,7 +8,7 @@
 ## Description
 
 This repository implements several swarm optimization algorithms and visualizes their (intermediate) solutions.
-To run the algorithms one can either use the command line interface or the API.
+To run the algorithms one can either use the CLI (recommended) or the API.
 Currently, the following algorithms are implemented:
 * [Firefly Algorithm](#firefly-algorithm)
 * [Cuckoo Search](#cuckoo-search)
@@ -21,7 +21,7 @@ Currently, the following algorithms are implemented:
 You can install the package with `pip` from [pypi](https://pypi.org/project/swarmlib):
 
 ```
-pip3 install swarmlib
+pip install swarmlib
 
 swarm --version
 ```
@@ -117,7 +117,7 @@ This repository also implements modified _particle swarm optimization_ that was 
 
 #### Features
 
-Enables to particle swarm optimization to one of the provided 2D functions. The algorithm tries to find the global minimum of the selected function.  
+Enables particle swarm optimization to one of the provided 2D functions. The algorithm tries to find the global minimum of the selected function.  
 
 Currently two functions can be selected:
 * [ackley](https://www.sfu.ca/~ssurjano/ackley.html)
@@ -179,15 +179,23 @@ problem.replay()
 
 ### Artificial Bee Colony
 
-TBD
+The Artificial Bee Colony (ABC) algorithm was initially proposed 2005 by Dervis Karaboga in his paper [An Idea Based on Honey Bee Swarm For Numerical Optimization](https://pdfs.semanticscholar.org/015d/f4d97ed1f541752842c49d12e429a785460b.pdf).
+In his paper Karaboga did not specify _how exactly_ new solutions shall be discovered. 
+
+Research has shown that the flight behavior of birds, fruit flies and other insects model properties of Levy flights ([Brown, Liebovitch & Glendon, 2007](https://link.springer.com/article/10.1007/s10745-006-9083-4); [Pavlyukevich, 2007](https://arxiv.org/pdf/cond-mat/0701653.pdf)). Therefore, this library's ABC implementation leverages levy flights to generate new solutions.
 
 #### Features
 
-TBD
+Enables the ABC algorithm to one of the provided 2D functions. The algorithm tries to find the global minimum of the selected function.
+
+Currently two functions can be selected:
+* [ackley](https://www.sfu.ca/~ssurjano/ackley.html)
+* [michalewicz](https://www.sfu.ca/~ssurjano/michal.html)
 
 ![ABC Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/bees.gif)
 
-TBD
+The plot shows all _employee bees_ as _red_ markers, the _onlooker bees_ are visualized as _blue_ markers. The best bees of all (previous) iterations are indicated by _yellow_ markers. When an employee bee exceeded its maximum _trials_ the bee is assigned a new random position. This is visualized by a _dark grey_ transition.
+Since the onlooker bees pick up an employee bee's position randomly visualizing their transitions confuses rather than it helps understanding the algorithm and therefore is omitted.
 
 To print all available options execute:
 

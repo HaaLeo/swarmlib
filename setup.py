@@ -41,6 +41,8 @@ setup(
     keywords=[
         'swarm',
         'swarmlib',
+        'lib',
+        'library',
         'ant',
         'colony',
         'optimization',
@@ -68,7 +70,14 @@ setup(
         'particle',
         'particles',
         'pso',
-        'PSO'
+        'PSO',
+        'artificial',
+        'bee',
+        'bees',
+        'colony',
+        'ABC',
+        'abc',
+        'heuristic'
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',

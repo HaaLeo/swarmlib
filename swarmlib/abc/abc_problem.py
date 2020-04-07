@@ -43,8 +43,7 @@ class ABCProblem():
         best = min(self.__employee_bees + self.__onlooker_bees, key=lambda bee: bee.value)
         self.__visualizer.add_data(employee_bees=self.__employee_bees, onlooker_bees=self.__onlooker_bees, best_position=best.position)
 
-        # Iterate to iteration_number+1 to generate iteration_number+1 velocities for visualization
-        for iteration in range(self.__iteration_number+1):
+        for iteration in range(self.__iteration_number):
             # Employee bee phase
             for bee in self.__employee_bees:
                 bee.explore()

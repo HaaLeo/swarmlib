@@ -72,11 +72,13 @@
             "module": "swarmlib",
             "console": "internalConsole",
             "args": [
-                "--dark",
+                // "--dark",
                 "--continuous",
                 "bees",
                 "-n",
                 "10",
+                "-t",
+                "5",
                 "14"
             ]
         }
