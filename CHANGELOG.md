@@ -3,9 +3,11 @@ All notable changes to the "swarmlib" pypi package will be documented in this fi
 This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased
-* Added the _artificial bee colony_ algorithm. After each step the intermediate solution is plotted.
 
-## 2020-02-17 -v0.7.0
+## 2020-04-07 - v0.8.0
+* **Added** the _artificial bee colony_ algorithm. After each step the intermediate solution is plotted.
+
+## 2020-02-17 - v0.7.0
 * **Added** dark mode. It is enabled via the `--dark` flag.
 * **Changed** `--continuous` and `--interval` flags. Both are now top level flags.
 * **Changed** the API of the ant colony optimization.
