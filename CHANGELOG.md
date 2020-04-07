@@ -3,21 +3,22 @@ All notable changes to the "swarmlib" pypi package will be documented in this fi
 This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased
+* Added the _artificial bee colony_ algorithm. After each step the intermediate solution is plotted.
 
-## 2019-02-17 -v0.7.0
+## 2020-02-17 -v0.7.0
 * **Added** dark mode. It is enabled via the `--dark` flag.
 * **Changed** `--continuous` and `--interval` flags. Both are now top level flags.
 * **Changed** the API of the ant colony optimization.
 * **Changed** the `tsp_file` argument to an option. Now `--tsp-file` is optional. By default the built-in burma14 problem is used.
 
-## 2019-01-25 - v0.6.2
+## 2020-01-25 - v0.6.2
 * **Changed** cuckoo search visualization: when a nest is abandoned / newly generated color its transition differently.
 * **Fixed** cuckoo search visualization: now the abandon transition is mapped to the correct nest.
 
-## 2019-01-24 - v0.6.1
+## 2020-01-24 - v0.6.1
 * **Changed** cuckoo search: Ensure each nest is assigned a cuckoo position in the update step
 
-## 2019-01-24 - v0.6.0
+## 2020-01-24 - v0.6.0
 * **Changed** the visualization of the _firefly algorithm_ and the _cuckoo search_. Now they both include velocities.
 * **Changed** the firefly algorithm including its API. Now it replays the same problem if `--continuous` is set.
 * **Changed** the `--continuous` flag. It requires no parameter anymore.
