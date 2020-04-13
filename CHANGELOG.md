@@ -4,6 +4,9 @@ This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased
 
+## 2020-04-13 - v0.8.1
+* **Fixed** a bug that caused the ACO algorithm to fail. Due to other third party packages swarmlib now requires `matplotlib<3.2.0`.
+
 ## 2020-04-07 - v0.8.0
 * **Added** the _artificial bee colony_ algorithm. After each step the intermediate solution is plotted.
 
