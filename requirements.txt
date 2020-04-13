@@ -1,4 +1,4 @@
 tsplib95>=0.3.2, <1.0.0
-matplotlib>=3.0.2, <4.0.0
+matplotlib<3.2.0
 networkx==2.1
 numpy>=1.15.4, <2.0.0
