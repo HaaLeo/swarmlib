@@ -29,7 +29,7 @@ setup(
     license='BSD 3-Clause License',
     install_requires=[
         'tsplib95>=0.3.2, <1.0.0',
-        'matplotlib>=3.0.2, <4.0.0',
+        'matplotlib<3.2.0',  # Otherwise networkx throws an exception
         'networkx==2.1',  # Required by tsplib95 0.3.2
         'numpy>=1.15.4, <2.0.0'
     ],
