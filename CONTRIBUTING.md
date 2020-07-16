@@ -58,6 +58,8 @@ If you want to contribute a new optimization algorithm ensure you opened an [iss
 
 When contributing a new algorithm you probably set up / change the following files:
 
+Please reuse common components that can be found in the [`swarmlib/util`](https://github.com/HaaLeo/swarmlib/tree/master/swarmlib/util) directory.
+There is no need to write a new visualization all over again :wink:.
 
 ```
 swarmlib
