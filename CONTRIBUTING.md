@@ -50,7 +50,7 @@ code swarmlib
 When you open the project the first time with VS Code the editor will ask you to install all recommended workspace extensions.
 Confirm that dialog and you are all set up.
 
-If you are new to VS Code and python check out the official docs to [get started]](https://code.visualstudio.com/docs/python/python-tutorial).
+If you are new to VS Code and python check out the official docs to [get started](https://code.visualstudio.com/docs/python/python-tutorial).
 
 #### Contribute a New Algorithm
 
