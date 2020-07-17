@@ -37,21 +37,24 @@ First you need to fork the repo, clone it and install all dependencies.
 I recommend you using a virtual environment for development.
 
 ```zsh
+# Clone the repository
 git@github.com:yourUserName/swarmlib.git
-cd swarmlib
 
-python3 -m venv .venv
-source .venv/bin/activate
+# Create virtual environment
+python3 -m venv swarmlib/.venv
+source swarmlib/.venv/bin/activate
 
-pip3 install -r requirements-dev.txt
+# Install dependencies
+pip3 install -r swarmlib/requirements-dev.txt
 
+# Open the project with VS Code
 code swarmlib
 ```
 
 When you open the project the first time with VS Code the editor will ask you to install all recommended workspace extensions.
 Confirm that dialog and you are all set up.
 
-If you are new to VS Code and python check out the official docs to [get started](https://code.visualstudio.com/docs/python/python-tutorial).
+If you are new to VS Code and python check out the [official documentation](https://code.visualstudio.com/docs/python/python-tutorial) to get started.
 
 #### Contribute a New Algorithm
 
