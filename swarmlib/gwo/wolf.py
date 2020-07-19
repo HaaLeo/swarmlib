@@ -30,7 +30,7 @@ class Wolf(Coordinate):
         c_1 = 2 * r_2  # Equation (3.4)
 
         d_alpha = abs(c_1 * alpha_pos - self._position)  # Equation (3.5)-part 1
-        X1 = alpha_pos - a_1 * d_alpha  # Equation (3.6)-part 1
+        X_1 = alpha_pos - a_1 * d_alpha  # Equation (3.6)-part 1
 
         r_1 = np.random.random()
         r_2 = np.random.random()
@@ -39,7 +39,7 @@ class Wolf(Coordinate):
         c_2 = 2 * r_2  # Equation (3.4)
 
         d_beta = abs(c_2 * beta_pos - self._position)  # Equation (3.5)-part 2
-        X2 = beta_pos - a_2 * d_beta  # Equation (3.6)-part 2
+        X_2 = beta_pos - a_2 * d_beta  # Equation (3.6)-part 2
 
         r_1 = np.random.random()
         r_2 = np.random.random()
@@ -48,6 +48,6 @@ class Wolf(Coordinate):
         c_3 = 2 * r_2  # Equation (3.4)
 
         d_delta = abs(c_3 * delta_pos - self._position)  # Equation (3.5)-part 3
-        X3 = delta_pos - a_3 * d_delta;  # Equation (3.5)-part 3
+        X_3 = delta_pos - a_3 * d_delta;  # Equation (3.5)-part 3
 
-        self._position = (X1 + X2 + X3) / 3  # Equation (3.7)
+        self._position = (X_1 + X_2 + X_3) / 3  # Equation (3.7)
