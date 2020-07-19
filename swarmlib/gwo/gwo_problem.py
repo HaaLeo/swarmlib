@@ -1,11 +1,13 @@
-# Nimish Verma
-import logging
+# ------------------------------------------------------------------------------------------------------
+#  Copyright (c) Leo Hanisch and contributors. All rights reserved.
+#  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.
+# ------------------------------------------------------------------------------------------------------
 
-from .wolf import Wolf
-from ..util.base_visualizer import BaseVisualizer
-from ..util.functions import FUNCTIONS
-from .visualizer import Visualizer
+import logging
 from copy import deepcopy
+from .wolf import Wolf
+from .visualizer import Visualizer
+
 
 LOGGER = logging.getLogger(__name__)
 
@@ -31,14 +33,14 @@ class GWOProblem:
     def solve(self) -> Wolf:
 
         for iter_no in range(self.__iteration_number + 1):
-            a = 2 - iter_no * ((2) / self.__iteration_number)
+            a_parameter = 2 - iter_no * ((2) / self.__iteration_number)
             # Update alpha beta delta
             self.__wolves.sort(key=lambda wolf: wolf.value)
 
             self.alpha, self.beta, self.delta = deepcopy(self.__wolves[:3])
 
             for particle in self.__wolves:
-                particle.step(a, self.alpha.position, self.beta.position, self.delta.position)
+                particle.step(a_parameter, self.alpha.position, self.beta.position, self.delta.position)
 
             # Add data for plot
             positions = [particle.position for particle in self.__wolves]
