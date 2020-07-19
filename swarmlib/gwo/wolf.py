@@ -11,9 +11,6 @@ from ..util.coordinate import Coordinate
 
 
 class Wolf(Coordinate):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
     def step(self, a_parameter, alpha_pos: Tuple[float, float], beta_pos: Tuple[float, float],
              delta_pos: Tuple[float, float]) -> None:
         """
@@ -52,6 +49,6 @@ class Wolf(Coordinate):
         c_3 = 2 * r_2  # Equation (3.4)
 
         d_delta = abs(c_3 * delta_pos - self._position)  # Equation (3.5)-part 3
-        x_3 = delta_pos - a_3 * d_delta;  # Equation (3.5)-part 3
+        x_3 = delta_pos - a_3 * d_delta  # Equation (3.5)-part 3
 
         self._position = (x_1 + x_2 + x_3) / 3  # Equation (3.7)
