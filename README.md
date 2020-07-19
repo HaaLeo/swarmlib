@@ -15,6 +15,7 @@ Currently, the following algorithms are implemented:
 * [Particle Swarm Optimization](#particle-swarm-optimization)
 * [Ant Colony Optimization](#ant-colony-optimization)
 * [Artificial Bee Colony](#artificial-bee-colony)
+* [Grey Wolf Optimization](#grey-wolf-optimization)
 
 ## Installation
 
@@ -212,5 +213,39 @@ from swarmlib import ABCProblem, FUNCTIONS
 
 problem = ABCProblem(bees=10, function=FUNCTIONS['michalewicz'])
 best_bee = problem.solve()
+problem.replay()
+```
+
+### Grey Wolf Optimization
+
+The Grey Wolf Optimization (GWO) algorithm was proposed by S. Mirjalili et  al. in the paper [Grey Wolf Optimizer](https://www.sciencedirect.com/science/article/pii/S0965997813001853?casa_token=IJMUjrkkBVkAAAAA:TIW5bZqXDqgQwD1aX-5vqsDvmf4AgWFODvWepUiZi79MgSii3MlDMXMwgMVPcQvuGlZYLKm5GA).
+The paper proposed a novel algorithm based on the hunting and the hierarchy structure in grey wolves
+
+#### Features
+
+Enables the GWO algorithm to one of the provided 2D functions. The algorithm tries to find the global minimum of the selected function.
+
+Currently two functions can be selected:
+* [ackley](https://www.sfu.ca/~ssurjano/ackley.html)
+* [michalewicz](https://www.sfu.ca/~ssurjano/michal.html)
+
+![GWO Sample](https://raw.githubusercontent.com/NimishVerma/swarmlib/master/doc/gwo.gif)
+
+
+To print all available options execute:
+
+```
+swarm wolves -h
+```
+
+#### API
+
+In addition to the cli you can also use the API:
+
+```python
+from swarmlib import GWOProblem, FUNCTIONS
+
+problem = GWOProblem(wolves=10, function=FUNCTIONS['michalewicz'])
+best_wolf = problem.solve()
 problem.replay()
 ```
