@@ -8,6 +8,7 @@ from copy import deepcopy
 from .wolf import Wolf
 from .visualizer import Visualizer
 
+# pylint: disable=too-many-instance-attributes
 
 LOGGER = logging.getLogger(__name__)
 
