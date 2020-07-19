@@ -25,7 +25,7 @@ jobs=1
 load-plugins=pylint_quotes,pylintfileheader
 
 # Option for the pylintfileheader plugin
-file-header=# ------------------------------------------------------------------------------------------------------\n#  Copyright \(c\) Leo Hanisch. All rights reserved.\n#  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.\n# ------------------------------------------------------------------------------------------------------\n
+file-header=# ------------------------------------------------------------------------------------------------------\n#  Copyright \(c\) Leo Hanisch and contributors. All rights reserved.\n#  Licensed under the BSD 3-Clause License. See LICENSE.txt in the project root for license information.\n# ------------------------------------------------------------------------------------------------------\n
 
 # Pickle collected data for later comparisons.
 persistent=yes
