@@ -1,13 +1,14 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-
+labels: bug
+assignees: ''
 ---
 
 <!-- Please fulfill the table below-->
-| Python Version | swarmlib Version |
-| -------------- | --------------- |
-|                |                 |
+| Python Version | swarmlib Version | OS |
+| -------------- | ---------------- | -- |
+|                |                  |    |
 
 # Description
 <!-- Please add a brief description of the error you are receiving here.-->
