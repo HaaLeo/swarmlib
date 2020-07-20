@@ -24,7 +24,7 @@ class GWOProblem:
             Wolf(**kwargs)
             for _ in range(kwargs['wolves'])
         ]
-        self.alpha, self.beta, self.delta = self.__wolves[:3]  # random alpha beta delta for initial coloring
+        self.__alpha, self.__beta, self.__delta = self.__wolves[:3]  # random alpha beta delta for initial coloring
         # Initialize visualizer for plotting
         positions = [wolf.position for wolf in self.__wolves]
         self.__visualizer = Visualizer(**kwargs)
