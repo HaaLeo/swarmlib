@@ -19,7 +19,7 @@ class GWOProblem:
         Initialize a new grey wolf optimization problem.
         """
 
-        self.__iteration_number = kwargs.get('iteration_number', 20)
+        self.__iteration_number = kwargs.get('iteration_number', 30)
         self.__wolves = [
             Wolf(**kwargs)
             for _ in range(kwargs['wolves'])
