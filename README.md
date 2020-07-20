@@ -229,7 +229,7 @@ Currently two functions can be selected:
 * [ackley](https://www.sfu.ca/~ssurjano/ackley.html)
 * [michalewicz](https://www.sfu.ca/~ssurjano/michal.html)
 
-![GWO Sample](https://raw.githubusercontent.com/NimishVerma/swarmlib/master/doc/gwo.gif)
+![GWO Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/gwo.gif)
 
 
 To print all available options execute:
