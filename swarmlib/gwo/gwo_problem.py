@@ -40,8 +40,8 @@ class GWOProblem:
 
             self.alpha, self.beta, self.delta = deepcopy(self.__wolves[:3])
 
-            for particle in self.__wolves:
-                particle.step(a_parameter, self.alpha.position, self.beta.position, self.delta.position)
+            for wolf in self.__wolves:
+                wolf.step(a_parameter, self.alpha.position, self.beta.position, self.delta.position)
 
             # Add data for plot
             positions = [particle.position for particle in self.__wolves]
