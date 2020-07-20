@@ -38,18 +38,18 @@ class GWOProblem:
             # Update alpha beta delta
             self.__wolves.sort(key=lambda wolf: wolf.value)
 
-            self.alpha, self.beta, self.delta = deepcopy(self.__wolves[:3])
+            self.__alpha, self.__beta, self.__delta = deepcopy(self.__wolves[:3])
 
             for wolf in self.__wolves:
-                wolf.step(a_parameter, self.alpha.position, self.beta.position, self.delta.position)
+                wolf.step(a_parameter, self.__alpha.position, self.__beta.position, self.__delta.position)
 
             # Add data for plot
             positions = [particle.position for particle in self.__wolves]
             self.__visualizer.add_data(
                 positions=positions)  # ,alpha_pos =self.alpha.position,beta_pos=self.beta.position,delta_pos=self.delta.position)
 
-        LOGGER.info('Last best solution="%s" at position="%s"', self.alpha.value, self.alpha.position)
-        return self.alpha
+        LOGGER.info('Last best solution="%s" at position="%s"', self.__alpha.value, self.__alpha.position)
+        return self.__alpha
 
     def replay(self):
         """
