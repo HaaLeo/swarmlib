@@ -13,7 +13,7 @@ from .fireflyalgorithm.main import configure_parser as firefly_parser
 from .cuckoosearch.main import configure_parser as cuckoo_parser
 from .pso.main import configure_parser as pso_parser
 from .abc.main import configure_parser as abc_parser
-
+from .gwo.main import configure_parser as gwo_parser
 from ._version import __version__
 
 logging.basicConfig(
@@ -62,7 +62,7 @@ def run_swarm():
     cuckoo_parser(sub_parsers)
     pso_parser(sub_parsers)
     abc_parser(sub_parsers)
-
+    gwo_parser(sub_parsers)
     args = vars(parser.parse_args())
     if args:
         algorithm = args.pop('func')
