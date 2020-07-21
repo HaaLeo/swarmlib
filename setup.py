@@ -77,7 +77,12 @@ setup(
         'colony',
         'ABC',
         'abc',
-        'heuristic'
+        'heuristic',
+        'grey',
+        'wolf',
+        'optimizer',
+        'gwo',
+        'GWO'
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',

@@ -81,6 +81,23 @@
                 "5",
                 "14"
             ]
+        },
+        {
+            "name": "Run: Grey Wolf Optimizer",
+            "type": "python",
+            "request": "launch",
+            "module": "swarmlib",
+            "console": "internalConsole",
+            "args": [
+                "--dark",
+                "--continuous",
+                "-i",
+                "2000",
+                "wolves",
+                "-n",
+                "30",
+                "14"
+            ]
         }
     ]
 }

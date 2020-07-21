@@ -19,11 +19,18 @@ Currently, the following algorithms are implemented:
 
 ## Installation
 
-You can install the package with `pip` from [pypi](https://pypi.org/project/swarmlib):
+You can install the package with `pip` from [pypi](https://pypi.org/project/swarmlib).
+Installing the library in a virtual environment is recommended:
 
-```
+```zsh
+# Create virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install swarmlib
 pip install swarmlib
 
+# Verify installation
 swarm --version
 ```
 
@@ -38,10 +45,14 @@ swarm --help
 ## Contribution
 
 If you found a bug or are missing a feature do not hesitate to [file an issue](https://github.com/HaaLeo/swarmlib/issues/new/choose).  
+Do not hesitate to ask questions on [gitter](https://gitter.im/HaaLeo/swarmlib).
+
 Pull Requests are welcome!
 
 ## Support
-When you like this package make sure to [star the repository](https://github.com/HaaLeo/swarmlib/stargazers). I am always looking for new ideas and feedback.  
+When you like this package make sure to [star the repository](https://github.com/HaaLeo/swarmlib/stargazers).
+I am always looking for new ideas and feedback.
+
 In addition, it is possible to [donate via paypal](https://www.paypal.me/LeoHanisch/3eur).
 
 ## Algorithms
@@ -230,7 +241,6 @@ Currently two functions can be selected:
 * [michalewicz](https://www.sfu.ca/~ssurjano/michal.html)
 
 ![GWO Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/gwo.gif)
-
 
 To print all available options execute:
 
