@@ -36,7 +36,7 @@ def configure_parser(sub_parsers):
         type=str,
         default='michalewicz',
         help='Choose the function that is used for searching the minimum.',
-        choices=['michalewicz', 'ackley'])
+        choices=[*FUNCTIONS])
     parser.add_argument(
         '-u',
         '--upper-boundary',
