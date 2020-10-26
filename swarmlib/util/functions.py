@@ -6,6 +6,8 @@
 #pylint: disable=invalid-name
 
 from functools import reduce
+import inspect
+import landscapes.single_objective
 import numpy as np
 
 
@@ -28,7 +30,12 @@ def ackley(x, a=20, b=0.2, c=2*np.pi):
     return -a*np.exp(-b*np.sqrt(s1 / n)) - np.exp(s2 / n) + a + np.exp(1)
 
 
+# Add all functions from landscapes.single_objective
 FUNCTIONS = {
-    'michalewicz': michalewicz,
-    'ackley': ackley
+    name: func
+    for (name, func) in inspect.getmembers(
+        landscapes.single_objective, inspect.isfunction
+    )
 }
+# Replace / add functions that are defined in this file
+FUNCTIONS.update({'michalewicz': michalewicz, 'ackley': ackley})
