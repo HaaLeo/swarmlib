@@ -1,3 +1,4 @@
+landscapes==0.0.10
 tsplib95>=0.3.2, <1.0.0
 matplotlib<3.2.0
 networkx==2.1
