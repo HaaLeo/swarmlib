@@ -30,9 +30,16 @@ def ackley(x, a=20, b=0.2, c=2*np.pi):
     return -a*np.exp(-b*np.sqrt(s1 / n)) - np.exp(s2 / n) + a + np.exp(1)
 
 
+# Wrapper for landscapes.single_objective functions for inputs > 1d
+def wrap_landscapes_func(landscapes_func):
+    def wrapper(x):
+        return np.apply_along_axis(func1d=landscapes_func, axis=0, arr=x)
+    return wrapper
+
+
 # Add all functions from landscapes.single_objective
 FUNCTIONS = {
-    name: func
+    name: wrap_landscapes_func(func)
     for (name, func) in inspect.getmembers(
         landscapes.single_objective, inspect.isfunction
     )
