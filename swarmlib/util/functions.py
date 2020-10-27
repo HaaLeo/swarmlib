@@ -5,8 +5,9 @@
 
 #pylint: disable=invalid-name
 
-from functools import reduce
 import inspect
+from functools import reduce
+
 import landscapes.single_objective
 import numpy as np
 
