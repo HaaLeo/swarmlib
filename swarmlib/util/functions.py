@@ -18,7 +18,7 @@ def michalewicz(x):
     def func(x):
         return np.sin(x) * np.power(np.sin((0 + 1) * np.power(x, 2) / np.pi), 2 * m)
 
-    result = reduce(lambda acc, x: acc + func(x), x, 0.)
+    result = reduce(lambda acc, x: acc + func(x), x, 0.0)
     return -result
 
 
