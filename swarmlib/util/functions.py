@@ -18,7 +18,7 @@ def michalewicz(x):
     def func(x):
         return np.sin(x) * np.power(np.sin((0 + 1) * np.power(x, 2) / np.pi), 2 * m)
 
-    result = reduce(lambda acc, x: acc + func(x), x, 0.)
+    result = reduce(lambda acc, x: acc + func(x), x, 0.0)
     return -result
 
 
@@ -44,6 +44,7 @@ FUNCTIONS = {
     for (name, func) in inspect.getmembers(
         landscapes.single_objective, inspect.isfunction
     )
+    if name not in ['colville', 'wolfe'] # Don't include 3D and 4D functions
 }
 # Replace / add functions that are defined in this file
 FUNCTIONS.update({'michalewicz': michalewicz, 'ackley': ackley})
