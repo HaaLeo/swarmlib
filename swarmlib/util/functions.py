@@ -44,6 +44,7 @@ FUNCTIONS = {
     for (name, func) in inspect.getmembers(
         landscapes.single_objective, inspect.isfunction
     )
+    if name not in ['colville', 'wolfe'] # Don't include 3D and 4D functions
 }
 # Replace / add functions that are defined in this file
 FUNCTIONS.update({'michalewicz': michalewicz, 'ackley': ackley})
