@@ -1,4 +1,4 @@
 tsplib95>=0.7.1, <1.0.0
-matplotlib<3.3.0 # Due to https://github.com/matplotlib/matplotlib/issues/18893 and artists get not rendered on macOSX (maybe related to https://github.com/matplotlib/matplotlib/issues/18451)
+matplotlib>=3.3.2, <4.0.0
 networkx>=2.5, <3.0
 numpy>=1.19.3, <2.0.0

@@ -29,7 +29,7 @@ setup(
     license='BSD 3-Clause License',
     install_requires=[
         'tsplib95>=0.7.1, <1.0.0',
-        'matplotlib<3.3.0', # Due to several issues on macOSX
+        'matplotlib>=3.3.2, <4.0.0',
         'networkx>=2.5, <3.0',
         'numpy>=1.19.3, <2.0.0'
     ],
