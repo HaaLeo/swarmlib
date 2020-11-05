@@ -69,8 +69,8 @@ class CuckooProblem:
                     nest.abandon()
 
             # Update best nest
-            current_best = min(self.__nests, key=lambda nest: nest.value)
-            if current_best.value < best_nest.value:
+            current_best = min(self.__nests)
+            if current_best < best_nest:
                 best_nest = deepcopy(current_best)
                 LOGGER.info('Iteration %i Found new best solution="%s" at position="%s"', iteration+1, best_nest.value, best_nest.position)
 

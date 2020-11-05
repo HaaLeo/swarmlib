@@ -36,7 +36,7 @@ class PSOProblem:
         for _ in range(self.__iteration_number+1):
 
             # Update global best
-            global_best_particle = min(self.__particles, key=lambda particle: particle.value)
+            global_best_particle = min(self.__particles)
 
             for particle in self.__particles:
                 particle.step(global_best_particle.position)

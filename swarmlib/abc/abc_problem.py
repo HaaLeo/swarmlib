@@ -65,8 +65,8 @@ class ABCProblem():
                 bee.reset()
 
              # Update best food source
-            current_best = min(self.__employee_bees + self.__onlooker_bees, key=lambda bee: bee.value)
-            if current_best.value < best.value:
+            current_best = min(self.__employee_bees + self.__onlooker_bees)
+            if current_best < best:
                 best = deepcopy(current_best)
                 LOGGER.info('Iteration %i Found new best solution="%s" at position="%s"', iteration+1, best.value, best.position)
 

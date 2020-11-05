@@ -59,3 +59,16 @@ class Coordinate:
     @property
     def value(self) -> float:
         return self.__value
+
+    def __eq__(self, other):
+        return self.__value == other.value
+    def __ne__(self, other):
+        return self.__value != other.value
+    def __lt__(self, other):
+        return self.__value < other.value
+    def __le__(self, other):
+        return self.__value <= other.value
+    def __gt__(self, other):
+        return self.__value > other.value
+    def __ge__(self, other):
+        return self.__value >= other.value

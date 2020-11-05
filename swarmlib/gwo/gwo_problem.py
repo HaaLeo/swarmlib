@@ -36,7 +36,7 @@ class GWOProblem:
         for iter_no in range(self.__iteration_number + 1):
             a_parameter = 2 - iter_no * ((2) / self.__iteration_number)
             # Update alpha beta delta
-            self.__wolves.sort(key=lambda wolf: wolf.value)
+            self.__wolves.sort()
 
             self.__alpha, self.__beta, self.__delta = deepcopy(self.__wolves[:3])
 
