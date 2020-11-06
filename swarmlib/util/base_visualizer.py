@@ -73,7 +73,7 @@ class BaseVisualizer:
         frames = int((self._iteration_number+1)*self.__interval/self.__frame_interval)
 
         # iteration_number+1 for initialization frame
-        animation.FuncAnimation(self._fig, self._animate, frames=frames, interval=self.__frame_interval,
+        _ = animation.FuncAnimation(self._fig, self._animate, frames=frames, interval=self.__frame_interval,
                                 blit=True, init_func=self._init, repeat=self.__continuous, fargs=[frames])
 
         plt.show()

@@ -29,10 +29,10 @@ setup(
     license='BSD 3-Clause License',
     install_requires=[
         'landscapes==0.0.10',
-        'tsplib95>=0.3.2, <1.0.0',
-        'matplotlib<3.2.0',  # Otherwise networkx throws an exception
-        'networkx==2.1',  # Required by tsplib95 0.3.2
-        'numpy>=1.15.4, <2.0.0'
+        'tsplib95>=0.7.1, <1.0.0',
+        'matplotlib>=3.3.2, <4.0.0',
+        'networkx>=2.5, <3.0',
+        'numpy>=1.19.3, <2.0.0'
     ],
     project_urls={
         'Issue Tracker': 'https://github.com/HaaLeo/swarmlib/issues',
