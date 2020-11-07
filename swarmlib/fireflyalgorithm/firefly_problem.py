@@ -7,7 +7,7 @@ from copy import deepcopy
 import logging
 
 from .firefly import Firefly
-from .visualizer import Visualizer
+from ..util.base_visualizer import BaseVisualizer
 LOGGER = logging.getLogger(__name__)
 
 
@@ -36,7 +36,7 @@ class FireflyProblem():
         ]
 
         # Initialize visualizer for plotting
-        self.__visualizer = Visualizer(**kwargs)
+        self.__visualizer = BaseVisualizer(**kwargs)
         self.__visualizer.add_data(positions=[firefly.position for firefly in self.__fireflies])
 
     def solve(self) -> Firefly:

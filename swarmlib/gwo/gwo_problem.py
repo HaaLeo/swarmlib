@@ -36,13 +36,13 @@ class GWOProblem:
 
     def solve(self) -> Wolf:
 
+        # Initialization
         best = None
-        for iter_no in range(self.__iteration_number + 1):
+        best_indices = np.argsort(self.__wolves)[:3]
+        alpha, beta, delta = [deepcopy(self.__wolves[index]) for index in best_indices]
+
+        for iter_no in range(self.__iteration_number):
             a_parameter = 2 - iter_no * ((2) / self.__iteration_number)
-            # Update alpha beta delta
-            # Avoid sorting the wolves to obtain the correct position transitions.
-            best_indices = np.argsort(self.__wolves)[:3]
-            alpha, beta, delta = [deepcopy(self.__wolves[index]) for index in best_indices]
 
             for wolf in self.__wolves:
                 wolf.step(a_parameter, alpha.position, beta.position, delta.position)
@@ -58,6 +58,10 @@ class GWOProblem:
                 positions=positions,
                 best_wolf_indices=best_indices)
 
+            # Update alpha beta delta
+            best_indices = np.argsort(self.__wolves)[:3]
+            alpha, beta, delta = [deepcopy(self.__wolves[index]) for index in best_indices]
+
         return best
 
     def replay(self):
@@ -65,5 +69,3 @@ class GWOProblem:
         Start the problems visualization.
         """
         self.__visualizer.replay()
-
-# print(GWOProblem(function=FUNCTIONS['michalewicz'], wolves=20, iteration_number=10))

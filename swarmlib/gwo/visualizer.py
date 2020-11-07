@@ -12,15 +12,13 @@ class Visualizer(BaseVisualizer):
         super().__init__(**kwargs)
         self.__best_wolf_indices = []
 
-    def replay(self):
-        self._velocities = [self._positions[index+1]-position for index, position in enumerate(self._positions[:-1])]
-        self._velocities.insert(0, np.zeros(self._positions[0].shape))
-        self._velocities.append(np.zeros(self._positions[0].shape))
-        super().replay()
-
     def add_data(self, **kwargs) -> None:
         super().add_data(**kwargs)
         self.__best_wolf_indices.append(kwargs['best_wolf_indices'])
+
+        # To show the static initial position first (without animation)
+        if len(self.__best_wolf_indices) == 1:
+            self.__best_wolf_indices.append(kwargs['best_wolf_indices'])
 
     def _animate(self, i: int, frames: int):
         self._marker_colors = np.full(len(self._positions[0][0]), self._marker_color)
