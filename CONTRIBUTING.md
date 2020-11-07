@@ -61,6 +61,7 @@ If you are new to VS Code and python check out the [official documentation](http
 
 If you want to contribute a new optimization algorithm ensure you opened an [issue](https://github.com/HaaLeo/swarmlib/issues/new?template=feature_request.md) beforehand.
 
+##### Overview
 Please reuse common components that can be found in the [`swarmlib/util`](https://github.com/HaaLeo/swarmlib/tree/master/swarmlib/util) directory.
 There is no need to write a new visualization all over again :wink:.
 
@@ -89,6 +90,52 @@ swarmlib
 
 To get started, I recommend you to take a look at the implementation of the CS, PSO, ABC algorithms.
 
+##### Programming notes
+
+:heavy_exclamation_mark: avoid sorting the coordinates list.
+This will cause the visualizer to wrongly replay position transitions.
+
+Consider the following example with two particles:
+
+The first particle _p1_ has coordinates `(0, 0)` and a value of `-1`.
+The second particle _p2_ has coordinates `(1, 1)` and a value of `0`.
+At the start of the algorithm we pass those positions to the visualizer:
+
+Now lets apply an algorithm which causes the first particle _p1_ to update its position to `(-1, -1)` with value `-0.5`.
+_p2_ now has a position `(2, 2)` with value `-2`.
+Now if we sort the particles with respect to their value _p2_ is before _p1_. 
+When we now pass those to the visualizer and calculated the velocities afterwards the visualizer will calculate wrong velocities:
+* _p2_'s first position and _p2_'s second position
+* _p1_'s first position and _p2_'s second position
+
+```python
+### Step 0
+# p1 with position (0, 0) and value 0
+# p2 with position (1, 1) and value -1
+particles = [p1, p2]
+positions = [particles.position for particle in particles]
+
+visualizer = BaseVisualizer(**kwargs)
+visualizer.add_data(positions=positions)
+
+# Algorithm is applied...
+
+### Step 2
+# p1 with position (-1, -1) and value -0.5
+# p2 with position (2, 2) and value -2
+particles.sort() # this leads to [p2, p1]
+positions = [particles.position for particle in particles]
+visualizer.add_data(positions=positions)
+
+# Now the visualizer has internal positions of 
+# [
+#   [(0, 0), (1, 1)], # Step 0
+#   [(2, 2), (-1, -1)] # Step 1
+# ]
+# If now the velocities are calculated afterwards the visualizer calculates the velocities
+# of (0, 0) -> (2, 2) and (1, 1) -> (-1, -1) which is obviously false
+visualizer.replay()
+```
 ### Functions
 
 As of release _v0.10.0_ swarmlib uses the functions supplied by [landscapes](https://github.com/nathanrooy/landscapes#readme).

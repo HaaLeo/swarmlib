@@ -22,19 +22,17 @@ class Visualizer(BaseVisualizer):
         super().add_data(**kwargs)
         # Indicates whether the nest was generated this iteration or not
         abandoned = np.array(kwargs['abandoned'])
-        self._abandon_map.append(np.array([abandoned, abandoned]))
+        self._abandon_map.append(abandoned)
 
         x_pos, y_pos = kwargs['best_position']
         self.__best_nests[0].append(x_pos)
         self.__best_nests[1].append(y_pos)
 
-    def replay(self):
-        # Prepare velocities before starting replay
-        self._velocities = [self._positions[index+1]-position for index, position in enumerate(self._positions[:-1])]
-        self._velocities.insert(0, np.zeros(self._positions[0].shape))
-        self._velocities.append(np.zeros(self._positions[0].shape))
-
-        super().replay()
+        # Initially add data twice
+        if len(self.__best_nests) == 1:
+            self._abandon_map.append(abandoned)
+            self.__best_nests[0].append(x_pos)
+            self.__best_nests[1].append(y_pos)
 
     def _init(self):
         base_artists = super()._init()
@@ -45,7 +43,7 @@ class Visualizer(BaseVisualizer):
     def _animate(self, i: int, frames: int):
         if self._index < len(self._abandon_map)-1:
             # Color the velocity different when the nest is abandoned
-            self._vel_color = np.where(self._abandon_map[self._index+1].sum(axis=0), '#373737', '#CFCFCF')
+            self._vel_color = np.where(self._abandon_map[self._index+1], '#373737', '#CFCFCF')
         base_artists = super()._animate(i, frames)
 
         self.__best_nests_artist.set_data(self.__best_nests[0][:self._index+1], self.__best_nests[1][:self._index+1])

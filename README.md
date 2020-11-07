@@ -233,6 +233,11 @@ Any of [landscapes'](https://github.com/nathanrooy/landscapes#readme) 2D or nD f
 
 ![GWO Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/gwo.gif)
 
+The plot indicates the alpha, beta and delta wolves by the following colors:
+* Alpha: green
+* Beta: yellow
+* Delta: brown
+
 To print all available options execute:
 
 ```

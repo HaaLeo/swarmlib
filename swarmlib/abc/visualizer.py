@@ -33,21 +33,19 @@ class Visualizer(BaseVisualizer):
         # Handle onlooker_positions
         onlooker_positions = [bee.position for bee in kwargs['onlooker_bees']]
 
-        x_pos, y_pos = zip(*onlooker_positions)
-        self.__onlooker_bee_positions.append(np.array([np.array(x_pos), np.array(y_pos)]))
+        self.__onlooker_bee_positions.append(np.transpose(onlooker_positions))
 
         # Handle best bee
         x_pos, y_pos = kwargs['best_position']
         self.__best_bees[0].append(x_pos)
         self.__best_bees[1].append(y_pos)
 
-    def replay(self):
-        # Add velocities for employee bee
-        self._velocities = [self._positions[index+1]-position for index, position in enumerate(self._positions[:-1])]
-        self._velocities.insert(0, np.zeros(self._positions[0].shape))
-        self._velocities.append(np.zeros(self._positions[0].shape))
-
-        super().replay()
+        # Initially add data twice
+        if len(self.__onlooker_bee_positions) == 1:
+            self._abandon_map.append(np.array(employee_reset))
+            self.__onlooker_bee_positions.append(np.transpose(onlooker_positions))
+            self.__best_bees[0].append(x_pos)
+            self.__best_bees[1].append(y_pos)
 
     def _init(self):
         base_artists = super()._init()

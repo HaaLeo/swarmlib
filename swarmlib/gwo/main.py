@@ -56,7 +56,7 @@ def configure_parser(sub_parsers):
         '-n',
         '--iteration-number',
         type=int,
-        default=30,
+        default=10,
         help='Number of iterations to execute (default 30)')
     parser.add_argument(
         'wolves',

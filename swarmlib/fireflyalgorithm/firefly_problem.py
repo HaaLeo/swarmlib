@@ -7,7 +7,7 @@ from copy import deepcopy
 import logging
 
 from .firefly import Firefly
-from .visualizer import Visualizer
+from ..util.base_visualizer import BaseVisualizer
 LOGGER = logging.getLogger(__name__)
 
 
@@ -36,7 +36,7 @@ class FireflyProblem():
         ]
 
         # Initialize visualizer for plotting
-        self.__visualizer = Visualizer(**kwargs)
+        self.__visualizer = BaseVisualizer(**kwargs)
         self.__visualizer.add_data(positions=[firefly.position for firefly in self.__fireflies])
 
     def solve(self) -> Firefly:
@@ -45,11 +45,11 @@ class FireflyProblem():
         for _ in range(self.__iteration_number):
             for i in self.__fireflies:
                 for j in self.__fireflies:
-                    if j.value < i.value:
+                    if j < i:
                         i.move_towards(j.position)
 
-            current_best = min(self.__fireflies, key=lambda firefly: firefly.value)
-            if not best or current_best.value < best.value:
+            current_best = min(self.__fireflies)
+            if not best or current_best < best:
                 best = deepcopy(current_best)
 
             LOGGER.info('Current best value: %s, Overall best value: %s', current_best.value, best.value)

@@ -3,6 +3,7 @@
         "ms-python.python",
         "streetsidesoftware.code-spell-checker",
         "njpwerner.autodocstring",
-        "gruntfuggly.todo-tree"
+        "gruntfuggly.todo-tree",
+        "bierner.color-info"
     ]
 }

@@ -26,25 +26,22 @@ class PSOProblem:
 
         # Initialize visualizer for plotting
         positions = [particle.position for particle in self.__particles]
-        velocities = [particle.velocity for particle in self.__particles]
         self.__visualizer = BaseVisualizer(**kwargs)
-        self.__visualizer.add_data(positions=positions, velocities=velocities)
+        self.__visualizer.add_data(positions=positions)
 
     def solve(self) -> Particle:
-        # Iterate to iteration_number+1 to generate iteration_number+1 velocities for visualization
         # And also update global_best_particle
-        for _ in range(self.__iteration_number+1):
+        for _ in range(self.__iteration_number):
 
             # Update global best
-            global_best_particle = min(self.__particles, key=lambda particle: particle.value)
+            global_best_particle = min(self.__particles)
 
             for particle in self.__particles:
                 particle.step(global_best_particle.position)
 
             # Add data for plot
             positions = [particle.position for particle in self.__particles]
-            velocities = [particle.velocity for particle in self.__particles]
-            self.__visualizer.add_data(positions=positions, velocities=velocities)
+            self.__visualizer.add_data(positions=positions)
 
         LOGGER.info('Last best solution="%s" at position="%s"', global_best_particle.value, global_best_particle.position)
         return global_best_particle

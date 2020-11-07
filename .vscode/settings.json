@@ -33,5 +33,11 @@
     "files.trimFinalNewlines": true,
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
-    "python.pythonPath": ".venv/bin/python"
+    "python.pythonPath": ".venv/bin/python",
+    "colorInfo.languages": [
+        {
+            "selector": "python",
+            "colors": "hex"
+        }
+    ]
 }
