@@ -24,7 +24,7 @@ class Visualizer(BaseVisualizer):
 
     def _animate(self, i: int, frames: int):
         self._marker_colors = np.full(len(self._positions[0][0]), self._marker_color)
-        for index, color in zip(self.__best_wolf_indices[self._index], ['#f535aa', '#39ff14', '#ffff33']):
+        for index, color in zip(self.__best_wolf_indices[self._index], ['#39ff14', '#ffff33', '#654321']):
             self._marker_colors[index] = color
 
         return super()._animate(i, frames)

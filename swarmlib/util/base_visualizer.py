@@ -27,7 +27,7 @@ class BaseVisualizer:
         self._marker_size = 0
         self._index = 0
         self._vel_color = '#CFCFCF'
-        self._marker_color = '#0078D7' if self._dark else 'red'
+        self._marker_color = '#0078D7' if self._dark else '#FF0000'
         self._marker_colors = np.empty(0)
 
         self._positions = []
