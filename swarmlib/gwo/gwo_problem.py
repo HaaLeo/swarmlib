@@ -5,6 +5,7 @@
 
 import logging
 from copy import deepcopy
+import numpy as np
 from .wolf import Wolf
 from .visualizer import Visualizer
 
@@ -24,32 +25,40 @@ class GWOProblem:
             Wolf(**kwargs)
             for _ in range(kwargs['wolves'])
         ]
-        self.__alpha, self.__beta, self.__delta = self.__wolves[:3]  # random alpha beta delta for initial coloring
+
         # Initialize visualizer for plotting
+        best_indices = np.argsort(self.__wolves)[:3]
         positions = [wolf.position for wolf in self.__wolves]
         self.__visualizer = Visualizer(**kwargs)
         self.__visualizer.add_data(
-            positions=positions)  # ,alpha_pos =self.alpha.position,beta_pos=self.beta.position,delta_pos=self.delta.position)
+            positions=positions,
+            best_wolf_indices=best_indices)
 
     def solve(self) -> Wolf:
 
+        best = None
         for iter_no in range(self.__iteration_number + 1):
             a_parameter = 2 - iter_no * ((2) / self.__iteration_number)
             # Update alpha beta delta
-            self.__wolves.sort()
-
-            self.__alpha, self.__beta, self.__delta = deepcopy(self.__wolves[:3])
+            # Avoid sorting the wolves to obtain the correct position transitions.
+            best_indices = np.argsort(self.__wolves)[:3]
+            alpha, beta, delta = [deepcopy(self.__wolves[index]) for index in best_indices]
 
             for wolf in self.__wolves:
-                wolf.step(a_parameter, self.__alpha.position, self.__beta.position, self.__delta.position)
+                wolf.step(a_parameter, alpha.position, beta.position, delta.position)
+
+            if not best or alpha < best:
+                best = deepcopy(alpha)
+
+            LOGGER.info('Current best value: %s, Overall best value: %s', alpha.value, best.value)
 
             # Add data for plot
-            positions = [particle.position for particle in self.__wolves]
+            positions = [wolf.position for wolf in self.__wolves]
             self.__visualizer.add_data(
-                positions=positions)  # ,alpha_pos =self.alpha.position,beta_pos=self.beta.position,delta_pos=self.delta.position)
+                positions=positions,
+                best_wolf_indices=best_indices)
 
-        LOGGER.info('Last best solution="%s" at position="%s"', self.__alpha.value, self.__alpha.position)
-        return self.__alpha
+        return best
 
     def replay(self):
         """

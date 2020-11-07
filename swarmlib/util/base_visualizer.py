@@ -27,6 +27,8 @@ class BaseVisualizer:
         self._marker_size = 0
         self._index = 0
         self._vel_color = '#CFCFCF'
+        self._marker_color = '#0078D7' if self._dark else 'red'
+        self._marker_colors = np.empty(0)
 
         self._positions = []
         self._velocities = []
@@ -47,7 +49,7 @@ class BaseVisualizer:
         self._fig.colorbar(cs)
 
         # Plot all particle pos
-        self.__particles = ax.scatter([], [], marker='o', color=['#0078D7' if self._dark else 'red'], zorder=2)
+        self.__particles = ax.scatter([], [], marker='o', zorder=2)
 
         # Plot all velocities
         self.__particle_vel = ax.quiver([], [], [], [], angles='xy', scale_units='xy', scale=1)
@@ -83,7 +85,7 @@ class BaseVisualizer:
         Init function for animations. Only used for FuncAnimation
         """
         self.__particles.set_offsets([[]])
-
+        self._marker_colors = np.full(len(self._positions[0][0]), self._marker_color) # Create array of correct size
         self.__particle_vel.X = []
         self.__particle_vel.Y = []
         self.__particle_vel.XY = []
@@ -121,6 +123,7 @@ class BaseVisualizer:
         # Update the particle position
         self.__particles.set_offsets(np.transpose([pos_x_scaled, pos_y_scaled]))
         self.__particles.set_sizes([self._marker_size**2]*len(x_data))
+        self.__particles.set_color(self._marker_colors)
 
         # Update the velocities
         self.__particle_vel = ax.quiver(pos_x_scaled, pos_y_scaled, vel_x_scaled, vel_y_scaled, angles='xy', scale_units='xy', scale=1, color=self._vel_color, width=self._marker_size*0.001)
