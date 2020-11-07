@@ -4,8 +4,11 @@ This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased
 
+## 2020-11-07 - v0.10.0
+* **Added** [landscapes](https://github.com/nathanrooy/landscapes#readme) as a dependency to enable more benchmark functions ([#15](https://github.com/HaaLeo/swarmlib/issues/15)). Contributed by Alex F ([@alxfmpl](https://github.com/alxfmpl)). Thanks a lot 🚀.
+
 ## 2020-07-21 - v0.9.0
-* Added _grey wolf optimizer_ ([#12](https://github.com/HaaLeo/swarmlib/issues/12)). Perform the grey wolf optimization algorithm on one of the selected 2D-functions. Contributed by Nimish Verma ([@NimishVerma](https://github.com/NimishVerma)) and greatly appreciated 🚀.
+* **Added** _grey wolf optimizer_ ([#12](https://github.com/HaaLeo/swarmlib/issues/12)). Perform the grey wolf optimization algorithm on one of the selected 2D-functions. Contributed by Nimish Verma ([@NimishVerma](https://github.com/NimishVerma)) and greatly appreciated 🚀.
 
 ## 2020-04-13 - v0.8.1
 * **Fixed** a bug that caused the ACO algorithm to fail. Due to other third party packages swarmlib now requires `matplotlib<3.2.0`.

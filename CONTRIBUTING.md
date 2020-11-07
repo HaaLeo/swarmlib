@@ -9,6 +9,7 @@ The following is a set of guidelines for contributing to the [`swarmlib`](https:
   * [Reporting Bugs](#reporting-bugs)
   * [Suggesting Enhancements](#suggesting-enhancements)
   * [Code Contribution](#code-contribution)
+  * [Functions](#functions)
   * [Pull Requests](#pull-requests)
 
 ## How Can I Contribute?
@@ -135,6 +136,11 @@ visualizer.add_data(positions=positions)
 # of (0, 0) -> (2, 2) and (1, 1) -> (-1, -1) which is obviously false
 visualizer.replay()
 ```
+### Functions
+
+As of release _v0.10.0_ swarmlib uses the functions supplied by [landscapes](https://github.com/nathanrooy/landscapes#readme).
+If you are missing a benchmark function please open an issue in the landscapes repository. 
+Once the function is implemented there we are happy to update swarmlib's landscapes dependency.
 
 ### Pull Requests
 

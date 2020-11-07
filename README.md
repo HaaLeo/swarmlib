@@ -64,11 +64,9 @@ The implementation was part of the course [Natural computing for learning and op
 
 #### Features
 
-Enables to apply the firefly algorithm to one of the provided 2D functions. The algorithm tries to find the global minimum of the selected function.  
-
-Currently two functions can be selected:
-* [ackley](https://www.sfu.ca/~ssurjano/ackley.html)
-* [michalewicz](https://www.sfu.ca/~ssurjano/michal.html)
+Enables to apply the firefly algorithm to a 2D function.
+The algorithm tries to find the global minimum of the selected function.
+Any of [landscapes'](https://github.com/nathanrooy/landscapes#readme) 2D or nD functions can be selected.
 
 ![firefly algorithm](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/fireflies.gif)
 
@@ -96,11 +94,9 @@ This repository also implements the _cuckoo search_ that was introduced by Xin-S
 
 #### Features
 
-Enables to apply cuckoo search to one of the provided 2D functions. The algorithm tries to find the global minimum of the selected function.  
-
-Currently two functions can be selected:
-* [ackley](https://www.sfu.ca/~ssurjano/ackley.html)
-* [michalewicz](https://www.sfu.ca/~ssurjano/michal.html)
+Enables to apply cuckoo search to one of the provided 2D functions.
+The algorithm tries to find the global minimum of the selected function.
+Any of [landscapes'](https://github.com/nathanrooy/landscapes#readme) 2D or nD functions can be selected.
 
 ![cukoo search](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/cuckoos.gif)
 
@@ -129,11 +125,9 @@ This repository also implements modified _particle swarm optimization_ that was 
 
 #### Features
 
-Enables particle swarm optimization to one of the provided 2D functions. The algorithm tries to find the global minimum of the selected function.  
-
-Currently two functions can be selected:
-* [ackley](https://www.sfu.ca/~ssurjano/ackley.html)
-* [michalewicz](https://www.sfu.ca/~ssurjano/michal.html)
+Enables particle swarm optimization to one of the provided 2D functions.
+The algorithm tries to find the global minimum of the selected function.
+Any of [landscapes'](https://github.com/nathanrooy/landscapes#readme) 2D or nD functions can be selected.
 
 ![particle swarm optimization](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/particles.gif)
 
@@ -198,11 +192,10 @@ Research has shown that the flight behavior of birds, fruit flies and other inse
 
 #### Features
 
-Enables the ABC algorithm to one of the provided 2D functions. The algorithm tries to find the global minimum of the selected function.
+Enables the ABC algorithm to one of the provided 2D functions.
+The algorithm tries to find the global minimum of the selected function.
+Any of [landscapes'](https://github.com/nathanrooy/landscapes#readme) 2D or nD functions can be selected.
 
-Currently two functions can be selected:
-* [ackley](https://www.sfu.ca/~ssurjano/ackley.html)
-* [michalewicz](https://www.sfu.ca/~ssurjano/michal.html)
 
 ![ABC Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/bees.gif)
 
@@ -234,11 +227,9 @@ The paper proposed a novel algorithm based on the hunting and the hierarchy stru
 
 #### Features
 
-Enables the GWO algorithm to one of the provided 2D functions. The algorithm tries to find the global minimum of the selected function.
-
-Currently two functions can be selected:
-* [ackley](https://www.sfu.ca/~ssurjano/ackley.html)
-* [michalewicz](https://www.sfu.ca/~ssurjano/michal.html)
+Enables the GWO algorithm to one of the provided 2D functions.
+The algorithm tries to find the global minimum of the selected function.
+Any of [landscapes'](https://github.com/nathanrooy/landscapes#readme) 2D or nD functions can be selected.
 
 ![GWO Sample](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/gwo.gif)
 
