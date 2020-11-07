@@ -3,6 +3,8 @@ All notable changes to the "swarmlib" pypi package will be documented in this fi
 This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased
+* **Added** visualization of the _alpha_, _beta_ and _delta_ wolves for the grey wolf optimizer ([#14](https://github.com/HaaLeo/swarmlib/issues/14)).
+* **Changed** the visualization. Now the initial as well as the end-position are shown unanimated.
 
 ## 2020-11-07 - v0.10.0
 * **Added** [landscapes](https://github.com/nathanrooy/landscapes#readme) as a dependency to enable more benchmark functions ([#15](https://github.com/HaaLeo/swarmlib/issues/15)). Contributed by Alex F ([@alxfmpl](https://github.com/alxfmpl)). Thanks a lot 🚀.
