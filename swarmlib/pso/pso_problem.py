@@ -9,25 +9,27 @@ import logging
 
 from .particle import Particle
 from ..util.base_visualizer import BaseVisualizer
+from ..util.problem_base import ProblemBase
+
 LOGGER = logging.getLogger(__name__)
 
 
-class PSOProblem:
+class PSOProblem(ProblemBase):
     def __init__(self, **kwargs):
         """
         Initialize a new particle swarm optimization problem.
         """
-
+        super().__init__(**kwargs)
         self.__iteration_number = kwargs['iteration_number']
         self.__particles = [
-            Particle(**kwargs)
+            Particle(**kwargs, bit_generator=self._random)
             for _ in range(kwargs['particles'])
         ]
 
         # Initialize visualizer for plotting
         positions = [particle.position for particle in self.__particles]
-        self.__visualizer = BaseVisualizer(**kwargs)
-        self.__visualizer.add_data(positions=positions)
+        self._visualizer = BaseVisualizer(**kwargs)
+        self._visualizer.add_data(positions=positions)
 
     def solve(self) -> Particle:
         # And also update global_best_particle
@@ -41,13 +43,7 @@ class PSOProblem:
 
             # Add data for plot
             positions = [particle.position for particle in self.__particles]
-            self.__visualizer.add_data(positions=positions)
+            self._visualizer.add_data(positions=positions)
 
         LOGGER.info('Last best solution="%s" at position="%s"', global_best_particle.value, global_best_particle.position)
         return global_best_particle
-
-    def replay(self):
-        """
-        Start the problems visualization.
-        """
-        self.__visualizer.replay()

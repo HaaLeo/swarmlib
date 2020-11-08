@@ -8,29 +8,31 @@ from copy import deepcopy
 import numpy as np
 from .wolf import Wolf
 from .visualizer import Visualizer
+from ..util.problem_base import ProblemBase
 
 # pylint: disable=too-many-instance-attributes
 
 LOGGER = logging.getLogger(__name__)
 
 
-class GWOProblem:
+class GWOProblem(ProblemBase):
     def __init__(self, **kwargs):
         """
         Initialize a new grey wolf optimization problem.
         """
+        super().__init__(**kwargs)
 
         self.__iteration_number = kwargs.get('iteration_number', 30)
         self.__wolves = [
-            Wolf(**kwargs)
+            Wolf(**kwargs, bit_generator=self._random)
             for _ in range(kwargs['wolves'])
         ]
 
         # Initialize visualizer for plotting
         best_indices = np.argsort(self.__wolves)[:3]
         positions = [wolf.position for wolf in self.__wolves]
-        self.__visualizer = Visualizer(**kwargs)
-        self.__visualizer.add_data(
+        self._visualizer = Visualizer(**kwargs)
+        self._visualizer.add_data(
             positions=positions,
             best_wolf_indices=best_indices)
 
@@ -54,7 +56,7 @@ class GWOProblem:
 
             # Add data for plot
             positions = [wolf.position for wolf in self.__wolves]
-            self.__visualizer.add_data(
+            self._visualizer.add_data(
                 positions=positions,
                 best_wolf_indices=best_indices)
 
@@ -63,9 +65,3 @@ class GWOProblem:
             alpha, beta, delta = [deepcopy(self.__wolves[index]) for index in best_indices]
 
         return best
-
-    def replay(self):
-        """
-        Start the problems visualization.
-        """
-        self.__visualizer.replay()

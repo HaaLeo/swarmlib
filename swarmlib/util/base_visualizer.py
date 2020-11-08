@@ -10,10 +10,11 @@ from matplotlib import animation
 from matplotlib.cm import get_cmap
 import numpy as np
 
+from .visualizer_base import VisualizerBase
 # pylint:disable=too-many-locals,too-many-instance-attributes,invalid-name
 
 
-class BaseVisualizer:
+class BaseVisualizer(VisualizerBase):
     def __init__(self, **kwargs):
         self.__lower_boundary = kwargs.get('lower_boundary', 0.)
         self.__upper_boundary = kwargs.get('upper_boundary', 4.)
@@ -73,7 +74,7 @@ class BaseVisualizer:
         # Calculate at time t the velocity for step t-1
         self._velocities.append(self._positions[-1] - self._positions[-2])
 
-    def replay(self):
+    def replay(self, **kwargs):
         # Overwrite last and first velocities with zeroes
         self._velocities.append(np.zeros(self._velocities[-1].shape))
 

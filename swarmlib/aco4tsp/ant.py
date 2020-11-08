@@ -5,15 +5,14 @@
 
 import logging
 from threading import Thread
-import random
+import numpy as np
 from .local_2_opt import run_2opt
-
 LOGGER = logging.getLogger(__name__)
 # pylint: disable=attribute-defined-outside-init,too-many-instance-attributes,too-many-arguments,super-init-not-called,invalid-name
 
 
 class Ant(Thread):
-    def __init__(self, start_node, graph, alpha, beta, Q, use_2_opt):
+    def __init__(self, start_node, graph, alpha, beta, Q, use_2_opt, random):
         """Initializes a new instance of the Ant class."""
         self.initialize(start_node)
         self.graph = graph
@@ -22,6 +21,7 @@ class Ant(Thread):
         self.__beta = beta
         self.__Q = Q
         self.__use_2_opt = use_2_opt
+        self._random = random
 
     def initialize(self, start_node):
         Thread.__init__(self)
@@ -71,10 +71,10 @@ class Ant(Thread):
 
         if overall_attractiveness == 0:
             self.selected_edge = (self.__current_node,
-                                  random.choice(list(attractiveness.keys())))
+                                  self._random.choice(list(attractiveness.keys())))
         else:
-            choice = random.choices(list(attractiveness.keys()), list(attractiveness.values()))
-            self.selected_edge = (self.__current_node, choice[0])
+            choice = self._random.choice(list(attractiveness.keys()), p=list(attractiveness.values())/np.sum(list(attractiveness.values())))
+            self.selected_edge = (self.__current_node, choice)
 
         LOGGER.debug('Selected edge: %s', (self.selected_edge,))
 

@@ -6,20 +6,20 @@
 import inspect
 import logging
 from os import path
-import random
 
 import tsplib95
 
 from .ant import Ant
 from .tsp_graph import Graph
 from .visualizer import Visualizer
+from ..util.problem_base import ProblemBase
 
 LOGGER = logging.getLogger(__name__)
 
 # pylint: disable=too-many-instance-attributes,invalid-name,too-many-locals
 
 
-class ACOProblem():
+class ACOProblem(ProblemBase):
     def __init__(self, **kwargs):
         """Initializes a new instance of the `ACOProblem` class.
 
@@ -36,7 +36,7 @@ class ACOProblem():
         `plot_interval` -- Plot intermediate result after this amount of iterations (default 10) \r
         `two_opt`       -- Additionally use 2-opt local search after each iteration (default true)
         """
-
+        super().__init__(**kwargs)
         self.__ant_number = kwargs['ant_number']  # Number of ants
         tsp_file = kwargs.get('tsp_file', path.join(path.abspath(path.dirname(inspect.getfile(inspect.currentframe()))), 'resources/burma14.tsp'))
         self.__graph = Graph(tsplib95.load_problem(tsp_file))
@@ -49,7 +49,7 @@ class ACOProblem():
         self.__num_iterations = kwargs.get('iteration_number', 10)  # Number of iterations
         self.__use_2_opt = kwargs.get('two_opt', False)
 
-        self.__visualizer = Visualizer(**kwargs)
+        self._visualizer = Visualizer(**kwargs)
 
     def solve(self):
         """
@@ -62,8 +62,8 @@ class ACOProblem():
 
         # Create ants
         ants = [
-            Ant(random.choice(self.__graph.get_nodes()),
-                self.__graph, self.__alpha, self.__beta, self.__Q, self.__use_2_opt)
+            Ant(self._random.choice(self.__graph.get_nodes()),
+                self.__graph, self.__alpha, self.__beta, self.__Q, self.__use_2_opt, self._random)
             for _ in range(self.__ant_number)
         ]
 
@@ -96,9 +96,9 @@ class ACOProblem():
                                 shortest_distance, best_path)
 
                 # Reset ants' thread
-                ant.initialize(random.choice(self.__graph.get_nodes()))
+                ant.initialize(self._random.choice(self.__graph.get_nodes()))
 
-            self.__visualizer.add_data(
+            self._visualizer.add_data(
                 best_path=best_path,
                 pheromone_map={edge: self.__graph.get_edge_pheromone(edge) for edge in edges}
             )
@@ -111,4 +111,4 @@ class ACOProblem():
         """
         Play the visualization of the problem
         """
-        self.__visualizer.replay(self.__graph)
+        self._visualizer.replay(graph=self.__graph)

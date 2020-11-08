@@ -20,7 +20,7 @@ class Particle(Coordinate):
         self.__max_velocity = kwargs.get('maximum_velocity', 2)
 
         # Randomly create a new particle properties
-        self.__velocity = np.random.uniform(-1, 1, size=2)
+        self.__velocity = self._random.uniform(-1, 1, size=2)
         self.__clip_velocity()
 
         # Local best
@@ -41,8 +41,8 @@ class Particle(Coordinate):
         """
 
         # Calculate velocity
-        cognitive_velocity = self.__c_1 * np.random.random_sample(size=2) * (self.__best_position - self._position)
-        social_velocity = self.__c_2 * np.random.random_sample(size=2) * (global_best_pos - self._position)
+        cognitive_velocity = self.__c_1 * self._random.random(size=2) * (self.__best_position - self._position)
+        social_velocity = self.__c_2 * self._random.random(size=2) * (global_best_pos - self._position)
         self.__velocity = self.__w * self.__velocity + cognitive_velocity + social_velocity
 
         # Clip velocity

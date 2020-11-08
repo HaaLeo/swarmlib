@@ -8,10 +8,12 @@ import logging
 
 from .firefly import Firefly
 from ..util.base_visualizer import BaseVisualizer
+from ..util.problem_base import ProblemBase
+
 LOGGER = logging.getLogger(__name__)
 
 
-class FireflyProblem():
+class FireflyProblem(ProblemBase):
     def __init__(self, **kwargs):
         """Initializes a new instance of the `FireflyProblem` class.
 
@@ -27,17 +29,17 @@ class FireflyProblem():
         `interval`         -- Interval between two animation frames in ms (default 500)  \r
         `continuous`       -- Indicates whether the algorithm should run continuously (default False)
         """
-
+        super().__init__(**kwargs)
         self.__iteration_number = kwargs.get('iteration_number', 10)
         # Create fireflies
         self.__fireflies = [
-            Firefly(**kwargs)
+            Firefly(**kwargs, bit_generator=self._random)
             for _ in range(kwargs['firefly_number'])
         ]
 
         # Initialize visualizer for plotting
-        self.__visualizer = BaseVisualizer(**kwargs)
-        self.__visualizer.add_data(positions=[firefly.position for firefly in self.__fireflies])
+        self._visualizer = BaseVisualizer(**kwargs)
+        self._visualizer.add_data(positions=[firefly.position for firefly in self.__fireflies])
 
     def solve(self) -> Firefly:
         """Solve the problem."""
@@ -58,10 +60,6 @@ class FireflyProblem():
             current_best.random_walk(0.1)
 
             # Add data for visualization
-            self.__visualizer.add_data(positions=[firefly.position for firefly in self.__fireflies])
+            self._visualizer.add_data(positions=[firefly.position for firefly in self.__fireflies])
 
         return best
-
-    def replay(self):
-        """Play the visualization"""
-        self.__visualizer.replay()

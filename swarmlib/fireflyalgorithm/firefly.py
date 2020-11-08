@@ -5,7 +5,6 @@
 
 # pylint: disable=too-many-arguments
 
-import random
 import numpy as np
 
 from ..util.coordinate import Coordinate
@@ -26,7 +25,7 @@ class Firefly(Coordinate):
         # update position
         self._position = self._position + \
             self.__beta*np.exp(-self.__gamma*(distance**2)) * (better_position-self._position) + \
-            self.__alpha*(random.uniform(0, 1)-0.5)
+            self.__alpha*(self._random.uniform(0, 1)-0.5)
 
     def random_walk(self, area):
-        self._position = np.array([np.random.uniform(cord-area, cord+area) for cord in self._position])
+        self._position = np.array([self._random.uniform(cord-area, cord+area) for cord in self._position])

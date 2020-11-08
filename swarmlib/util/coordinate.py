@@ -7,7 +7,6 @@ from typing import Tuple
 
 import numpy as np
 
-
 class Coordinate:
     def __init__(self, **kwargs) -> None:
         """
@@ -15,6 +14,7 @@ class Coordinate:
         """
         self.__lower_boundary = kwargs.get('lower_boundary', 0.)
         self.__upper_boundary = kwargs.get('upper_boundary', 4.)
+        self._random = kwargs['bit_generator']
         self._function = kwargs['function']
 
         self.__value = None
@@ -25,7 +25,7 @@ class Coordinate:
         """
         Initialize a new random position and its value
         """
-        self._position = np.random.uniform(self.__lower_boundary, self.__upper_boundary, 2)
+        self._position = self._random.uniform(self.__lower_boundary, self.__upper_boundary, 2)
 
     @property
     def position(self) -> Tuple[float, float]:

@@ -5,7 +5,6 @@
 
 # pylint: disable-msg=too-many-locals
 from typing import Tuple
-import numpy as np
 
 from ..util.coordinate import Coordinate
 
@@ -24,8 +23,8 @@ class Wolf(Coordinate):
         """
 
 
-        r_1 = np.random.random()  # r_1 is a random number in [0,1]
-        r_2 = np.random.random()  # r_2 is a random number in [0,1]
+        r_1 = self._random.random()  # r_1 is a random number in [0,1]
+        r_2 = self._random.random()  # r_2 is a random number in [0,1]
 
         a_1 = 2 * a_parameter * r_1 - a_parameter  # Equation (3.3)
         c_1 = 2 * r_2  # Equation (3.4)
@@ -33,8 +32,8 @@ class Wolf(Coordinate):
         d_alpha = abs(c_1 * alpha_pos - self._position)  # Equation (3.5)-part 1
         x_1 = alpha_pos - a_1 * d_alpha  # Equation (3.6)-part 1
 
-        r_1 = np.random.random()
-        r_2 = np.random.random()
+        r_1 = self._random.random()
+        r_2 = self._random.random()
 
         a_2 = 2 * a_parameter * r_1 - a_parameter # Equation (3.3)
         c_2 = 2 * r_2  # Equation (3.4)
@@ -42,8 +41,8 @@ class Wolf(Coordinate):
         d_beta = abs(c_2 * beta_pos - self._position)  # Equation (3.5)-part 2
         x_2 = beta_pos - a_2 * d_beta  # Equation (3.6)-part 2
 
-        r_1 = np.random.random()
-        r_2 = np.random.random()
+        r_1 = self._random.random()
+        r_2 = self._random.random()
 
         a_3 = 2 * a_parameter * r_1 - a_parameter  # Equation (3.3)
         c_3 = 2 * r_2  # Equation (3.4)

@@ -60,7 +60,7 @@ class Visualizer(BaseVisualizer):
             self._vel_color = np.where(self._abandon_map[self._index+1], '#373737', '#CFCFCF')
         base_artists = super()._animate(i, frames)
 
-        self.__best_bees_artist.set_data(self.__best_bees[0][:self._index+1], self.__best_bees[1][:self._index+1])
+        self.__best_bees_artist.set_data(self.__best_bees[0][:self._index], self.__best_bees[1][:self._index])
         self.__best_bees_artist.set_markersize(self._marker_size)
 
         x_pos, y_pos = self.__onlooker_bee_positions[self._index]

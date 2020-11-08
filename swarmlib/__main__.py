@@ -52,6 +52,12 @@ def run_swarm():
         default=False,
         action='store_true',
         help='Enable the algorithm to run continuously (default off)')
+    parser.add_argument(
+        '-s',
+        '--seed',
+        default=None,
+        type=int,
+        help='Used to set the initial state of the random bit generator (default None)')
 
     sub_parsers = parser.add_subparsers(
         title='Commands',

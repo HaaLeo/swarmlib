@@ -5,6 +5,7 @@ This project follows [semantic versioning](https://semver.org/).
 ## Unreleased
 * **Added** visualization of the _alpha_, _beta_ and _delta_ wolves for the grey wolf optimizer ([#14](https://github.com/HaaLeo/swarmlib/issues/14)).
 * **Changed** the visualization. Now the initial as well as the end-position are shown unanimated.
+* **Added** Top level `--seed` flag which allows to set the random bit generators initial state for reproducible results.
 
 ## 2020-11-07 - v0.10.0
 * **Added** [landscapes](https://github.com/nathanrooy/landscapes#readme) as a dependency to enable more benchmark functions ([#15](https://github.com/HaaLeo/swarmlib/issues/15)). Contributed by Alex F ([@alxfmpl](https://github.com/alxfmpl)). Thanks a lot 🚀.

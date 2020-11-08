@@ -7,8 +7,9 @@ from matplotlib import animation
 from matplotlib import pyplot as plt
 import networkx as nx
 
+from ..util.visualizer_base import VisualizerBase
 
-class Visualizer:  # pylint:disable=too-many-instance-attributes
+class Visualizer(VisualizerBase):  # pylint:disable=too-many-instance-attributes
     def __init__(self, **kwargs):
         self.__interval = kwargs.get('interval', 1000)
         self.__continuous = kwargs.get('continuous', False)
@@ -49,8 +50,9 @@ class Visualizer:  # pylint:disable=too-many-instance-attributes
             for edge in pheromone_map.keys()
         ])
 
-    def replay(self, graph):
+    def replay(self, **kwargs):
         """Draw the given graph."""
+        graph = kwargs['graph']
         fig, ax = plt.subplots(frameon=False)  # pylint:disable=invalid-name
         plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
 

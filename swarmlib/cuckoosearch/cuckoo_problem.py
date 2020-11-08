@@ -12,16 +12,17 @@ import numpy as np
 
 from .nest import Nest
 from ..util import levy_flight as cuckoo
+from ..util.problem_base import ProblemBase
 from .visualizer import Visualizer
 LOGGER = logging.getLogger(__name__)
 
 
-class CuckooProblem:
+class CuckooProblem(ProblemBase):
     def __init__(self, **kwargs):
         """
         Initialize a new cuckoo search problem.
         """
-
+        super().__init__(**kwargs)
         self.__upper_boundary = kwargs.get('upper_boundary', 4.)
         self.__lower_boundary = kwargs.get('lower_boundary', 0.)
         self.__alpha = kwargs.pop('alpha', 1)
@@ -31,20 +32,20 @@ class CuckooProblem:
 
         self.__function = kwargs['function']
         self.__nests = [
-            Nest(lower_boundary=self.__lower_boundary, upper_boundary=self.__upper_boundary, function=self.__function)
+            Nest(lower_boundary=self.__lower_boundary, upper_boundary=self.__upper_boundary, function=self.__function, bit_generator=self._random)
             for _ in range(kwargs['nests'])
         ]
 
         # Initialize visualizer for plotting
         kwargs['iteration_number'] = self.__max_generations
-        self.__visualizer = Visualizer(**kwargs)
+        self._visualizer = Visualizer(**kwargs)
 
     def solve(self) -> Nest:
         nest_indices = np.array(range(len(self.__nests)))
         best_nest = deepcopy(min(self.__nests, key=lambda nest: nest.value))
 
         positions, abandoned = zip(*[(nest.position, nest.abandoned) for nest in self.__nests])
-        self.__visualizer.add_data(positions=positions, best_position=best_nest.position, abandoned=abandoned)
+        self._visualizer.add_data(positions=positions, best_position=best_nest.position, abandoned=abandoned)
 
         LOGGER.info('Iteration 0 best solution="%s" at position="%s"', best_nest.value, best_nest.position)
 
@@ -57,7 +58,7 @@ class CuckooProblem:
             ]
 
             # Randomly select nests to be updated
-            np.random.shuffle(nest_indices)
+            self._random.shuffle(nest_indices)
 
             # Update nests
             for index, pos in zip(nest_indices, new_cuckoo_pos):
@@ -65,7 +66,7 @@ class CuckooProblem:
 
             # Abandon nests randomly considering p_a
             for nest in self.__nests:
-                if np.random.random_sample() < self.__p_a:
+                if self._random.random() < self.__p_a:
                     nest.abandon()
 
             # Update best nest
@@ -76,13 +77,7 @@ class CuckooProblem:
 
             # Add data for plot
             positions, abandoned = zip(*[(nest.position, nest.abandoned) for nest in self.__nests])
-            self.__visualizer.add_data(positions=positions, best_position=current_best.position, abandoned=abandoned)
+            self._visualizer.add_data(positions=positions, best_position=current_best.position, abandoned=abandoned)
 
         LOGGER.info('Last best solution="%s" at position="%s"', best_nest.value, best_nest.position)
         return best_nest
-
-    def replay(self):
-        """
-        Start the problems visualization.
-        """
-        self.__visualizer.replay()
