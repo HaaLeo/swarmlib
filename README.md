@@ -6,8 +6,8 @@
 [![Chat on Gitter](https://img.shields.io/badge/-chat%20on%20gitter-753a88.svg?logo=gitter&style=flat-square&labelColor=grey)](https://gitter.im/HaaLeo/swarmlib) [![Donate](https://img.shields.io/badge/☕️-Buy%20Me%20a%20Coffee-blue.svg?&style=flat-square)](https://www.paypal.me/LeoHanisch/3eur)
 
 <p align="middle">
-  <img src="https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/light_mode.png" width="40%" />
-  <img src="https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/dark_mode.png" width="40%" /> 
+  <img src="https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/light_mode.png" width="49%" />
+  <img src="https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/dark_mode.png" width="49%" /> 
 </p>
 
 ## Description
