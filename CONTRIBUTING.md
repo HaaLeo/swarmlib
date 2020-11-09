@@ -11,6 +11,7 @@ The following is a set of guidelines for contributing to the [`swarmlib`](https:
   * [Code Contribution](#code-contribution)
   * [Functions](#functions)
   * [Pull Requests](#pull-requests)
+  * [Documentation](#documentation)
 
 ## How Can I Contribute?
 
@@ -152,3 +153,9 @@ Please follow these steps to have your contribution considered:
 
 After your pull request was submitted and the status checks pass I will review your changes.
 I may ask you to complete additional design work, tests, or other changes before your pull request can be ultimately accepted.
+
+### Documentation
+
+Swarmlib organizes its documentation in a [wiki](https://github.com/HaaLeo/swarmlib/wiki).
+Please ensure you opened an issue beforehand which provides an explanation of the changes you want to propose to the wiki.
+After that you can fork the wiki and [submit a pull request](#pull-requests) to address that issue.
