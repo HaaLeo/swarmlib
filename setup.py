@@ -24,7 +24,6 @@ setup(
     description='Implementation and visualization of different swarm optimization algorithms.',
     long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
-    url='https://github.com/HaaLeo/swarmlib',
     author='Leo Hanisch',
     license='BSD 3-Clause License',
     install_requires=[
@@ -35,6 +34,8 @@ setup(
         'numpy>=1.19.3, <2.0.0'
     ],
     project_urls={
+        'Documentation': 'https://github.com/HaaLeo/swarmlib/wiki',
+        'Source': 'https://github.com/HaaLeo/swarmlib',
         'Issue Tracker': 'https://github.com/HaaLeo/swarmlib/issues',
         'Changelog': 'https://github.com/HaaLeo/swarmlib/blob/master/CHANGELOG.md#changelog'
     },

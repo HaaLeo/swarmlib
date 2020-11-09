@@ -49,6 +49,11 @@ Do not hesitate to ask questions on [gitter](https://gitter.im/HaaLeo/swarmlib).
 
 Pull Requests are welcome!
 
+## Wiki
+
+Swarmlib's wiki includes all of the documentation and more details to each algorithm.
+It can be found [here](https://github.com/HaaLeo/swarmlib/wiki).
+
 ## Support
 When you like this package make sure to [star the repository](https://github.com/HaaLeo/swarmlib/stargazers).
 I am always looking for new ideas and feedback.
