@@ -21,15 +21,17 @@ jobs:
       python: 3.7
     - stage: test
       python: 3.8
+    - stage: test
+      python: 3.9
 
     - stage: bundle
       script:
         - cp {ThirdPartyNotices.txt,LICENSE.txt} ./swarmlib
         - python setup.py sdist bdist_wheel
-      python: 3.8
+      python: 3.9
 
     - stage: deploy
-      python: 3.8
+      python: 3.9
       before_deploy:
         - cp {ThirdPartyNotices.txt,LICENSE.txt} ./swarmlib
         - python setup.py sdist bdist_wheel
