@@ -103,7 +103,7 @@ setup(
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Education',
         'Topic :: Scientific/Engineering',
-        'Topic :: Scientific/Engineering:: Artificial Intelligence',
+        'Topic :: Scientific/Engineering :: Artificial Intelligence',
         'Topic :: Scientific/Engineering :: Bio-Informatics',
         'Topic :: Scientific/Engineering :: Information Analysis',
         'Topic :: Scientific/Engineering :: Mathematics',
