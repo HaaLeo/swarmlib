@@ -68,7 +68,6 @@
             "console": "internalConsole",
             "args": [
                 "--dark",
-                "-h",
                 "--continuous",
                 "--seed",
                 "1",
