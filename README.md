@@ -27,8 +27,8 @@ Installing the library in a virtual environment is recommended:
 python3 -m venv .venv
 source .venv/bin/activate
 
-# Install swarmlib
-pip install swarmlib
+# Install the latest version of swarmlib
+pip install --upgrade swarmlib
 
 # Verify installation
 swarm --version
