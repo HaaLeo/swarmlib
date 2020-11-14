@@ -1,0 +1,2 @@
+# Ensure python files are checked out with LF lineendings
+*.py text eol=lf

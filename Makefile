@@ -18,7 +18,7 @@ lint:  ## Lint
 
 .PHONY: bundle
 bundle: ## Bundle swarmlib
-	cp {ThirdPartyNotices.txt,LICENSE.txt} ./swarmlib
+	cp ThirdPartyNotices.txt LICENSE.txt swarmlib
 	python setup.py sdist bdist_wheel
 	twine check dist/*
 	rm swarmlib/ThirdPartyNotices.txt swarmlib/LICENSE.txt
