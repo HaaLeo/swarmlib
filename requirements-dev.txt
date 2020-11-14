@@ -1,5 +1,10 @@
 -r requirements.txt
 
+pytest
+pytest-describe
+pytest-spec
+pytest-cov
+autopep8
 pylint
 pylint-quotes
 pylintfileheader
