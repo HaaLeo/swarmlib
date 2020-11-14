@@ -65,6 +65,6 @@ jobs:
           make install
           make bundle
       - name: Publish package
-        uses: pypa/gh-action-pypi-publish@master
+        uses: pypa/gh-action-pypi-publish@v1.4.1
         with:
           password: ${{ secrets.PYPI_TOKEN }}
