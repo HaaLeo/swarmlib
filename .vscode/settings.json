@@ -24,6 +24,7 @@
         "pylint",
         "pypi",
         "pyplot",
+        "pytest",
         "qsize",
         "swarmlib",
         "wfunc"
@@ -33,11 +34,15 @@
     "files.trimFinalNewlines": true,
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
+    "python.testing.pytestEnabled": true,
     "python.pythonPath": ".venv/bin/python",
     "colorInfo.languages": [
         {
             "selector": "python",
             "colors": "hex"
         }
-    ]
+    ],
+    "files.associations": {
+        ".pylintrc": "ini"
+    }
 }

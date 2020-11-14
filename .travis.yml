@@ -11,7 +11,9 @@ stages:
 install:
   - pip install -r requirements-dev.txt
 
-script: pylint swarmlib
+script:
+  - pylint swarmlib tests
+  - pytest tests
 
 jobs:
   include:
