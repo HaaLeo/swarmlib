@@ -2,8 +2,6 @@ name: Lint, Test, Bundle and Deploy
 
 on:
   push:
-    branches:
-      - "*"
   release:
     types:
       - published
