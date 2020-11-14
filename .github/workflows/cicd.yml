@@ -1,0 +1,72 @@
+name: Lint, Test, Bundle and Deploy
+
+on:
+  push:
+    branches:
+      - "*"
+  release:
+    types:
+      - published
+
+jobs:
+  lint-test-bundle:
+    name: Lint, test andd bundle on ${{ matrix.os }} with python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        python:
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v2
+      - name: Setup python ${{ matrix.python }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install Dependencies
+        run: make install
+      - name: Run Linter
+        run: make lint
+      - name: Run Unit Tests
+        run: make test
+      - name: Bundle Package
+        run: make bundle
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.xml
+          flags: unittests
+          name: Coverage for ${{ matrix.os }} with python ${{ matrix.python }}
+
+  publish:
+    name: Publish Github Action
+    needs:
+      - lint-test-bundle
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Prepare for publish
+        run: |
+          make install
+          make bundle
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.PYPI_TOKEN }}
