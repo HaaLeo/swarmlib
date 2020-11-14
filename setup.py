@@ -37,7 +37,9 @@ setup(
         'Documentation': 'https://github.com/HaaLeo/swarmlib/wiki',
         'Source': 'https://github.com/HaaLeo/swarmlib',
         'Issue Tracker': 'https://github.com/HaaLeo/swarmlib/issues',
-        'Changelog': 'https://github.com/HaaLeo/swarmlib/blob/master/CHANGELOG.md#changelog'
+        'Changelog': 'https://github.com/HaaLeo/swarmlib/blob/master/CHANGELOG.md#changelog',
+        'Funding': 'https://github.com/sponsors/HaaLeo',
+        'gitter.im': 'https://gitter.im/HaaLeo/swarmlib'
     },
     python_requires='>=3.6',
     keywords=[
