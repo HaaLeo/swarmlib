@@ -8,6 +8,12 @@ install:  ## Install dependencies
 	python -m pip install --upgrade pip
 	pip install -r requirements-dev.txt
 
+.PHONY: install-bundle
+install-bundle: ## Install the locally packaged swarmlib bundle (wheel)
+	python -m pip install --upgrade pip
+	pip install `find dist -iname '*.whl'`
+	swarm --version
+
 .PHONY: test
 test:  ## Run tests
 	pytest tests
