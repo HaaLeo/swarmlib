@@ -3,6 +3,7 @@ All notable changes to the "swarmlib" pypi package will be documented in this fi
 This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased
+* **Added** top level flag `--log-level` to set swarmlib's verbosity ([#29](https://github.com/HaaLeo/swarmlib/issues/29)). It can be one of `debug`, `info`, `warning`, `error`, `critical`. Contributed by Nikos Koutsovasilis ([@nkoutsov](https://github.com/nkoutsov)) and happily accepted 🚀.
 
 ## 2020-11-10 - v0.11.0
 * **Added** visualization of the _alpha_, _beta_ and _delta_ wolves for the grey wolf optimizer ([#14](https://github.com/HaaLeo/swarmlib/issues/14)).
