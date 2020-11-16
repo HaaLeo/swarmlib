@@ -58,6 +58,11 @@ def run_swarm():
         default=None,
         type=int,
         help='Used to set the initial state of the random bit generator (default None)')
+    parser.add_argument(
+        '--log-level',
+        default='info',
+        choices=['debug', 'info', 'warning', 'error', 'critical'],
+        help='Set the log level (default info)')
 
     sub_parsers = parser.add_subparsers(
         title='Commands',
@@ -72,6 +77,9 @@ def run_swarm():
     args = vars(parser.parse_args())
     if args:
         algorithm = args.pop('func')
+        loglevel = args.pop('log_level', 'INFO')
+        level = getattr(logging, loglevel.upper())
+        logging.getLogger().setLevel(level)
         algorithm(args)
     else:
         parser.print_usage()
