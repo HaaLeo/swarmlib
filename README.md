@@ -57,3 +57,7 @@ When you like this package make sure to [star the repository](https://github.com
 I am always looking for new ideas and feedback.
 
 In addition, it is possible to sponsor this project via [PayPal](https://www.paypal.me/LeoHanisch/3eur) or [GitHub sponsors](https://github.com/sponsors/HaaLeo).
+
+## Example
+
+![Particle Swarm Optimization](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/example.gif)
