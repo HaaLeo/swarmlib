@@ -2,6 +2,9 @@ name: Lint, Test, Bundle and Deploy
 
 on:
   push:
+  pull_request:
+    branches:
+      - master
   release:
     types:
       - published
