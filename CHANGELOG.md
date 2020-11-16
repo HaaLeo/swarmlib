@@ -3,6 +3,8 @@ All notable changes to the "swarmlib" pypi package will be documented in this fi
 This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased
+
+## 2020-11-16 - v0.12.0
 * **Added** top level flag `--log-level` to set swarmlib's verbosity ([#29](https://github.com/HaaLeo/swarmlib/issues/29)). It can be one of `debug`, `info`, `warning`, `error`, `critical`. Contributed by Nikos Koutsovasilis ([@nkoutsov](https://github.com/nkoutsov)) and happily accepted 🚀.
 
 ## 2020-11-10 - v0.11.0
