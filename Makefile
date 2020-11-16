@@ -11,7 +11,7 @@ install:  ## Install dependencies
 .PHONY: install-bundle
 install-bundle: ## Install the locally packaged swarmlib bundle (wheel)
 	python -m pip install --upgrade pip
-	pip install `find dist -iname '*.whl'`
+	pip install --upgrade `find dist -iname '*.whl'`
 	swarm --version
 
 .PHONY: test

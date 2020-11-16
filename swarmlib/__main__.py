@@ -16,13 +16,6 @@ from .abc.main import configure_parser as abc_parser
 from .gwo.main import configure_parser as gwo_parser
 from ._version import __version__
 
-logging.basicConfig(
-    format='%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s',
-    stream=sys.stdout,
-    level=logging.INFO)
-
-LOGGER = logging.getLogger(__name__)
-
 
 def run_swarm():
     parser = argparse.ArgumentParser(
@@ -77,9 +70,13 @@ def run_swarm():
     gwo_parser(sub_parsers)
     args = vars(parser.parse_args())
     if args:
-        loglevel = args.pop('log_level')
-        level = getattr(logging, loglevel.upper())
-        logging.getLogger().setLevel(level)
+        log_level = args.pop('log_level')
+        level = getattr(logging, log_level.upper())
+        logging.basicConfig(
+            format=f'%(asctime)s{" [%(threadName)-12.12s] [%(module)-12.12s]" if log_level == "debug" else ""} [%(levelname)-5.5s]  %(message)s',
+            stream=sys.stdout,
+            level=logging.INFO) # Set overall level to info
+        logging.getLogger(__package__).setLevel(level) # Set the level for swarmlib components
 
         algorithm = args.pop('func')
         algorithm(args)
