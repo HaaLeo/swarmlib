@@ -60,4 +60,4 @@ In addition, it is possible to sponsor this project via [PayPal](https://www.pay
 
 ## Example
 
-![Particle Swarm Optimization](https://raw.githubusercontent.com/HaaLeo/swarmlib/master/doc/example.gif)
+![Particle Swarm Optimization](https://cdn.jsdelivr.net/gh/HaaLeo/swarmlib@master/doc/example.gif)
