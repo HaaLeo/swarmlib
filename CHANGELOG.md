@@ -4,6 +4,9 @@ This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased
 
+## 2020-11-17 - v0.12.1
+* **Fixed** swarmlib's appearance on [pypi](https://pypi.org/project/swarmlib). Now the gif is render correctly.
+
 ## 2020-11-16 - v0.12.0
 * **Added** top level flag `--log-level` to set swarmlib's verbosity ([#29](https://github.com/HaaLeo/swarmlib/issues/29)). It can be one of `debug`, `info`, `warning`, `error`, `critical`. Contributed by Nikos Koutsovasilis ([@nkoutsov](https://github.com/nkoutsov)) and happily accepted 🚀.
 
