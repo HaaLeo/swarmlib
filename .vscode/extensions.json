@@ -4,6 +4,7 @@
         "streetsidesoftware.code-spell-checker",
         "njpwerner.autodocstring",
         "gruntfuggly.todo-tree",
-        "bierner.color-info"
+        "bierner.color-info",
+        "ms-python.vscode-pylance"
     ]
 }

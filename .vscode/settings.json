@@ -26,6 +26,7 @@
         "pyplot",
         "pytest",
         "qsize",
+        "rastrigin",
         "swarmlib",
         "wfunc"
     ],
