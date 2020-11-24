@@ -8,12 +8,14 @@ import sys
 import argparse
 
 
-from .aco4tsp.main import configure_parser as aco_parser
-from .fireflyalgorithm.main import configure_parser as firefly_parser
-from .cuckoosearch.main import configure_parser as cuckoo_parser
-from .pso.main import configure_parser as pso_parser
-from .abc.main import configure_parser as abc_parser
-from .gwo.main import configure_parser as gwo_parser
+from .aco4tsp.main import configure_parser as add_aco_parser
+from .fireflyalgorithm.main import configure_parser as add_firefly_parser
+from .cuckoosearch.main import configure_parser as add_cuckoo_parser
+from .pso.main import configure_parser as add_pso_parser
+from .abc.main import configure_parser as add_abc_parser
+from .gwo.main import configure_parser as add_gwo_parser
+from .woa.main import configure_parser as add_woa_parser
+
 from ._version import __version__
 
 
@@ -62,13 +64,15 @@ def run_swarm():
         title='Commands',
         description='Valid commands',
         help='Choose the algorithm to execute')
-    aco_parser(sub_parsers)
-    firefly_parser(sub_parsers)
-    cuckoo_parser(sub_parsers)
-    pso_parser(sub_parsers)
-    abc_parser(sub_parsers)
-    gwo_parser(sub_parsers)
+    add_aco_parser(sub_parsers)
+    add_firefly_parser(sub_parsers)
+    add_cuckoo_parser(sub_parsers)
+    add_pso_parser(sub_parsers)
+    add_abc_parser(sub_parsers)
+    add_gwo_parser(sub_parsers)
+    add_woa_parser(sub_parsers)
     args = vars(parser.parse_args())
+
     if args:
         log_level = args.pop('log_level')
         level = getattr(logging, log_level.upper())

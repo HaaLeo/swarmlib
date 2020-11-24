@@ -57,14 +57,14 @@ def configure_parser(sub_parsers):
         '-n',
         '--iteration-number',
         type=int,
-        default=30,
-        help='Number of iterations to execute (default 30)')
+        default=10,
+        help='Number of iterations to execute (default 10)')
     parser.add_argument(
         '-a',
         '--a',
         type=float,
-        default=2.,
-        help='Controls the search\'s spread. (default 2)')
+        default=1.,
+        help='Controls the search\'s spread. (default 1)')
     parser.add_argument(
         '-b',
         '--b',

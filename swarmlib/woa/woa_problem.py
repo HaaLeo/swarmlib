@@ -6,6 +6,9 @@
 # pylint: disable=too-many-instance-attributes
 
 import logging
+from copy import deepcopy
+
+import numpy as np
 
 from .whale import Whale
 from ..util.base_visualizer import BaseVisualizer
@@ -32,19 +35,21 @@ class WOAProblem(ProblemBase):
         self._visualizer.add_data(positions=positions)
 
     def solve(self) -> Whale:
-        global_best_whale = min(self.__whales)
+        global_best_whale = None
 
-        # And also update global_best_particle
+        # And also update global_best_whale
         for _ in range(self.__iteration_number):
 
             # Update global best
-            global_best_whale = min(self.__whales)
+            global_best_whale = np.amin(self.__whales)
 
-            for particle in self.__whales:
-                particle.step(global_best_whale.position)
+            random_whales = deepcopy(self._random.choice(self.__whales, size=len(self.__whales)))
+            for whale, random_whale in zip(self.__whales, random_whales):
+                whale.step(global_best_whale, random_whale)
 
             # Add data for plot
             self._visualizer.add_data(positions=[particle.position for particle in self.__whales])
 
+        global_best_whale = np.amin(self.__whales)
         LOGGER.info('Last best solution="%s" at position="%s"', global_best_whale.value, global_best_whale.position)
         return global_best_whale
