@@ -17,6 +17,7 @@
         "ioff",
         "isabs",
         "michalewicz",
+        "ndarray",
         "networkx",
         "numpy",
         "optimisation",
