@@ -116,6 +116,23 @@
                 "10",
                 "14"
             ]
+        },
+        {
+            "name": "Run: Whale Optimization Algorithm",
+            "type": "python",
+            "request": "launch",
+            "module": "swarmlib",
+            "console": "internalConsole",
+            "args": [
+                // "--dark",
+                "--continuous",
+                "--seed",
+                "3",
+                "whales",
+                "-a",
+                "0.9",
+                "20"
+            ]
         }
     ]
 }

@@ -17,6 +17,7 @@
         "ioff",
         "isabs",
         "michalewicz",
+        "ndarray",
         "networkx",
         "numpy",
         "optimisation",
@@ -26,6 +27,7 @@
         "pyplot",
         "pytest",
         "qsize",
+        "rastrigin",
         "swarmlib",
         "wfunc"
     ],
@@ -35,6 +37,10 @@
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
     "python.testing.pytestEnabled": true,
+    "python.languageServer": "Pylance",
+    "python.testing.pytestArgs": [
+        "--no-cov"
+    ],
     "python.pythonPath": ".venv/bin/python",
     "colorInfo.languages": [
         {

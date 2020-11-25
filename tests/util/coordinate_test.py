@@ -4,8 +4,6 @@
 # ------------------------------------------------------------------------------------------------------
 
 import numpy as np
-
-
 import pytest
 
 from swarmlib.util.coordinate import Coordinate
