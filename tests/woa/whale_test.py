@@ -87,15 +87,16 @@ def describe_coordinate():
                     iteration_number=10)
                 random = Whale(
                     function=test_func,
-                    bit_generator=np.random.default_rng(5),
+                    bit_generator=np.random.default_rng(2),
                     iteration_number=10)
                 test_object = Whale(
                     function=test_func,
-                    bit_generator=np.random.default_rng(6),  # rng with start 6 triggers searching
+                    bit_generator=np.random.default_rng(0),  # rng with start 0 triggers searching (in combination with a=1)
                     iteration_number=10,
-                    a=0.1)
+                    lower_boundary=-1,
+                    a=1)
 
                 test_object.step(best, random)
 
-                np.testing.assert_array_equal(test_object.position, [2.188891315456896, 1.2323537380871505])
-                np.testing.assert_equal(test_object.value, 3.4212450535440464)
+                np.testing.assert_array_equal(test_object.position, [3.634068919497446, -0.4827071779367993])
+                np.testing.assert_equal(test_object.value, 3.1513617415606463)
