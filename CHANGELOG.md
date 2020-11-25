@@ -3,8 +3,14 @@ All notable changes to the "swarmlib" pypi package will be documented in this fi
 This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased
+
+[All Changes](https://github.com/HaaLeo/swarmlib/compare/v0.13.0...master)
+
+## 2020-11-25 - [v0.13.0](https://github.com/HaaLeo/swarmlib/tree/v0.13.0)
 * **Added** the _whale optimization algorithm_. After each step the solutions are plotted.
 * **Fixed** the upload of release artifacts. Now the bundled pypi packages are added as release artifacts again.
+
+[All Changes](https://github.com/HaaLeo/swarmlib/compare/v0.12.1...v0.13.0)
 
 ## 2020-11-17 - [v0.12.1](https://github.com/HaaLeo/swarmlib/tree/v0.12.1)
 * **Fixed** swarmlib's appearance on [pypi](https://pypi.org/project/swarmlib). Now the gif is render correctly.
