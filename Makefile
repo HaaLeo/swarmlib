@@ -6,7 +6,7 @@ help:  ## Show this help.
 .PHONY: install
 install:  ## Install dependencies
 	python -m pip install --upgrade pip
-	pip install -r requirements-dev.txt
+	pip install --upgrade --requirement requirements-dev.txt
 
 .PHONY: install-bundle
 install-bundle: ## Install the locally packaged swarmlib bundle (wheel)
