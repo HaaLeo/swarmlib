@@ -70,23 +70,22 @@ When contributing a new algorithm you probably set up / change the following fil
 
 ```
 swarmlib
-|
-|- swarmlib
-|    |- your_awesome_new_algorithm
-|    |   |- __init__.py
-|    |   |- main.py                        // Provide the argument parser for the algorithm
-|    |   |- problem.py                     // Implement the algorithm here similar to PSO etc. Main work will be done here.
-|    |   |- animal.py                      // Optional: Subclass of coordinate.py to add additional functions if needed
-|    |   |- visualizer.py                  // Optional: Subclass of base_visualizer.py if any additional functions are needed
-|    |- __init__.py                        // import problem for easier API access
-|    |- __main__.py                        // Register the argument parser for the algorithm
-|    |- _version.py                        // Update the version according to semantic versioning
-|- swarmlib_test
-|    |- your_awesome_new_algorithm_test    // I greatly appreciate any first unit test using `pytest` ❤️🙏🏼
-|        |- ...
-|- setup.py                                // Add new keywords for the new algorithm
-|- README.md                               // Extend readme with a brief introduction of the algorithm
-|- CHANGELOG.md                            // Briefly state all relevant changes that will shipped with the next release
+    |- swarmlib
+    |    |- your_awesome_new_algorithm
+    |    |    |- __init__.py
+    |    |    |- main.py                       // Provide the argument parser for the algorithm
+    |    |    |- problem.py                    // Implement the algorithm here similar to PSO etc. Main work will be done here.
+    |    |    |- animal.py                     // Optional: Subclass of coordinate.py to add additional functions if needed
+    |    |    |- visualizer.py                 // Optional: Subclass of base_visualizer.py if any additional functions are needed
+    |    |- __init__.py                        // import problem for easier API access
+    |    |- __main__.py                        // Register the argument parser for the algorithm
+    |    |- _version.py                        // Update the version according to semantic versioning
+    |- tests
+    |    |- your_awesome_new_algorithm_test    // Unit-Test the major components of your algorithm here (like the WOA does).
+    |         |- ...
+    |- setup.py                                // Add new keywords for the new algorithm
+    |- README.md                               // Extend readme with a brief introduction of the algorithm
+    |- CHANGELOG.md                            // Briefly state all relevant changes that will shipped with the next release
 ```
 
 To get started, I recommend you to take a look at the implementation of the CS, PSO, ABC algorithms.
