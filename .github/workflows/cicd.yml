@@ -92,6 +92,35 @@ jobs:
         with:
           name: swarmlib@${{ github.sha }}
           path: dist
+      - name: Get Release Parameters
+        id: getParameters
+        run: |
+          upload_url=$(curl -sL https://api.github.com/repos/${{github.repository}}/releases/latest?access_token=${{ secrets.GITHUB_TOKEN }} | jq -r '.upload_url')
+          tarball_name=$(find ${{ steps.download.outputs.download-path }} -type f -name '*.tar.gz' -exec basename {} ';')
+          wheel_name=$(find ${{ steps.download.outputs.download-path }} -type f -name '*.whl' -exec basename {} ';')
+          echo ::set-output name=upload_url::$upload_url
+          echo ::set-output name=tarball_name::$tarball_name
+          echo ::set-output name=wheel_name::$wheel_name
+      - name: Upload Release Asset (Tarball)
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.getParameters.outputs.upload_url }}
+          asset_path: ${{ steps.download.outputs.download-path }}/${{steps.getParameters.outputs.tarball_name}}
+          asset_name: ${{steps.getParameters.outputs.tarball_name}}
+          asset_content_type: application/x-gzip
+      - name: Upload Release Asset (Wheel)
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.getParameters.outputs.upload_url }}
+          asset_path: ${{ steps.download.outputs.download-path }}/${{steps.getParameters.outputs.wheel_name}}
+          asset_name: ${{steps.getParameters.outputs.wheel_name}}
+          asset_content_type: application/zip
       - name: Publish package
         uses: pypa/gh-action-pypi-publish@v1.4.1
         with:

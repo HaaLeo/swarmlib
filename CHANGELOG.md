@@ -3,6 +3,8 @@ All notable changes to the "swarmlib" pypi package will be documented in this fi
 This project follows [semantic versioning](https://semver.org/).
 
 ## Unreleased
+* **Added** the _whale optimization algorithm_. After each step the solutions are plotted.
+* **Fixed** the upload of release artifacts. Now the bundled pypi packages are added as release artifacts again.
 
 ## 2020-11-17 - v0.12.1
 * **Fixed** swarmlib's appearance on [pypi](https://pypi.org/project/swarmlib). Now the gif is render correctly.
