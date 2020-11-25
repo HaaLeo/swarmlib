@@ -50,12 +50,12 @@ def describe_coordinate():
                     function=test_func,
                     bit_generator=np.random.default_rng(3),  # rng with start 3 triggers attacking
                     iteration_number=10,
-                    b=-2)
+                    b=-1)
                 # rng with start 3 triggers attacking
                 test_object.step(best, random)
 
-                np.testing.assert_array_equal(test_object.position, [1.1907864197778455, 2.291688488648443])
-                np.testing.assert_equal(test_object.value, 3.4824749084262887)
+                np.testing.assert_array_equal(test_object.position, [0.4808914501845343, 1.494525117648736])
+                np.testing.assert_equal(test_object.value, 1.9754165678332702)
 
         def describe_encircle_prey():
             def updates_position_correctly(test_object, test_func):
