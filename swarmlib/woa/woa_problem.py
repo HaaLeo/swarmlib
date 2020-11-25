@@ -20,7 +20,7 @@ LOGGER = logging.getLogger(__name__)
 class WOAProblem(ProblemBase):
     def __init__(self, **kwargs):
         """
-        Initialize a new particle swarm optimization problem.
+        Initialize a new whale optimization algorithm problem.
         """
         super().__init__(**kwargs)
         self.__iteration_number = kwargs['iteration_number']
@@ -29,9 +29,9 @@ class WOAProblem(ProblemBase):
             for _ in range(kwargs['whales'])
         ]
 
-        # Initialize visualizer for plotting
-        positions = [particle.position for particle in self.__whales]
         self._visualizer = BaseVisualizer(**kwargs)
+        # Initialize visualizer for plotting
+        positions = [whale.position for whale in self.__whales]
         self._visualizer.add_data(positions=positions)
 
     def solve(self) -> Whale:
@@ -48,7 +48,7 @@ class WOAProblem(ProblemBase):
                 whale.step(global_best_whale, random_whale)
 
             # Add data for plot
-            self._visualizer.add_data(positions=[particle.position for particle in self.__whales])
+            self._visualizer.add_data(positions=[whale.position for whale in self.__whales])
 
         global_best_whale = np.amin(self.__whales)
         LOGGER.info('Last best solution="%s" at position="%s"', global_best_whale.value, global_best_whale.position)

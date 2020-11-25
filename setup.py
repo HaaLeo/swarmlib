@@ -86,7 +86,11 @@ setup(
         'wolf',
         'optimizer',
         'gwo',
-        'GWO'
+        'GWO',
+        'whale',
+        'whales',
+        'WOA',
+        'woa'
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
