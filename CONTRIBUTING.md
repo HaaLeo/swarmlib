@@ -47,7 +47,7 @@ python3 -m venv swarmlib/.venv
 source swarmlib/.venv/bin/activate
 
 # Install dependencies
-pip3 install -r swarmlib/requirements-dev.txt
+make install
 
 # Open the project with VS Code
 code swarmlib
