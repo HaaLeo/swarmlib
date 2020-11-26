@@ -7,15 +7,16 @@
 
 import inspect
 from functools import wraps
+from typing import Callable
 
 import landscapes.single_objective
 import numpy as np
 
 
 # Wrapper for landscapes.single_objective functions for inputs > 1d
-def wrap_landscapes_func(landscapes_func):
+def wrap_landscapes_func(landscapes_func) -> Callable[[np.ndarray], np.ndarray]:
     @wraps(landscapes_func)
-    def wrapper(x):
+    def wrapper(x: np.ndarray) -> np.ndarray:
         return np.apply_along_axis(func1d=landscapes_func, axis=0, arr=x)
     return wrapper
 
