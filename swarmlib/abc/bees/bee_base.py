@@ -48,7 +48,7 @@ class BeeBase(Coordinate):
             starting_position (Tuple[float, float]): The starting position
             start_value (float): The positions value
         """
-        new_pos = levy_flight(starting_position, self.__alpha, self.__lambda)
+        new_pos = levy_flight(starting_position, self.__alpha, self.__lambda, self._random)
         new_value = self._function(new_pos)
 
         if new_value < start_value:

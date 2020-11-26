@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-* Added new functions by upgrading [landscapes](https://github.com/nathanrooy/landscapes#readme) to _v0.0.11_
+* new functions by upgrading [landscapes](https://github.com/nathanrooy/landscapes#readme) to _v0.0.11_
+
+### Fixed
+* a bug that caused levy flights to be performed randomly despite `--seed` was enabled.
 
 [All Changes](https://github.com/HaaLeo/swarmlib/compare/v0.13.0...master)
 

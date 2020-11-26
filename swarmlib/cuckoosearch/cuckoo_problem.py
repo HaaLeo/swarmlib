@@ -53,7 +53,7 @@ class CuckooProblem(ProblemBase):
 
             # Perform levy flights to get cuckoo's new position
             new_cuckoo_pos = [
-                np.clip(cuckoo.levy_flight(nest.position, self.__alpha, self.__lambda), a_min=self.__lower_boundary, a_max=self.__upper_boundary)
+                np.clip(cuckoo.levy_flight(nest.position, self.__alpha, self.__lambda, self._random), a_min=self.__lower_boundary, a_max=self.__upper_boundary)
                 for nest in self.__nests
             ]
 
