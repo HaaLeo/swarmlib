@@ -18,7 +18,7 @@ with open(path.join(path.abspath(path.dirname(__file__)), 'swarmlib/_version.py'
 setup(
     name='swarmlib',  # PEP8: Packages should also have short, all-lowercase names, the use of underscores is discouraged
     version=__version__,
-    packages=find_packages(exclude=['*test']),
+    packages=find_packages(exclude=['*test', 'tests']),
     # Include files specified in MANIFEST.in
     include_package_data=True,
     description='Implementation and visualization of different swarm optimization algorithms.',
