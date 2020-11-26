@@ -16,4 +16,4 @@ def describe_functions():
 
         result = michalewicz(np.array([1.5, 2.5]))
 
-        np.testing.assert_equal(result, -0.001786698064987311)
+        np.testing.assert_array_almost_equal(result, -0.001786698064987311)
