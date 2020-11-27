@@ -44,6 +44,7 @@ swarm --help
 ## Contribution
 
 If you found a bug or are missing a feature do not hesitate to [file an issue](https://github.com/HaaLeo/swarmlib/issues/new/choose) or to ask questions on [gitter](https://gitter.im/HaaLeo/swarmlib).
+For a more detailed guide checkout the [CONTRIBUTING.md](https://github.com/HaaLeo/swarmlib/blob/master/CONTRIBUTING.md) file.
 
 Pull Requests are welcome!
 

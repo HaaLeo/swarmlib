@@ -24,7 +24,7 @@ def test_object(test_func):
         iteration_number=10)
 
 
-def describe_coordinate():
+def describe_whale():
     def describe_constructor():
         def describe_raise_error():
             def if_iteration_number_is_missing(test_func):
