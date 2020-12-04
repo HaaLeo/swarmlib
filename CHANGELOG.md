@@ -5,13 +5,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+[All Changes](https://github.com/HaaLeo/swarmlib/compare/v0.14.0...master)
+
+## 2020-12-04 - [v0.14.0](https://github.com/HaaLeo/swarmlib/tree/v0.14.0)
+
 ### Added
 * new functions by upgrading [landscapes](https://github.com/nathanrooy/landscapes#readme) to _v0.0.11_
 
 ### Fixed
 * a bug that caused levy flights to be performed randomly despite `--seed` was enabled.
 
-[All Changes](https://github.com/HaaLeo/swarmlib/compare/v0.13.0...master)
+[All Changes](https://github.com/HaaLeo/swarmlib/compare/v0.13.0...v0.14.0)
 
 ## 2020-11-25 - [v0.13.0](https://github.com/HaaLeo/swarmlib/tree/v0.13.0)
 
