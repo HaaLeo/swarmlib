@@ -84,8 +84,7 @@ swarmlib
     |    |- your_awesome_new_algorithm_test    // Unit-Test the major components of your algorithm here (like the WOA does).
     |         |- ...
     |- setup.py                                // Add new keywords for the new algorithm
-    |- README.md                               // Extend readme with a brief introduction of the algorithm
-    |- CHANGELOG.md                            // Briefly state all relevant changes that will shipped with the next release
+    |- CHANGELOG.md                            // Briefly state all relevant changes that will be shipped with the next release
 ```
 
 To get started, I recommend you to take a look at the implementation of the CS, PSO, ABC algorithms.
