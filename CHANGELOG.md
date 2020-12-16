@@ -5,6 +5,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+
+* a bug that caused swarmlib to show an error message instead of the help message when it was invoked without any args ([#36](https://github.com/HaaLeo/swarmlib/issues/36))
+
 [All Changes](https://github.com/HaaLeo/swarmlib/compare/v0.14.0...master)
 
 ## 2020-12-04 - [v0.14.0](https://github.com/HaaLeo/swarmlib/tree/v0.14.0)

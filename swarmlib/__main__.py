@@ -73,7 +73,7 @@ def run_swarm():
     add_woa_parser(sub_parsers)
     args = vars(parser.parse_args())
 
-    if args:
+    if args and 'func' in args:
         log_level = args.pop('log_level')
         level = getattr(logging, log_level.upper())
         logging.basicConfig(
