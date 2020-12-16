@@ -15,6 +15,9 @@ with open(path.join(path.abspath(path.dirname(__file__)), 'README.md'), 'r', enc
 with open(path.join(path.abspath(path.dirname(__file__)), 'swarmlib/_version.py'), 'r', encoding='utf8') as f:
     exec(f.read())
 
+with open(path.join(path.abspath(path.dirname(__file__)), 'requirements.txt'), 'r', encoding='utf8') as rr:
+    required_libs = [line.rstrip() for line in rr]
+
 setup(
     name='swarmlib',  # PEP8: Packages should also have short, all-lowercase names, the use of underscores is discouraged
     version=__version__,
@@ -26,13 +29,7 @@ setup(
     long_description_content_type='text/markdown',
     author='Leo Hanisch',
     license='BSD 3-Clause License',
-    install_requires=[
-        'landscapes==0.0.11',
-        'tsplib95>=0.7.1, <1.0.0',
-        'matplotlib>=3.3.2, <4.0.0',
-        'networkx>=2.5, <3.0',
-        'numpy>=1.19.3, <2.0.0'
-    ],
+    install_requires=required_libs,
     project_urls={
         'Documentation': 'https://github.com/HaaLeo/swarmlib/wiki',
         'Source': 'https://github.com/HaaLeo/swarmlib',
